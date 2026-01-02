@@ -1,0 +1,4388 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/doc/factory/lvgl/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://cloud.rocketpi.club/cloud/rocket.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Lvgl - Rocket-Pi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ledger-overview" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rocket-Pi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lvgl
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <div class="md-header__links">
+        
+          
+          
+          
+            
+          
+          <a href="../../.." class="md-header__link">
+            🏠 首页
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../../roadmap/roadmap/" class="md-header__link">
+            🧭 学习路线
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../../downloads/download/" class="md-header__link">
+            📁 资料下载
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../rocketpi_src/" class="md-header__link">
+            🧪 示例程序
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../../faq/faq/" class="md-header__link">
+            ❓ 常见问题
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../../tools/tools/" class="md-header__link">
+            💼 工具
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../../community/announcement/" class="md-header__link">
+            📣 公告
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../../community/column/" class="md-header__link">
+            👥 社区专栏
+          </a>
+        
+      </div>
+    
+    
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    Rocket-Pi
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🏠 首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧭 学习路线
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🧭 学习路线
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/roadmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    学习路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/hardware/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【硬件】硬件一览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】开发路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】CubeMX安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stm32F4xx_DFP安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5注册
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stlink安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】验证开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【前言】嵌入式常见术语
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【Cubemx通用配置】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_printf/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【三种打印方式不来看看】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_ws2812b/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【超炫的可编程LED】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_aht30_hardware_i2c_base/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【温湿度这就出来了？】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_key_irq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【求求你，别让它抖了】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_delay_us/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【微秒延时你这样做嘛】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_serial_plane_game_joystick/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【用双轴遥杆打飞机】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_sg90/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【小小舵机拿捏】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_hcsr04_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【这个雷达太酷了】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【蜂鸣器演奏家】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_irda/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【三分钟就会红外解码】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_at24xx_soft_i2c/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【EEPROM so easy】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_sdio_card/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【读写tf卡原来这么简单】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_sdio_card_fatfs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【FATFS文件系统使用】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../roadmap/rocketpi_flash_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【littlefs文件系统使用】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📁 资料下载
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            📁 资料下载
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../downloads/download/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    资料下载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧪 示例程序
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🧪 示例程序
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocketpi_src/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi所有示例程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../factory/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    厂测程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_key_scan/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_scan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_key_irq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_irq
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_key_multi_button/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_multi_button
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_delay_us/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_delay_us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_uart_printf/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_printf
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_uart_echo/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_echo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_uart_control_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led_cjson
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_ymodem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_shell_microrl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_easylogger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_uart_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_radar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_aht30
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_at24cxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_passive_buzzer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_sg90
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_pwm_motor/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_motor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_hcsr04/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_hcsr04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_mcu_temperature
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_adc_joystick/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_joystick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_irda/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_irda
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_ws2812b/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_ws2812b
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_speedtest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_bitmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_240x240_lvgl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_sdio_card/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card_fatfs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_audio_to_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_pic_to_lcd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_usb_cdc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_cdc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_usb_msc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_msc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_w25qxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_flash_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_esp8266/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266_tcp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_standby_wkup/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_standby_wkup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_crc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_crc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_mbedtls/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_mbedtls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../base_samples/rocketpi_extern_io_check/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_extern_io_check
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../boot/bootloader/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../boot/bootloader_iap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader_iap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocketpi_demo/01_rocketpi_serial_plane_game/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    飞行大乱斗
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocketpi_demo/02_don%27t_approach_me_alarm/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    别靠近我报警器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocketpi_demo/03_rocketpi_usb_audio_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    超炫桌面节奏大师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocketpi_demo/04_rocketpi_hcsr04_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    雷达探测器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocketpi_demo/05_rocketpi_smart_home/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    物联网智能家居
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rocketpi_demo/06_rocketpi_mqtt_ota/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    FOTA固件升级
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rtos/rocketpi_freertos/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_freertos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rtos/rocketpi_zephyr/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_zephyr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rtos/rocketpi_rt-thread/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_rt-thread
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rtos/rocketpi_threadx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_threadx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    ❓ 常见问题
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ❓ 常见问题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../faq/faq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    常见问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    💼 工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            💼 工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tools/tools/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📣 公告
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            📣 公告
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../community/announcement/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    公告
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    👥 社区专栏
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            👥 社区专栏
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../community/column/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    社区专栏
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ledger-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :ledger: Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rocket-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :rocket: Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heart-sponsor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :heart: Sponsor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :package: Packages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robot-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :robot: Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=":robot: Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hello-world-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hello world label
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#button-with-click-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Button with Click Event
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkboxes-with-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkboxes with Layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#styling-a-slider" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Styling a Slider
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#english-hebrew-mixed-ltr-rtl-and-chinese-texts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        English, Hebrew (mixed LTR-RTL) and Chinese texts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrow_forward-get-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :arrow_forward: Get started
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handshake-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :handshake: Services
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#star2-contributing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :star2: Contributing
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="https://github.com/sponsors/lvgl" target="_blank"><img align="left" src="https://lvgl.io/github-assets/sponsor.png" height="32px"></a></p>
+<p align="right">
+  <b>English</b> | <a href="./docs/README_zh.rst">中文</a> | <a href="./docs/README_pt_BR.rst">Português do Brasil</a> | <a href="./docs/README_jp.rst">日本語</a>
+</p>
+
+<p><br></p>
+<p align="center">
+  <a class="glightbox" href="https://lvgl.io/github-assets/logo-colored.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://lvgl.io/github-assets/logo-colored.png" width=300px></a>
+</p>
+
+<h1 align="center">Light and Versatile Graphics Library</h1>
+<p><br></p>
+<div align="center">
+  <a class="glightbox" href="https://lvgl.io/github-assets/smartwatch-demo.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://lvgl.io/github-assets/smartwatch-demo.gif"></a>
+  &nbsp;
+  <a class="glightbox" href="https://lvgl.io/github-assets/widgets-demo.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img border="1px" src="https://lvgl.io/github-assets/widgets-demo.gif"></a>
+</div>
+<p><br></p>
+<p align="center">
+<a href="https://lvgl.io" title="Homepage of LVGL">Website </a> |
+<a href="https://docs.lvgl.io/" title="Detailed documentation with 100+ examples">Docs</a> |
+<a href="https://forum.lvgl.io" title="Get help and help others">Forum</a> |
+<a href="https://lvgl.io/demos" title="Demos running in your browser">Demos</a> |
+<a href="https://lvgl.io/services" title="Graphics design, UI implementation and consulting">Services</a>
+</p>
+<p><br></p>
+<h2 id="ledger-overview">:ledger: Overview<a class="headerlink" href="#ledger-overview" title="Permanent link">&para;</a></h2>
+<p><strong>Mature and Well-known</strong><br>
+LVGL is the most popular free and open source embedded graphics library to create beautiful UIs for any MCU, MPU and display type. It's supported by industry leading vendors and projects like  Arm, STM32, NXP, Espressif, Nuvoton, Arduino, RT-Thread, Zephyr, NuttX, Adafruit and many more.</p>
+<p><strong>Feature Rich</strong><br>
+It has all the features to create modern and beautiful GUIs: 30+ built-in widgets, a powerful style system, web inspired layout managers, and a typography system supporting many languages. To integrate LVGL into your platform, all you need is at least 32kB RAM and 128 kB Flash, a C compiler, a frame buffer, and at least an 1/10 screen sized buffer for rendering.</p>
+<p><strong>Services</strong><br>
+Our team is ready to help you with graphics design, UI implementation and consulting services. Contact us if you need some support during the development of your next GUI project.</p>
+<h2 id="rocket-features">:rocket: Features<a class="headerlink" href="#rocket-features" title="Permanent link">&para;</a></h2>
+<p><strong>Free and Portable</strong>
+  - A fully portable C (C++ compatible) library with no external dependencies.
+  - Can be compiled to any MCU or MPU, with any (RT)OS.
+  - Supports monochrome, ePaper, OLED or TFT displays, or even monitors. <a href="https://docs.lvgl.io/master/porting/project.html">Porting Guide</a>
+  - Distributed under the MIT license, so you can easily use it in commercial projects too.
+  - Needs only 32kB RAM and 128 kB Flash, a frame buffer, and at least an 1/10 screen sized buffer for rendering.
+  - OS, External memory and GPU are supported but not required.</p>
+<p><strong>Widgets, Styles, Layouts and more</strong>
+  - 30+ built-in <a href="https://docs.lvgl.io/master/widgets/index.html">Widgets</a>:  Button, Label, Slider, Chart, Keyboard, Meter, Arc, Table and many more.
+  - Flexible <a href="https://docs.lvgl.io/master/overview/style.html">Style system</a> with  ~100 style properties to customize any part of the widgets in any state.
+  - <a href="https://docs.lvgl.io/master/layouts/flex.html">Flexbox</a> and <a href="https://docs.lvgl.io/master/layouts/grid.html">Grid</a>-like layouts engines to automatically size and position the widgets in a responsive way.
+  - Texts are rendered with UTF-8 encoding supporting CJK, Thai, Hindi, Arabic, Persian writing systems.
+  - Word wrapping, kerning, text scrolling, sub-pixel rendering, Pinyin-IME Chinese input, Emojis in texts.
+  - Rendering engine supporting animations, anti-aliasing, opacity, smooth scrolling, shadows, image transformation, etc  
+  - Supports Mouse, Touchpad, Keypad, Keyboard, External buttons, Encoder <a href="https://docs.lvgl.io/master/porting/indev.html">Input devices</a>.
+  - <a href="https://docs.lvgl.io/master/overview/display.html#multiple-display-support">Multiple display</a> support.</p>
+<p><strong>Binding and Build Support</strong>
+  - <a href="https://blog.lvgl.io/2019-02-20/micropython-bindings">MicroPython Binding</a> exposes LVGL API
+  - <a href="https://blog.lvgl.io/2022-08-24/pikascript-and-lvgl">PikaScript Binding</a> python on MCU lighter and easier.
+  - No custom build system is used. You can build LVGL as you build the other files of your project.
+  - Support for Make and <a href="https://docs.lvgl.io/master/integration/building/cmake.html">CMake</a> is included out of the box.
+  - <a href="https://docs.lvgl.io/master/integration/ide/pc-simulator.html">Develop on PC</a> and use the same UI code on embedded hardware.
+  - Convert the C UI code to HTML file with our <a href="https://github.com/lvgl/lv_web_emscripten">Emscripten port</a>.</p>
+<p><strong>Docs, Tools, and Services</strong>
+  - Detailed <a href="https://docs.lvgl.io/">Documentation</a> with <a href="https://docs.lvgl.io/master/index.html">100+ simple examples</a>
+  - <a href="https://lvgl.io/services">Services</a> such as User interface design, Implementation and Consulting to make UI development simpler and faster.</p>
+<h2 id="heart-sponsor">:heart: Sponsor<a class="headerlink" href="#heart-sponsor" title="Permanent link">&para;</a></h2>
+<p>If LVGL saved you a lot of time and money or you just had fun using it, consider <a href="https://github.com/sponsors/lvgl">Supporting its Development</a>.</p>
+<p><strong>How do we spend the donations?</strong><br>
+Our goal is to provide financial compensation for people who do the most for LVGL. It means not only the maintainers but anyone who implements a great feature should get a payment from the accumulated money. We use the donations to cover our operational costs like servers and related services.</p>
+<p><strong>How to donate?</strong><br>
+We use <a href="https://github.com/sponsors/lvgl">GitHub Sponsors</a> where you can easily send one time or recurring donations. You can also see all of our expenses  in a transparent way.</p>
+<p><strong>How to get paid for your contribution?</strong><br>
+If someone implements or fixes an issue labeled as <a href="https://github.com/lvgl/lvgl/labels/Sponsored">Sponsored</a> he or she will get a payment for that work. We estimate the required time, complexity and importance of the issue and set a price accordingly. To jump in just comment on a <a href="https://github.com/lvgl/lvgl/labels/Sponsored">Sponsored</a> issue saying "Hi, I'd like to deal with it. This is how I'm planning to fix/implement it...". A work is considered ready when it's approved and merged by a maintainer. After that you can submit and expense at <a href="https://opencollective.com/lvgl">opencollective.com</a> and you will receive the payment in a few days.</p>
+<p><strong>Organizations supporting LVGL</strong><br>
+<a href="https://opencollective.com/lvgl"><img alt="Sponsors of LVGL" src="https://opencollective.com/lvgl/organizations.svg?width=600" /></a></p>
+<p><strong>Individuals supporting LVGL</strong><br>
+<a href="https://opencollective.com/lvgl"><img alt="Backers of LVGL" src="https://opencollective.com/lvgl/individuals.svg?width=600" /></a></p>
+<h2 id="package-packages">:package: Packages<a class="headerlink" href="#package-packages" title="Permanent link">&para;</a></h2>
+<p>LVGL is available as:
+- <a href="https://docs.lvgl.io/master/integration/framework/arduino.html">Arduino library</a>
+- <a href="https://registry.platformio.org/libraries/lvgl/lvgl">PlatformIO package</a>
+- <a href="https://docs.lvgl.io/master/integration/os/zephyr.html">Zephyr library</a>
+- <a href="https://components.espressif.com/components/lvgl/lvgl">ESP-IDF(ESP32) component</a>
+- <a href="https://www.nxp.com/design/software/embedded-software/lvgl-open-source-graphics-library:LITTLEVGL-OPEN-SOURCE-GRAPHICS-LIBRARY">NXP MCUXpresso component</a>
+- <a href="https://docs.lvgl.io/master/integration/os/nuttx.html">NuttX library</a>
+- <a href="https://docs.lvgl.io/master/integration/os/rt-thread.html">RT-Thread RTOS</a>
+- CMSIS-Pack
+- <a href="https://doc.riot-os.org/group__pkg__lvgl.html#details">RIOT OS package</a></p>
+<h2 id="robot-examples">:robot: Examples<a class="headerlink" href="#robot-examples" title="Permanent link">&para;</a></h2>
+<p>See some examples of creating widgets, using layouts and applying styles. You will find C and MicroPython code, and links to try out or edit the examples in an online MicroPython editor.</p>
+<p>For more examples check out the <a href="https://github.com/lvgl/lvgl/tree/master/examples">Examples</a> folder.</p>
+<h3 id="hello-world-label">Hello world label<a class="headerlink" href="#hello-world-label" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://github.com/kisvegabor/test/raw/master/readme_example_1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Simple Hello world label example in LVGL" src="https://github.com/kisvegabor/test/raw/master/readme_example_1.png" /></a></p>
+<details>
+  <summary>C code</summary>
+
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cm">/*Change the active screen&#39;s background color*/</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">lv_obj_set_style_bg_color</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">(),</span><span class="w"> </span><span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x003a57</span><span class="p">),</span><span class="w"> </span><span class="n">LV_PART_MAIN</span><span class="p">);</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="cm">/*Create a white label, set its text and align it to the center*/</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="n">lv_obj_set_style_text_color</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0xffffff</span><span class="p">),</span><span class="w"> </span><span class="n">LV_PART_MAIN</span><span class="p">);</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">lv_obj_align</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ALIGN_CENTER</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+
+<details>
+  <summary>MicroPython code | <a href="https://sim.lvgl.io/v8.3/micropython/ports/javascript/index.html?script_direct=4ab7c40c35b0dc349aa2f0c3b00938d7d8e8ac9f" target="_blank">Online Simulator</a></summary>
+
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span>
+<span class="normal"><a href="#__codelineno-1-8">8</a></span>
+<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># Change the active screen&#39;s background color</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="n">scr</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">()</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="n">scr</span><span class="o">.</span><span class="n">set_style_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">color_hex</span><span class="p">(</span><span class="mh">0x003a57</span><span class="p">),</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="c1"># Create a white label, set its text and align it to the center</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="n">label</span><span class="o">.</span><span class="n">set_style_text_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">color_hex</span><span class="p">(</span><span class="mh">0xffffff</span><span class="p">),</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="n">label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><br></p>
+<h3 id="button-with-click-event">Button with Click Event<a class="headerlink" href="#button-with-click-event" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://github.com/kisvegabor/test/raw/master/readme_example_2.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="LVGL button with label example" src="https://github.com/kisvegabor/test/raw/master/readme_example_2.gif" /></a></p>
+<details>
+  <summary>C code</summary>
+
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_button_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span><span class="w">                   </span><span class="cm">/*Add a button to the current screen*/</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">lv_obj_center</span><span class="p">(</span><span class="n">button</span><span class="p">);</span><span class="w">                                             </span><span class="cm">/*Set its position*/</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">button</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span><span class="w">                                  </span><span class="cm">/*Set its size*/</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="n">lv_obj_add_event_cb</span><span class="p">(</span><span class="n">button</span><span class="p">,</span><span class="w"> </span><span class="n">button_event_cb</span><span class="p">,</span><span class="w"> </span><span class="n">LV_EVENT_CLICKED</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"> </span><span class="cm">/*Assign a callback to the button*/</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">button</span><span class="p">);</span><span class="w">                        </span><span class="cm">/*Add a label to the button*/</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Button&quot;</span><span class="p">);</span><span class="w">                             </span><span class="cm">/*Set the labels text*/</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="n">lv_obj_center</span><span class="p">(</span><span class="n">label</span><span class="p">);</span><span class="w">                                           </span><span class="cm">/*Align the label to the center*/</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="p">...</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="kt">void</span><span class="w"> </span><span class="n">button_event_cb</span><span class="p">(</span><span class="n">lv_event_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="p">{</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Clicked</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+
+<details>
+  <summary>MicroPython code | <a href="https://sim.lvgl.io/v8.3/micropython/ports/javascript/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/header.py&script=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/widgets/slider/lv_example_slider_2.py&script_direct=926bde43ec7af0146c486de470c53f11f167491e" target="_blank">Online Simulator</a></summary>
+
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">button_event_cb</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a>  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clicked&quot;</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="c1"># Create a Button and a Label</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="n">button</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="n">button</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="n">button</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="n">button</span><span class="o">.</span><span class="n">add_event_cb</span><span class="p">(</span><span class="n">button_event_cb</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">CLICKED</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="n">label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="n">label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Button&quot;</span><span class="p">)</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="n">label</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><br></p>
+<h3 id="checkboxes-with-layout">Checkboxes with Layout<a class="headerlink" href="#checkboxes-with-layout" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://github.com/kisvegabor/test/raw/master/readme_example_3.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Checkboxes with layout in LVGL" src="https://github.com/kisvegabor/test/raw/master/readme_example_3.gif" /></a></p>
+<details>
+  <summary>C code</summary>
+
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">lv_obj_set_flex_flow</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">(),</span><span class="w"> </span><span class="n">LV_FLEX_FLOW_COLUMN</span><span class="p">);</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">lv_obj_set_flex_align</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">(),</span><span class="w"> </span><span class="n">LV_FLEX_ALIGN_CENTER</span><span class="p">,</span><span class="w"> </span><span class="n">LV_FLEX_ALIGN_START</span><span class="p">,</span><span class="w"> </span><span class="n">LV_FLEX_ALIGN_CENTER</span><span class="p">);</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cb</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_checkbox_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="n">lv_checkbox_set_text</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Apple&quot;</span><span class="p">);</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="n">lv_obj_add_event_cb</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="n">event_handler</span><span class="p">,</span><span class="w"> </span><span class="n">LV_EVENT_ALL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="n">cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_checkbox_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="n">lv_checkbox_set_text</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Banana&quot;</span><span class="p">);</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="n">lv_obj_add_state</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="n">LV_STATE_CHECKED</span><span class="p">);</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="n">lv_obj_add_event_cb</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="n">event_handler</span><span class="p">,</span><span class="w"> </span><span class="n">LV_EVENT_ALL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="n">cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_checkbox_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="n">lv_checkbox_set_text</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Lemon&quot;</span><span class="p">);</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="n">lv_obj_add_state</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="n">LV_STATE_DISABLED</span><span class="p">);</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="n">lv_obj_add_event_cb</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="n">event_handler</span><span class="p">,</span><span class="w"> </span><span class="n">LV_EVENT_ALL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18"></a>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="n">cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_checkbox_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="n">lv_obj_add_state</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="n">LV_STATE_CHECKED</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">LV_STATE_DISABLED</span><span class="p">);</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="n">lv_checkbox_set_text</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Melon</span><span class="se">\n</span><span class="s">and a new line&quot;</span><span class="p">);</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="n">lv_obj_add_event_cb</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span><span class="w"> </span><span class="n">event_handler</span><span class="p">,</span><span class="w"> </span><span class="n">LV_EVENT_ALL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+
+</details>
+
+<details>
+  <summary>MicroPython code | <a href="https://sim.lvgl.io/v8.3/micropython/ports/javascript/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/header.py&script=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/widgets/slider/lv_example_slider_2.py&script_direct=311d37e5f70daf1cb0d2cad24c7f72751b5f1792" target="_blank">Online Simulator</a></summary>
+
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span>
+<span class="normal"><a href="#__codelineno-5-32">32</a></span>
+<span class="normal"><a href="#__codelineno-5-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">event_handler</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>    <span class="n">code</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_code</span><span class="p">()</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="n">obj</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_target_obj</span><span class="p">()</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>    <span class="k">if</span> <span class="n">code</span> <span class="o">==</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">VALUE_CHANGED</span><span class="p">:</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a>        <span class="n">txt</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a>        <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">CHECKED</span><span class="p">:</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a>            <span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;Checked&quot;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a>            <span class="n">state</span> <span class="o">=</span> <span class="s2">&quot;Unchecked&quot;</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">txt</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12"></a>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">()</span><span class="o">.</span><span class="n">set_flex_flow</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">FLEX_FLOW</span><span class="o">.</span><span class="n">COLUMN</span><span class="p">)</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">()</span><span class="o">.</span><span class="n">set_flex_align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">FLEX_ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">FLEX_ALIGN</span><span class="o">.</span><span class="n">START</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">FLEX_ALIGN</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15"></a>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="n">cb</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="n">cb</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Apple&quot;</span><span class="p">)</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="n">cb</span><span class="o">.</span><span class="n">add_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19"></a>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="n">cb</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="n">cb</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Banana&quot;</span><span class="p">)</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="n">cb</span><span class="o">.</span><span class="n">add_state</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">CHECKED</span><span class="p">)</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="n">cb</span><span class="o">.</span><span class="n">add_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24"></a>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="n">cb</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="n">cb</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Lemon&quot;</span><span class="p">)</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="n">cb</span><span class="o">.</span><span class="n">add_state</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">)</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="n">cb</span><span class="o">.</span><span class="n">add_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29"></a>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30"></a><span class="n">cb</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">checkbox</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31"></a><span class="n">cb</span><span class="o">.</span><span class="n">add_state</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">CHECKED</span> <span class="o">|</span> <span class="n">lv</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">)</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32"></a><span class="n">cb</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;Melon&quot;</span><span class="p">)</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33"></a><span class="n">cb</span><span class="o">.</span><span class="n">add_event_cb</span><span class="p">(</span><span class="n">event_handler</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">EVENT</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+
+</details>
+<p><br></p>
+<h3 id="styling-a-slider">Styling a Slider<a class="headerlink" href="#styling-a-slider" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://github.com/kisvegabor/test/raw/master/readme_example_4.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Styling a slider with LVGL" src="https://github.com/kisvegabor/test/raw/master/readme_example_4.gif" /></a></p>
+<details>
+  <summary>C code</summary>
+
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span>
+<span class="normal"><a href="#__codelineno-6-24">24</a></span>
+<span class="normal"><a href="#__codelineno-6-25">25</a></span>
+<span class="normal"><a href="#__codelineno-6-26">26</a></span>
+<span class="normal"><a href="#__codelineno-6-27">27</a></span>
+<span class="normal"><a href="#__codelineno-6-28">28</a></span>
+<span class="normal"><a href="#__codelineno-6-29">29</a></span>
+<span class="normal"><a href="#__codelineno-6-30">30</a></span>
+<span class="normal"><a href="#__codelineno-6-31">31</a></span>
+<span class="normal"><a href="#__codelineno-6-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">slider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_slider_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">lv_slider_set_value</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ANIM_OFF</span><span class="p">);</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="n">lv_obj_center</span><span class="p">(</span><span class="n">slider</span><span class="p">);</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="cm">/*Add local styles to MAIN part (background rectangle)*/</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="n">lv_obj_set_style_bg_color</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x0F1215</span><span class="p">),</span><span class="w"> </span><span class="n">LV_PART_MAIN</span><span class="p">);</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="n">lv_obj_set_style_bg_opa</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="n">LV_PART_MAIN</span><span class="p">);</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="n">lv_obj_set_style_border_color</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x333943</span><span class="p">),</span><span class="w"> </span><span class="n">LV_PART_MAIN</span><span class="p">);</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="n">lv_obj_set_style_border_width</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">LV_PART_MAIN</span><span class="p">);</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="n">lv_obj_set_style_pad_all</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">LV_PART_MAIN</span><span class="p">);</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="cm">/*Create a reusable style sheet for the INDICATOR part*/</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="k">static</span><span class="w"> </span><span class="n">lv_style_t</span><span class="w"> </span><span class="n">style_indicator</span><span class="p">;</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indicator</span><span class="p">);</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indicator</span><span class="p">,</span><span class="w"> </span><span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x37B9F5</span><span class="p">));</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="n">lv_style_set_bg_grad_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indicator</span><span class="p">,</span><span class="w"> </span><span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x1464F0</span><span class="p">));</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="n">lv_style_set_bg_grad_dir</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indicator</span><span class="p">,</span><span class="w"> </span><span class="n">LV_GRAD_DIR_HOR</span><span class="p">);</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="n">lv_style_set_shadow_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indicator</span><span class="p">,</span><span class="w"> </span><span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x37B9F5</span><span class="p">));</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="n">lv_style_set_shadow_width</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indicator</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21"></a><span class="n">lv_style_set_shadow_spread</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style_indicator</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="mi">4</span>
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23"></a><span class="cm">/*Add the style sheet to the slider&#39;s INDICATOR part*/</span>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24"></a><span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">style_indicator</span><span class="p">,</span><span class="w"> </span><span class="n">LV_PART_INDICATOR</span><span class="p">);</span>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25"></a>
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26"></a><span class="cm">/*Add the same style to the KNOB part too and locally overwrite some properties*/</span>
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27"></a><span class="n">lv_obj_add_style</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">style_indicator</span><span class="p">,</span><span class="w"> </span><span class="n">LV_PART_KNOB</span><span class="p">);</span>
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28"></a>
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29"></a><span class="n">lv_obj_set_style_outline_color</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="n">lv_color_hex</span><span class="p">(</span><span class="mh">0x0096FF</span><span class="p">),</span><span class="w"> </span><span class="n">LV_PART_KNOB</span><span class="p">);</span>
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="n">lv_obj_set_style_outline_width</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">LV_PART_KNOB</span><span class="p">);</span>
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31"></a><span class="n">lv_obj_set_style_outline_pad</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="mi">-5</span><span class="p">,</span><span class="w"> </span><span class="n">LV_PART_KNOB</span><span class="p">);</span>
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32"></a><span class="n">lv_obj_set_style_shadow_spread</span><span class="p">(</span><span class="n">slider</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">LV_PART_KNOB</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+
+</details>
+
+<details>
+  <summary>MicroPython code |
+<a href="https://sim.lvgl.io/v8.3/micropython/ports/javascript/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/header.py&script=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/widgets/slider/lv_example_slider_2.py&script_direct=c431c7b4dfd2cc0dd9c392b74365d5af6ea986f0" target="_blank">Online Simulator</a>
+</summary>
+
+
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span>
+<span class="normal"><a href="#__codelineno-7-25">25</a></span>
+<span class="normal"><a href="#__codelineno-7-26">26</a></span>
+<span class="normal"><a href="#__codelineno-7-27">27</a></span>
+<span class="normal"><a href="#__codelineno-7-28">28</a></span>
+<span class="normal"><a href="#__codelineno-7-29">29</a></span>
+<span class="normal"><a href="#__codelineno-7-30">30</a></span>
+<span class="normal"><a href="#__codelineno-7-31">31</a></span>
+<span class="normal"><a href="#__codelineno-7-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># Create a slider and add the style</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">slider</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">ANIM</span><span class="o">.</span><span class="n">OFF</span><span class="p">)</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_size</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="n">slider</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="c1"># Add local styles to MAIN part (background rectangle)</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_style_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">color_hex</span><span class="p">(</span><span class="mh">0x0F1215</span><span class="p">),</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">)</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_style_bg_opa</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">)</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_style_border_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">color_hex</span><span class="p">(</span><span class="mh">0x333943</span><span class="p">),</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">)</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_style_border_width</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">)</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_style_pad_all</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">MAIN</span><span class="p">)</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="c1"># Create a reusable style sheet for the INDICATOR part</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="n">style_indicator</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">style_t</span><span class="p">()</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="n">style_indicator</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="n">style_indicator</span><span class="o">.</span><span class="n">set_bg_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">color_hex</span><span class="p">(</span><span class="mh">0x37B9F5</span><span class="p">))</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="n">style_indicator</span><span class="o">.</span><span class="n">set_bg_grad_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">color_hex</span><span class="p">(</span><span class="mh">0x1464F0</span><span class="p">))</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="n">style_indicator</span><span class="o">.</span><span class="n">set_bg_grad_dir</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">GRAD_DIR</span><span class="o">.</span><span class="n">HOR</span><span class="p">)</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="n">style_indicator</span><span class="o">.</span><span class="n">set_shadow_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">color_hex</span><span class="p">(</span><span class="mh">0x37B9F5</span><span class="p">))</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="n">style_indicator</span><span class="o">.</span><span class="n">set_shadow_width</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="n">style_indicator</span><span class="o">.</span><span class="n">set_shadow_spread</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23"></a>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24"></a><span class="c1"># Add the style sheet to the slider&#39;s INDICATOR part</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25"></a><span class="n">slider</span><span class="o">.</span><span class="n">add_style</span><span class="p">(</span><span class="n">style_indicator</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">INDICATOR</span><span class="p">)</span>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26"></a><span class="n">slider</span><span class="o">.</span><span class="n">add_style</span><span class="p">(</span><span class="n">style_indicator</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">KNOB</span><span class="p">)</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27"></a>
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28"></a><span class="c1"># Add the same style to the KNOB part too and locally overwrite some properties</span>
+</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_style_outline_color</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">color_hex</span><span class="p">(</span><span class="mh">0x0096FF</span><span class="p">),</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">KNOB</span><span class="p">)</span>
+</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_style_outline_width</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">KNOB</span><span class="p">)</span>
+</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_style_outline_pad</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">KNOB</span><span class="p">)</span>
+</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32"></a><span class="n">slider</span><span class="o">.</span><span class="n">set_style_shadow_spread</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">lv</span><span class="o">.</span><span class="n">PART</span><span class="o">.</span><span class="n">KNOB</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><br></p>
+<h3 id="english-hebrew-mixed-ltr-rtl-and-chinese-texts">English, Hebrew (mixed LTR-RTL) and Chinese texts<a class="headerlink" href="#english-hebrew-mixed-ltr-rtl-and-chinese-texts" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="https://github.com/kisvegabor/test/raw/master/readme_example_5.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="English, Hebrew and Chinese texts with LVGL" src="https://github.com/kisvegabor/test/raw/master/readme_example_5.png" /></a></p>
+<details>
+  <summary>C code</summary>
+
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ltr_label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">ltr_label</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;In modern terminology, a microcontroller is similar to a system on a chip (SoC).&quot;</span><span class="p">);</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">lv_obj_set_style_text_font</span><span class="p">(</span><span class="n">ltr_label</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lv_font_montserrat_16</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">ltr_label</span><span class="p">,</span><span class="w"> </span><span class="mi">310</span><span class="p">);</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">lv_obj_align</span><span class="p">(</span><span class="n">ltr_label</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ALIGN_TOP_LEFT</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rtl_label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">rtl_label</span><span class="p">,</span><span class="s">&quot;מעבד, או בשמו המלא יחידת עיבוד מרכזית (באנגלית: CPU - Central Processing Unit).&quot;</span><span class="p">);</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="n">lv_obj_set_style_base_dir</span><span class="p">(</span><span class="n">rtl_label</span><span class="p">,</span><span class="w"> </span><span class="n">LV_BASE_DIR_RTL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="n">lv_obj_set_style_text_font</span><span class="p">(</span><span class="n">rtl_label</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lv_font_dejavu_16_persian_hebrew</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">rtl_label</span><span class="p">,</span><span class="w"> </span><span class="mi">310</span><span class="p">);</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="n">lv_obj_align</span><span class="p">(</span><span class="n">rtl_label</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ALIGN_LEFT_MID</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13"></a>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cz_label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_screen_active</span><span class="p">());</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">cz_label</span><span class="p">,</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">                  </span><span class="s">&quot;嵌入式系统（Embedded System），</span><span class="se">\n</span><span class="s">是一种嵌入机械或电气系统内部、具有专一功能和实时计算性能的计算机系统。&quot;</span><span class="p">);</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="n">lv_obj_set_style_text_font</span><span class="p">(</span><span class="n">cz_label</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lv_font_simsun_16_cjk</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">cz_label</span><span class="p">,</span><span class="w"> </span><span class="mi">310</span><span class="p">);</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="n">lv_obj_align</span><span class="p">(</span><span class="n">cz_label</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ALIGN_BOTTOM_LEFT</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">-5</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+
+</details>
+
+<details>
+  <summary>MicroPython code | <a href="https://sim.lvgl.io/v8.3/micropython/ports/javascript/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/header.py&script=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/widgets/slider/lv_example_slider_2.py&script_direct=18bb38200a64e10ead1aa17a65c977fc18131842" target="_blank">Online Simulator</a></summary>
+
+<div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">ltr_label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">ltr_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;In modern terminology, a microcontroller is similar to a system on a chip (SoC).&quot;</span><span class="p">)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="n">ltr_label</span><span class="o">.</span><span class="n">set_style_text_font</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">font_montserrat_16</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">ltr_label</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">310</span><span class="p">)</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="n">ltr_label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">TOP_LEFT</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="n">rtl_label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="n">rtl_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;מעבד, או בשמו המלא יחידת עיבוד מרכזית (באנגלית: CPU - Central Processing Unit).&quot;</span><span class="p">)</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="n">rtl_label</span><span class="o">.</span><span class="n">set_style_base_dir</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">BASE_DIR</span><span class="o">.</span><span class="n">RTL</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="n">rtl_label</span><span class="o">.</span><span class="n">set_style_text_font</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">font_dejavu_16_persian_hebrew</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="n">rtl_label</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">310</span><span class="p">)</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="n">rtl_label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">LEFT_MID</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14"></a>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="n">font_simsun_16_cjk</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">font_load</span><span class="p">(</span><span class="s2">&quot;S:../../assets/font/lv_font_simsun_16_cjk.fnt&quot;</span><span class="p">)</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16"></a>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="n">cz_label</span> <span class="o">=</span> <span class="n">lv</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">screen_active</span><span class="p">())</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="n">cz_label</span><span class="o">.</span><span class="n">set_style_text_font</span><span class="p">(</span><span class="n">font_simsun_16_cjk</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="n">cz_label</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;嵌入式系统（Embedded System），</span><span class="se">\n</span><span class="s2">是一种嵌入机械或电气系统内部、具有专一功能和实时计算性能的计算机系统。&quot;</span><span class="p">)</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="n">cz_label</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="mi">310</span><span class="p">)</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="n">cz_label</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">lv</span><span class="o">.</span><span class="n">ALIGN</span><span class="o">.</span><span class="n">BOTTOM_LEFT</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+
+<h2 id="arrow_forward-get-started">:arrow_forward: Get started<a class="headerlink" href="#arrow_forward-get-started" title="Permanent link">&para;</a></h2>
+<p>This list will guide you to get started with LVGL step-by-step.</p>
+<p><strong>Get Familiar with LVGL</strong></p>
+<ol>
+<li>Check the <a href="https://lvgl.io/demos">Online demos</a> to see LVGL in action (3 minutes)</li>
+<li>Read the <a href="https://docs.lvgl.io/master/intro/index.html">Introduction</a> page of the documentation (5 minutes)</li>
+<li>Get familiar with the basics on the <a href="https://docs.lvgl.io/master/get-started/quick-overview.html">Quick overview</a> page (15 minutes)</li>
+</ol>
+<p><strong>Start to Use LVGL</strong></p>
+<ol>
+<li>Set up a <a href="https://docs.lvgl.io/master/integration/ide/pc-simulator.html#simulator">Simulator</a> (10 minutes)</li>
+<li>Try out some <a href="https://github.com/lvgl/lvgl/tree/master/examples">Examples</a></li>
+<li>Port LVGL to a board. See the <a href="https://docs.lvgl.io/master/porting/index.html">Porting</a> guide or check the ready to use <a href="https://github.com/lvgl?q=lv_port_">Projects</a></li>
+</ol>
+<p><strong>Become a Pro</strong></p>
+<ol>
+<li>Read the <a href="https://docs.lvgl.io/master/overview/index.html">Overview</a> page to get a better understanding of the library (2-3 hours)</li>
+<li>Check the documentation of the <a href="https://docs.lvgl.io/master/widgets/index.html">Widgets</a> to see their features and usage</li>
+</ol>
+<p><strong>Get Help and Help Others</strong></p>
+<ol>
+<li>If you have questions go to the <a href="http://forum.lvgl.io/">Forum</a></li>
+<li>Read the <a href="https://docs.lvgl.io/master/CONTRIBUTING.html">Contributing</a> guide to see how you can help to improve LVGL (15 minutes)</li>
+</ol>
+<h2 id="handshake-services">:handshake: Services<a class="headerlink" href="#handshake-services" title="Permanent link">&para;</a></h2>
+<p>LVGL LLC was established to provide a solid background for LVGL library and to offer several type of services to help you in UI development. With 15+ years of experience in the user interface and graphics industry we can help you the bring your UI to the next level.</p>
+<ul>
+<li><strong>Graphics design</strong> Our in-house graphics designers are experts in creating beautiful modern designs which fit to your product and the resources of your hardware.</li>
+<li><strong>UI implementation</strong> We can also implement your UI based on the design you or we have created. You can be sure that we will make the most out of your hardware and LVGL. If a feature or widget is missing from LVGL, don't worry, we will implement it for you.</li>
+<li><strong>Consulting and Support</strong> We can support you with consulting as well to avoid pricey and time consuming mistakes during the UI development.</li>
+<li><strong>Board certification</strong> For companies who are offering development boards, or production ready kits we do board certification which shows how board can run LVGL.</li>
+</ul>
+<p>Check out our <a href="https://lvgl.io/demos">Demos</a> as reference. For more information take look at the <a href="https://lvgl.io/services">Services page</a>.</p>
+<p><a href="https://lvgl.io/#contact">Contact us</a> and tell how we can help.</p>
+<h2 id="star2-contributing">:star2: Contributing<a class="headerlink" href="#star2-contributing" title="Permanent link">&para;</a></h2>
+<p>LVGL is an open project and contribution is very welcome. There are many ways to contribute from simply speaking about your project, through writing examples, improving the documentation, fixing bugs or even hosting your own project under the LVGL organization.</p>
+<p>For a detailed description of contribution opportunities visit the <a href="https://docs.lvgl.io/master/CONTRIBUTING.html">Contributing</a> section of the documentation.</p>
+<p>More than 300 people already left their fingerprint in LVGL. Be one them! See you here! :slightly_smiling_face:</p>
+<p><a href="https://github.com/lvgl/lvgl/graphs/contributors">
+  <a class="glightbox" href="https://contrib.rocks/image?repo=lvgl/lvgl&max=48" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="https://contrib.rocks/image?repo=lvgl/lvgl&max=48" /></a>
+</a></p>
+<p>... and many other.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
