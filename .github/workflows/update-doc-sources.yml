@@ -1,0 +1,47 @@
+name: Prepare README Docs
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: prepare-readme-docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements.txt
+            mkdocs.yml
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run update_readme scripts
+        run: python rocketpi_src/run_update_readme_scripts.py
+
+      - name: Collect project READMEs
+        run: |
+          python rocketpi_src/copy_readmes.py
+          rm -rf docs/doc
+          mkdir -p docs/doc
+          cp -R rocketpi_src/doc/. docs/doc/

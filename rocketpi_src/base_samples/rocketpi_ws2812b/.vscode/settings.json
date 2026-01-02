@@ -1,0 +1,6 @@
+{
+	"iis.configDir": "",
+	"files.associations": {
+		"driver_ws2812b_test.h": "c"
+	}
+}

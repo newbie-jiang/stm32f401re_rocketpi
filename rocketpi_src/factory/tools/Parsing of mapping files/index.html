@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RocketPi Map Parser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="hero">
+        <p class="eyebrow">www.rocketpi.club</p>
+        <h1>Map 文件内存分析</h1>
+      </header>
+
+      <section class="card upload">
+        <div class="drop-zone" id="drop-zone">
+          <input id="map-file" type="file" accept=".map,text/plain" />
+          <div>
+            <p class="drop-title">拖拽 map 文件到这里</p>
+          </div>
+          <button id="browse-btn" type="button">选择文件</button>
+        </div>
+        <div class="controls">
+          <label class="field">
+            <span>显示前 N 项（0 = 全部）</span>
+            <input id="top-n" type="number" min="0" value="30" />
+          </label>
+          <button id="analyze-btn" type="button">开始解析</button>
+          <button id="download-btn" type="button" disabled>下载报告</button>
+        </div>
+        <p class="status" id="status">等待上传 map 文件。</p>
+      </section>
+
+      <section class="grid">
+        <div class="card output">
+          <div class="output-header">
+            <h2>生成的报告</h2>
+          </div>
+          <pre id="report-output">上传 map 文件后生成报告。</pre>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

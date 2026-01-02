@@ -1,0 +1,7 @@
+{# Custom logo displayed in the header. Uses hosted SVG to avoid bundling binaries. #}
+{% set logo_url = "https://cloud.rocketpi.club/cloud/rocket.svg" %}
+<img src="{{ logo_url }}"
+     alt="{{ config.site_name }}"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">

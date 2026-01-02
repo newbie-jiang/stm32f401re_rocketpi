@@ -1,0 +1,35 @@
+# NEC Protocol
+
+## Overview
+
+Portable C library for decoding and encoding Infra-Red NEC protocol messages.
+
+The library only works with timing data of the IR signal, for both decoding and encoding. There are no functions to read IR sensors or drive output LEDs. Therefore, the library is perfectly portable, but it is necessary to add the transmit and receive functionality for your platform.
+
+## Requirements
+
+This is a standard C library.
+
+For the optional library tests, the https://github.com/cpputest/cpputest[cpputest] is required.
+
+## Building
+
+The library can be built using the following commands:
+
+[source,bash]
+----
+git clone https://github.com/privara/nec-protocol
+mkdir build
+cd build
+cmake ../
+----
+
+### Timing tolerances
+
+Captured IR signals usually deviate slightly from the timing specified by the protocol. This is caused by the real-world inaccuracies and quality of IR sensors.
+
+The library by default tolerates up to 20% deviances of the basic NEC pulse duration, which is 562 usec. You can adjust the `NEC_PULSE_TOLERANCE` and `NEC_SPACE_TOLERANCE` defines, if the defaults do not work for you.
+
+## Tests
+
+There are few simple tests with the library. It is disabled by default. To enable them, use the `-DBUILD_TESTS=ON` cmake build option and run them with `make test`

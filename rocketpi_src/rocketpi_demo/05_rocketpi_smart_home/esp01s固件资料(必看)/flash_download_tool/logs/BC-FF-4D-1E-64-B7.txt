@@ -1,0 +1,116 @@
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251206-21:43
+Connect baud: 115200
+Com:COM10
+connecting...
+0x3ff00050: b71c0000
+0x3ff00054: 02001e64
+0x3ff00058: 3100b000
+0x3ff0005c: 00bcff4d
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 49
+target crc val: 49
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 28
+target crc val: 28
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:B71C0000
+    REG1:02001E64
+    REG2:3100b000
+    REG3:00BCFF4D
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ bc ff 4d 1e 64 b7CUSTOM_ID: 03 10 00 00 00 01 C0 00 
+MAC AP : BE-FF-4D-1E-64-B7
+MAC STA: BC-FF-4D-1E-64-B7
+manufacturer_id: 0xd8
+device_id: 0x4014
+fs:0x0
+address/file: 0 <_io.BufferedReader name='G:\\desktop\\f401\\esp8266\\flash_download_tool\\dl_temp\\bin_tmp\\downloadPanel1\\（1471）ESP8266-AT-1M.bin_rep'>
+Wrote 1048576 bytes at 0x00000000 in 47.2 seconds (effective 177.6 kbit/s)...
+File: G:\desktop\f401\esp8266\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\（1471）ESP8266-AT-1M.bin
+File  md5: e178f5d36f9e91f72ab094e7f1ea663e
+Flash md5: e178f5d36f9e91f72ab094e7f1ea663e
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 50 s
+Download result: PASS
+*************************** END ****************************
+
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251223-05:13
+Connect baud: 115200
+Com:COM10
+connecting...
+0x3ff00050: b71c0000
+0x3ff00054: 02001e64
+0x3ff00058: 3100b000
+0x3ff0005c: 00bcff4d
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 49
+target crc val: 49
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 28
+target crc val: 28
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:B71C0000
+    REG1:02001E64
+    REG2:3100b000
+    REG3:00BCFF4D
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ bc ff 4d 1e 64 b7CUSTOM_ID: 03 10 00 00 00 01 C0 00 
+MAC AP : BE-FF-4D-1E-64-B7
+MAC STA: BC-FF-4D-1E-64-B7
+manufacturer_id: 0xd8
+device_id: 0x4014
+fs:0x0
+address/file: 0 <_io.BufferedReader name='G:\\desktop\\www.rocketpi.club\\rocketpi_src\\rocketpi_esp8266\\esp01s固件资料(必看)\\flash_download_tool\\dl_temp\\bin_tmp\\downloadPanel1\\（1471）ESP8266-AT-1M.bin_rep'>
+Wrote 1048576 bytes at 0x00000000 in 47.2 seconds (effective 177.6 kbit/s)...
+File: G:\desktop\www.rocketpi.club\rocketpi_src\rocketpi_esp8266\esp01s固件资料(必看)\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\（1471）ESP8266-AT-1M.bin
+File  md5: e178f5d36f9e91f72ab094e7f1ea663e
+Flash md5: e178f5d36f9e91f72ab094e7f1ea663e
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 50 s
+Download result: PASS
+*************************** END ****************************
+

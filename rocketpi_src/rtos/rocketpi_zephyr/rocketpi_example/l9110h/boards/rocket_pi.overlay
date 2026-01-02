@@ -1,0 +1,38 @@
+/*
+ * L9110H motor PWM wiring for Rocket Pi.
+ * INA -> PB7 (TIM4_CH2), INB -> PB6 (TIM4_CH1)
+ */
+#include <zephyr/dt-bindings/pwm/pwm.h>
+
+/ {
+	aliases {
+		motorina = &l9110h_ina;
+		motorinb = &l9110h_inb;
+	};
+
+	l9110h_pwm: l9110h_pwm {
+		compatible = "pwm-leds";
+
+		l9110h_ina: l9110h_ina {
+			pwms = <&pwm4 1 PWM_HZ(20000) PWM_POLARITY_NORMAL>;
+			label = "L9110H_INA";
+		};
+
+		l9110h_inb: l9110h_inb {
+			pwms = <&pwm4 2 PWM_HZ(20000) PWM_POLARITY_NORMAL>;
+			label = "L9110H_INB";
+		};
+	};
+};
+
+&timers4 {
+	status = "okay";
+	st,prescaler = <83>; /* 84MHz/(83+1) = 1MHz time base */
+
+	pwm4: pwm {
+		status = "okay";
+		pinctrl-0 = <&tim4_ch1_pb6 &tim4_ch2_pb7>;
+		pinctrl-names = "default";
+		label = "l9110_pwm";
+	};
+};

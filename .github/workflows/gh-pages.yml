@@ -1,0 +1,56 @@
+name: Deploy MkDocs (Material) to GitHub Pages
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+concurrency:
+  group: gh-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements.txt
+            mkdocs.yml
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 准备 README 文档
+        run: |
+          python rocketpi_src/run_update_readme_scripts.py
+          python rocketpi_src/copy_readmes.py
+          rm -rf docs/doc
+          mkdir -p docs/doc
+          cp -R rocketpi_src/doc/. docs/doc/
+
+      - name: Build
+        run: mkdocs build --strict
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          cname: www.rocketpi.club

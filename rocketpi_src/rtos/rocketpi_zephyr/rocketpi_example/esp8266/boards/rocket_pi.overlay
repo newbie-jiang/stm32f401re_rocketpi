@@ -1,0 +1,19 @@
+/ {
+	aliases {
+		wifi0 = &esp8266;
+	};
+};
+
+&usart6 {
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&usart6_tx_pc6 &usart6_rx_pc7>;
+	pinctrl-names = "default";
+
+	esp8266: wifi {
+		compatible = "espressif,esp-at";
+		status = "okay";
+	};
+};
+
+

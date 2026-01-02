@@ -1,0 +1,13 @@
+#include <zephyr/dt-bindings/gpio/gpio.h>
+
+/ {
+	aliases {
+	};
+
+	at24_soft_i2c:at24_soft_i2c {
+		compatible = "zephyr,i2c-bitbang";
+		status = "okay";
+		scl-gpios = <&gpioc 14 GPIO_ACTIVE_HIGH>;
+		sda-gpios = <&gpioc 15 GPIO_ACTIVE_HIGH>;
+	};
+};

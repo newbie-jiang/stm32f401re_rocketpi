@@ -1,0 +1,22 @@
+{
+  "name": "tts_web_v2",
+  "version": "2.0.0",
+  "description": "Edge TTS helper with selectable sample rate, channels and voices",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "edge-tts",
+    "ffmpeg",
+    "audio"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "morgan": "^1.10.1"
+  }
+}

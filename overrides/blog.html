@@ -1,0 +1,66 @@
+{% extends "main.html" %}
+{% block container %}
+  {% set blog_root = namespace(view=page) %}
+  {% if page.parent is defined and page.parent and page.parent.children is defined %}
+    {% for candidate in page.parent.children %}
+      {% if candidate.url is defined and candidate.url == 'blog/' %}
+        {% set blog_root.view = candidate %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% set source_view = blog_root.view %}
+  {% if source_view.posts is not defined %}
+    {% set source_view = page %}
+  {% endif %}
+  {% set all_posts = source_view.posts %}
+  {% set current_url = page.url %}
+  {% set categories = namespace(items=[]) %}
+  {% for post in all_posts %}
+    {% if post.categories %}
+      {% for category in post.categories %}
+        {% if category not in categories.items %}
+          {% set _ = categories.items.append(category) %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  <div class="md-content" data-md-component="content">
+    <div class="md-content__inner">
+      {% if categories.items %}
+        {% set categories_sorted = categories.items | sort(attribute="title") %}
+        {% set all_url = 'blog/' %}
+        <nav class="category-strip" aria-label="{{ lang.t('blog.categories.in') }}">
+          <a href="{{ all_url | url }}" class="category-pill{% if current_url == all_url %} category-pill--active{% endif %}">
+            <span class="category-pill__icon">
+              {% include ".icons/material/view-grid.svg" %}
+            </span>
+            {{ lang.t("blog.index") }}
+          </a>
+          {% for category in categories_sorted %}
+            {% set is_active = current_url == category.url %}
+            {% set icon_name = config.extra.blog_category_icons[category.title] if config.extra.blog_category_icons is defined and category.title in config.extra.blog_category_icons else None %}
+            <a href="{{ category.url | url }}" class="category-pill{% if is_active %} category-pill--active{% endif %}">
+              {% if icon_name %}
+                <span class="category-pill__icon">
+                  {% include ".icons/" ~ icon_name ~ ".svg" %}
+                </span>
+              {% endif %}
+              {{ category.title }}
+            </a>
+          {% endfor %}
+        </nav>
+      {% endif %}
+      <header class="md-typeset">
+        {{ page.content }}
+      </header>
+      {% for post in posts %}
+        {% include "partials/post.html" %}
+      {% endfor %}
+      {% if pagination %}
+        {% block pagination %}
+          {% include "partials/pagination.html" %}
+        {% endblock %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

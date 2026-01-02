@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PCM Converter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <p class="eyebrow">本地音频</p>
+          <h1>浏览器端重采样 / 导出</h1>
+          <p class="hint">直接在浏览器内解码音频，转换为 header 或 PCM 文件，无需上传。</p>
+        </div>
+        <div class="link-row">
+          <a class="ghost" href="index.html">返回文本合成</a>
+        </div>
+      </div>
+
+      <form id="convert-form">
+        <label>
+          选择音频文件
+          <input type="file" id="file" name="file" accept="audio/*" required />
+          <span class="note">浏览器会在本地解码音频，不会上传到服务器。</span>
+        </label>
+
+        <div class="row">
+          <label>
+            采样率
+            <select id="sampleRate" name="sampleRate"></select>
+          </label>
+          <label>
+            声道
+            <select id="channels" name="channels">
+              <option value="1">单声道 (1)</option>
+              <option value="2" selected>双声道 (2)</option>
+            </select>
+          </label>
+          <label>
+            输出类型
+            <select id="output" name="output">
+              <option value="header">头文件 (.h)</option>
+              <option value="bin">PCM (.bin)</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          自定义文件名前缀
+          <input type="text" name="fileName" placeholder="默认为原始文件名" />
+        </label>
+
+        <button type="submit">开始转换</button>
+        <div id="status" class="status"></div>
+      </form>
+
+      <div class="info">
+        <strong>说明</strong>
+        <ul>
+          <li>Chrome / Edge 等现代浏览器支持 Web Audio API 才可使用。</li>
+          <li>输出为 16-bit signed little-endian PCM。</li>
+          <li>文件较大时请耐心等待“重采样并生成 PCM...”提示结束。</li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="convert.js" defer></script>
+  </body>
+</html>

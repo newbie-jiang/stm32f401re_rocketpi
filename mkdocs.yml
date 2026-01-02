@@ -1,0 +1,169 @@
+site_name: Rocket-Pi
+site_url: https://newbie-jiang.github.io/blogs_mkdocs/
+
+theme:
+  name: material
+  language: zh
+  custom_dir: overrides
+  favicon: https://cloud.rocketpi.club/cloud/rocket.svg
+  features:
+    - content.code.copy
+
+plugins:
+  - search
+  - blog
+  - glightbox
+
+nav:
+  - "🏠 首页": index.md
+  - "🧭 学习路线":
+      - 学习路线 : roadmap/roadmap.md
+   
+      - 【硬件】硬件一览: roadmap/hardware.md
+      - 【环境】开发路线: roadmap/0.开发路线选择.md
+      - 【环境】CubeMX安装 : roadmap/1.CubeMX安装.md
+      - 【环境】keilv5安装 : roadmap/2.keilv5安装.md
+      - 【环境】stm32F4xx_DFP安装 : roadmap/3.stm32F4xx_DFP安装.md
+      - 【环境】keilv5注册: roadmap/4.keilv5注册.md
+      - 【环境】stlink安装: roadmap/5.stlink安装.md
+      - 【环境】验证开发环境: roadmap/6.验证开发环境.md
+
+      - 【前言】嵌入式常见术语:  roadmap/嵌入式常见术语.md
+      - 【Cubemx通用配置】 : roadmap/0.1Cubemx基本配置.md
+      - 【三种打印方式不来看看】 :  roadmap/rocketpi_printf.md
+      - 【超炫的可编程LED】 : roadmap/rocketpi_ws2812b.md
+      - 【温湿度这就出来了？】 : roadmap/rocketpi_aht30_hardware_i2c_base.md
+      - 【求求你，别让它抖了】: roadmap/rocketpi_key_irq.md
+      - 【微秒延时你这样做嘛】: roadmap/rocketpi_delay_us.md
+      - 【用双轴遥杆打飞机】: roadmap/rocketpi_serial_plane_game_joystick.md
+      - 【小小舵机拿捏】: roadmap/rocketpi_sg90.md
+      - 【这个雷达太酷了】: roadmap/rocketpi_hcsr04_radar.md
+      - 【蜂鸣器演奏家】: roadmap/rocketpi_pwm_passive_buzzer.md
+      - 【三分钟就会红外解码】: roadmap/rocketpi_irda.md
+      - 【EEPROM so easy】: roadmap/rocketpi_at24xx_soft_i2c.md
+      - 【读写tf卡原来这么简单】: roadmap/rocketpi_sdio_card.md
+      - 【FATFS文件系统使用】: roadmap/rocketpi_sdio_card_fatfs.md
+      - 【littlefs文件系统使用】: roadmap/rocketpi_flash_littlefs.md
+      
+  - "📁 资料下载":
+      - 资料下载 : downloads/download.md
+  - "🧪 示例程序":
+      - rocketpi所有示例程序: doc/rocketpi_src.md
+      - 厂测程序: doc/factory/factory.md
+      - rocketpi_led: doc/base_samples/rocketpi_led.md
+      - rocketpi_key_scan: doc/base_samples/rocketpi_key_scan.md
+      - rocketpi_key_irq: doc/base_samples/rocketpi_key_irq.md
+      - rocketpi_key_multi_button: doc/base_samples/rocketpi_key_multi_button.md
+      - rocketpi_delay_us: doc/base_samples/rocketpi_delay_us.md
+      - rocketpi_uart_printf: doc/base_samples/rocketpi_uart_printf.md
+      - rocketpi_uart_echo: doc/base_samples/rocketpi_uart_echo.md
+      - rocketpi_uart_control_led: doc/base_samples/rocketpi_uart_control_led.md
+      - rocketpi_uart_control_led_cjson: doc/base_samples/rocketpi_uart_control_led_cjson.md
+      - rocketpi_uart_ymodem: doc/base_samples/rocketpi_uart_ymodem.md
+      - rocketpi_uart_shell_microrl: doc/base_samples/rocketpi_uart_shell_microrl.md
+      - rocketpi_uart_easylogger: doc/base_samples/rocketpi_uart_easylogger.md
+      - rocketpi_uart_radar: doc/base_samples/rocketpi_uart_radar.md
+      - rocketpi_i2c_aht30: doc/base_samples/rocketpi_i2c_aht30.md
+      - rocketpi_i2c_at24cxx: doc/base_samples/rocketpi_i2c_at24cxx.md  
+      - rocketpi_pwm_passive_buzzer: doc/base_samples/rocketpi_pwm_passive_buzzer.md
+      - rocketpi_pwm_sg90: doc/base_samples/rocketpi_pwm_sg90.md
+      - rocketpi_pwm_motor: doc/base_samples/rocketpi_pwm_motor.md
+      - rocketpi_hcsr04: doc/base_samples/rocketpi_hcsr04.md
+      - rocketpi_adc_mcu_temperature: doc/base_samples/rocketpi_adc_mcu_temperature.md
+      - rocketpi_adc_joystick: doc/base_samples/rocketpi_adc_joystick.md
+      - rocketpi_irda: doc/base_samples/rocketpi_irda.md
+      - rocketpi_ws2812b: doc/base_samples/rocketpi_ws2812b.md
+      - rocketpi_spi_lcd_speedtest: doc/base_samples/rocketpi_spi_lcd_speedtest.md
+      - rocketpi_spi_lcd_bitmap: doc/base_samples/rocketpi_spi_lcd_bitmap.md
+      - rocketpi_spi_lcd_240x240_lvgl: doc/base_samples/rocketpi_spi_lcd_240x240_lvgl.md
+      - rocketpi_i2s: doc/base_samples/rocketpi_i2s.md
+      - rocketpi_sdio_card: doc/base_samples/rocketpi_sdio_card.md
+      - rocketpi_sdio_card_fatfs: doc/base_samples/rocketpi_sdio_card_fatfs.md
+      - rocketpi_sd_audio_to_i2s: doc/base_samples/rocketpi_sd_audio_to_i2s.md
+      - rocketpi_sd_pic_to_lcd: doc/base_samples/rocketpi_sd_pic_to_lcd.md
+      - rocketpi_usb_cdc: doc/base_samples/rocketpi_usb_cdc.md
+      - rocketpi_usb_msc: doc/base_samples/rocketpi_usb_msc.md
+      - rocketpi_w25qxx: doc/base_samples/rocketpi_w25qxx.md
+      - rocketpi_flash_littlefs: doc/base_samples/rocketpi_flash_littlefs.md 
+      - rocketpi_w25qxx_littlefs: doc/base_samples/rocketpi_w25qxx_littlefs.md
+      - rocketpi_esp8266: doc/base_samples/rocketpi_esp8266.md
+      - rocketpi_esp8266_tcp: doc/base_samples/rocketpi_esp8266_tcp.md
+      - rocketpi_standby_wkup: doc/base_samples/rocketpi_standby_wkup.md
+      - rocketpi_crc: doc/base_samples/rocketpi_crc.md
+      - rocketpi_mbedtls: doc/base_samples/rocketpi_mbedtls.md
+      - rocketpi_extern_io_check: doc/base_samples/rocketpi_extern_io_check.md
+     
+      - rocketpi_bootloader: doc/boot/bootloader.md
+      - rocketpi_bootloader_iap: doc/boot/bootloader_iap.md
+
+      - 飞行大乱斗: doc/rocketpi_demo/01_rocketpi_serial_plane_game.md
+      - 别靠近我报警器: doc/rocketpi_demo/02_don't_approach_me_alarm.md
+      - 超炫桌面节奏大师: doc/rocketpi_demo/03_rocketpi_usb_audio_i2s.md
+      - 雷达探测器: doc/rocketpi_demo/04_rocketpi_hcsr04_radar.md
+      - 物联网智能家居: doc/rocketpi_demo/05_rocketpi_smart_home.md
+      - FOTA固件升级: doc/rocketpi_demo/06_rocketpi_mqtt_ota.md
+    
+      - rocketpi_freertos: doc/rtos/rocketpi_freertos.md
+      - rocketpi_zephyr: doc/rtos/rocketpi_zephyr.md
+      - rocketpi_rt-thread: doc/rtos/rocketpi_rt-thread.md
+      - rocketpi_threadx: doc/rtos/rocketpi_threadx.md
+     
+  - "❓ 常见问题":
+      - 常见问题 : faq/faq.md
+  - "💼 工具":
+      - 工具: tools/tools.md
+  - "📣 公告":
+      - 公告: community/announcement.md
+  - "👥 社区专栏":
+      - 社区专栏: community/column.md
+
+markdown_extensions:
+  - md_in_html
+  - attr_list
+  - admonition
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      linenums: true
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+
+extra:
+  generator: true
+  nav_links:
+    - name: "🏠 首页"
+      url: .
+    - name: "🧭 学习路线"
+      url: roadmap/roadmap/
+    - name: "📁 资料下载"
+      url: downloads/download/
+    - name: "🧪 示例程序"
+      url: doc/rocketpi_src/
+    - name: "❓ 常见问题"
+      url: faq/faq/
+    - name: "💼 工具"
+      url: tools/tools/
+    - name: "📣 公告"
+      url: community/announcement/
+    - name: "👥 社区专栏"
+      url: community/column/
+  # 已去掉 RSS 的 social 链接，如需其他社交链接可在此处添加
+  blog_category_icons:
+    Bootloader: material/chip
+    Networking: material/access-point
+  nav_icons:
+    blog/:
+      icon: material/newspaper
+      color: "#ff6f00"
+    博客:
+      icon: material/newspaper
+      color: "#ff6f00"
+
+extra_css:
+  - stylesheets/custom.css

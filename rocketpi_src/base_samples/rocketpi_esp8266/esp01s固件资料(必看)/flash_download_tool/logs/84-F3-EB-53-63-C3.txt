@@ -1,0 +1,116 @@
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:35
+Connect baud: 115200
+Com:COM12
+connecting...
+0x3ff00050: c3d20000
+0x3ff00054: 02005363
+0x3ff00058: 2700b000
+0x3ff0005c: 0084f3eb
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 39
+target crc val: 39
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 210
+target crc val: 210
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:C3D20000
+    REG1:02005363
+    REG2:2700b000
+    REG3:0084F3EB
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ 84 f3 eb 53 63 c3CUSTOM_ID: 02 70 00 00 00 0D 20 00 
+MAC AP : 86-F3-EB-53-63-C3
+MAC STA: 84-F3-EB-53-63-C3
+manufacturer_id: 0x5e
+device_id: 0x6014
+fs:0x0
+address/file: 0 <_io.BufferedReader name='G:\\desktop\\f401\\esp8266\\flash_download_tool\\dl_temp\\bin_tmp\\downloadPanel1\\£¨1471£©ESP8266-AT_MQTT-1M.bin_rep'>
+Wrote 1048576 bytes at 0x00000000 in 48.3 seconds (effective 173.8 kbit/s)...
+File: G:\desktop\f401\esp8266\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\£¨1471£©ESP8266-AT_MQTT-1M.bin
+File  md5: e178f5d36f9e91f72ab094e7f1ea663e
+Flash md5: e178f5d36f9e91f72ab094e7f1ea663e
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 53 s
+Download result: PASS
+*************************** END ****************************
+
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:36
+Connect baud: 115200
+Com:COM29
+connecting...
+0x3ff00050: c3d20000
+0x3ff00054: 02005363
+0x3ff00058: 2700b000
+0x3ff0005c: 0084f3eb
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 39
+target crc val: 39
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 210
+target crc val: 210
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:C3D20000
+    REG1:02005363
+    REG2:2700b000
+    REG3:0084F3EB
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ 84 f3 eb 53 63 c3CUSTOM_ID: 02 70 00 00 00 0D 20 00 
+MAC AP : 86-F3-EB-53-63-C3
+MAC STA: 84-F3-EB-53-63-C3
+manufacturer_id: 0x5e
+device_id: 0x6014
+fs:0x0
+address/file: 0 <_io.BufferedReader name='G:\\desktop\\f401\\esp8266\\flash_download_tool\\dl_temp\\bin_tmp\\downloadPanel1\\£¨1471£©ESP8266-AT_MQTT-1M.bin_rep'>
+Wrote 1048576 bytes at 0x00000000 in 47.4 seconds (effective 177.0 kbit/s)...
+File: G:\desktop\f401\esp8266\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\£¨1471£©ESP8266-AT_MQTT-1M.bin
+File  md5: e178f5d36f9e91f72ab094e7f1ea663e
+Flash md5: e178f5d36f9e91f72ab094e7f1ea663e
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 50 s
+Download result: PASS
+*************************** END ****************************
+

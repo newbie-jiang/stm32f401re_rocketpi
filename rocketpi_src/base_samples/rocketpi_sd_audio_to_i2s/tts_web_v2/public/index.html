@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TTS Web Helper v2</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <p class="eyebrow">Edge TTS</p>
+          <h1>文本实时合成到 PCM</h1>
+          <p class="hint">选择 voice / 采样率 / 声道，并直接下载音频头文件或原始 PCM。</p>
+        </div>
+        <div class="link-row">
+          <a class="ghost" href="convert.html">本地音频转 header/bin</a>
+          <a class="ghost" href="https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/ai-services/speech-service/language-support.md" target="_blank" rel="noreferrer">voice 列表</a>
+        </div>
+      </div>
+
+      <form id="tts-form">
+        <label>
+          文本内容
+          <textarea id="text" name="text" placeholder="请输入要合成的文本" required></textarea>
+          <span class="note">最长 400 个字符，建议使用简短句子。</span>
+        </label>
+
+        <div class="row">
+          <label>
+            语音 voice
+            <select id="voice" name="voice">
+              <option value="zh-CN-XiaoxiaoNeural">zh-CN Xiaoxiao (F)</option>
+              <option value="zh-CN-XiaochenNeural">zh-CN Xiaochen (M)</option>
+              <option value="zh-CN-YunxiNeural">zh-CN Yunxi (M)</option>
+              <option value="zh-CN-YunyeNeural">zh-CN Yunye (M)</option>
+              <option value="zh-CN-XiaoyiNeural">zh-CN Xiaoyi (F)</option>
+              <option value="zh-HK-HiuMaanNeural">zh-HK HiuMaan (F)</option>
+              <option value="zh-HK-HiuGaaiNeural">zh-HK HiuGaai (F)</option>
+              <option value="zh-HK-WanLungNeural">zh-HK WanLung (M)</option>
+              <option value="en-US-EmmaMultilingualNeural">en-US Emma (F)</option>
+              <option value="en-US-GuyMultilingualNeural">en-US Guy (M)</option>
+            </select>
+          </label>
+          <label>
+            采样率
+            <select id="sampleRate" name="sampleRate">
+              <option value="8000">8 kHz</option>
+              <option value="11025">11.025 kHz</option>
+              <option value="16000" selected>16 kHz</option>
+              <option value="22050">22.05 kHz</option>
+              <option value="32000">32 kHz</option>
+              <option value="44100">44.1 kHz</option>
+              <option value="48000">48 kHz</option>
+              <option value="96000">96 kHz</option>
+            </select>
+          </label>
+          <label>
+            声道
+            <select id="channels" name="channels">
+              <option value="1">单声道 (1)</option>
+              <option value="2" selected>双声道 (2)</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="row">
+          <label>
+            语速 rate
+            <input type="text" name="rate" placeholder="如 +0% / -20%" value="+0%" />
+          </label>
+          <label>
+            音高 pitch
+            <input type="text" name="pitch" placeholder="如 +0Hz / -5Hz" value="+0Hz" />
+          </label>
+          <label>
+            自定义文件名前缀
+            <input type="text" name="fileName" placeholder="不填则自动生成" />
+            <span class="note">无需扩展名，自动拼接 .h/.bin。</span>
+          </label>
+        </div>
+
+        <fieldset>
+          <legend>输出类型</legend>
+          <label class="radio">
+            <input type="radio" name="output" value="header" checked />
+            生成 C 语言头文件 (.h)
+          </label>
+          <label class="radio">
+            <input type="radio" name="output" value="bin" />
+            生成裸 PCM (.bin)
+          </label>
+        </fieldset>
+
+        <button type="submit">开始合成</button>
+        <div id="status" class="status"></div>
+      </form>
+
+      <div class="info">
+        <strong>提示</strong>
+        <ul>
+          <li>确保系统已安装 edge-tts 与 ffmpeg，并在 PATH 中可访问。</li>
+          <li>支持 1/2 声道，16-bit signed little-endian PCM。</li>
+          <li>需要更多 voice，可在右上角链接查询并直接填写。</li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

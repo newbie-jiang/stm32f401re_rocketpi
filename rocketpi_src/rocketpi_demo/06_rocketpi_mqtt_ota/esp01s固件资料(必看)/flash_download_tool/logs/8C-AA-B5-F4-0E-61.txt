@@ -1,0 +1,93 @@
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:33
+Connect baud: 115200
+Com:COM29
+connecting...
+0x3ff00050: 61490000
+0x3ff00054: 0200f40e
+0x3ff00058: af00b000
+0x3ff0005c: 008caab5
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 175
+target crc val: 175
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 73
+target crc val: 73
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:61490000
+    REG1:0200F40E
+    REG2:af00b000
+    REG3:008CAAB5
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ 8c aa b5 f4 0e 61CUSTOM_ID: 0A F0 00 00 00 04 90 00 
+MAC AP : 8E-AA-B5-F4-0E-61
+MAC STA: 8C-AA-B5-F4-0E-61
+manufacturer_id: 0x5e
+device_id: 0x6014
+fs:0x0
+address/file: 0 <_io.BufferedReader name='G:\\desktop\\f401\\esp8266\\flash_download_tool\\dl_temp\\bin_tmp\\downloadPanel1\\£¨1471£©ESP8266-AT_MQTT-1M.bin_rep'>
+Wrote 1048576 bytes at 0x00000000 in 47.4 seconds (effective 176.8 kbit/s)...
+File: G:\desktop\f401\esp8266\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\£¨1471£©ESP8266-AT_MQTT-1M.bin
+File  md5: e178f5d36f9e91f72ab094e7f1ea663e
+Flash md5: e178f5d36f9e91f72ab094e7f1ea663e
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 50 s
+Download result: PASS
+*************************** END ****************************
+
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:34
+Connect baud: 115200
+Com:COM29
+serial port open error
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:34
+Connect baud: 115200
+Com:COM29
+serial port open error
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:34
+Connect baud: 115200
+Com:COM29
+serial port open error
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:34
+Connect baud: 115200
+Com:COM29
+serial port open error
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:34
+Connect baud: 115200
+Com:COM29
+serial port open error

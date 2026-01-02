@@ -1,0 +1,90 @@
+map文件存储分布 分析脚本
+
+默认显示所有
+
+```
+python tools\analyze_map.py --map MDK-ARM\rocketpi_factory\rocketpi_factory.map --output tools\memory_usage_report.txt
+```
+
+只显示前20项
+
+```
+python tools\analyze_map.py --map MDK-ARM\rocketpi_factory\rocketpi_factory.map --top 20 --output tools\memory_usage_report.txt
+```
+
+
+
+![image-20251219000535428](https://cloud.rocketpi.club/cloud/image-20251219000535428.png)
+
+
+
+example
+
+```
+RocketPi memory usage derived from rocketpi_factory.map
+Objects parsed: 169
+Total Flash (Code + RO + RW): 202587 bytes (197.84 KB)
+Total RAM (RW + ZI): 81593 bytes (79.68 KB)
+
+Top modules by Flash consumption:
+Flash focus
+Rank  Object                                   Code        RO        RW        ZI   Flash bytes       Human
+   1  lv_font_montserrat_14.o                     0         0     13637         0         13637    13.32 KB
+   2  lv_theme_default.o                      10376       316        12         0         10704    10.45 KB
+   3  lv_obj_pos.o                             5450        96        16         0          5562     5.43 KB
+   4  lv_indev.o                               4768       110         0         0          4878     4.76 KB
+   5  lv_chart.o                               4336        12        42         0          4390     4.29 KB
+   6  lv_label.o                               4230        82        42         0          4354     4.25 KB
+   7  lv_obj_scroll.o                          4192        72         0         0          4264     4.16 KB
+   8  lv_textarea.o                            3982       134        45         0          4161     4.06 KB
+   9  lv_scale.o                               4106        10        42         0          4158     4.06 KB
+  10  lv_obj_style.o                           4070        54         0         0          4124     4.03 KB
+  11  lv_refr.o                                4044        60         0         0          4104     4.01 KB
+  12  lv_draw_sw_mask.o                        3914        40         0         0          3954     3.86 KB
+  13  lv_buttonmatrix.o                        3634        34        93         0          3761     3.67 KB
+  14  lv_table.o                               3478        10        42         0          3530     3.45 KB
+  15  lv_dropdown.o                            3152        60        86         0          3298     3.22 KB
+  16  lv_draw_sw_box_shadow.o                  3280         0         0         0          3280     3.20 KB
+  17  lv_indev_scroll.o                        3084        20         0         0          3104     3.03 KB
+  18  lv_roller.o                              2912        86        95         0          3093     3.02 KB
+  19  lv_arc.o                                 3014        10        40         0          3064     2.99 KB
+  20  lv_obj.o                                 2856         4        40         0          2900     2.83 KB
+  21  lv_flex.o                                2776        66         0         0          2842     2.78 KB
+  22  lv_grid.o                                2592        52         0         0          2644     2.58 KB
+  23  stm32f4xx_hal_sd.o                       2498        66         0         0          2564     2.50 KB
+  24  lv_image.o                               2472        12        42         0          2526     2.47 KB
+  25  lv_slider.o                              2242         8        43         0          2293     2.24 KB
+...  remaining 144 objects account for 95398 bytes (93.16 KB)
+
+Top modules by RAM consumption:
+RAM focus
+Rank  Object                                   Code        RO        RW        ZI     RAM bytes       Human
+   1  lv_mem_core_builtin.o                     252        26         0     32768         32768    32.00 KB
+   2  heap_4.o                                  372        18         0     15360         15360    15.00 KB
+   3  lv_font_montserrat_14.o                     0         0     13637         0         13637    13.32 KB
+   4  startup_stm32f401xe.o                      64        26       404      8192          8596     8.39 KB
+   5  usbd_conf.o                               360         4         0      1796          1796     1.75 KB
+   6  lv_keyboard.o                             794        78      1325         0          1325     1.29 KB
+   7  tasks.o                                  1124       108         0      1220          1220     1.19 KB
+   8  lv_calendar_header_dropdown.o             412        18       725         0           725     0.71 KB
+   9  lv_palette.o                              168        14       570         0           570     0.56 KB
+  10  lv_init.o                                 160        12         0       492           492     0.48 KB
+  11  lv_port_disp.o                            152        14         0       480           480     0.47 KB
+  12  st7789.o                                 1116       116         0       480           480     0.47 KB
+  13  lv_math.o                                 656        10       438         0           438     0.43 KB
+  14  lv_menu.o                                1076        20       385         0           385     0.38 KB
+  15  lv_msgbox.o                               534        22       371         0           371     0.36 KB
+  16  sdio.o                                    356        34         0       324           324     0.32 KB
+  17  spi.o                                     244        28         0       184           184     0.18 KB
+  18  lv_style.o                                724        16       173         0           173     0.17 KB
+  19  lv_calendar_header_arrow.o                456        42       165         0           165     0.16 KB
+  20  lv_list.o                                 116        10       138         0           138     0.13 KB
+  21  lv_roller.o                              2912        86        95         0            95     0.09 KB
+  22  lv_buttonmatrix.o                        3634        34        93         0            93     0.09 KB
+  23  lv_tileview.o                             268        14        89         0            89     0.09 KB
+  24  lv_dropdown.o                            3152        60        86         0            86     0.08 KB
+  25  i2c.o                                     168        26         0        84            84     0.08 KB
+...  remaining 144 objects account for 1519 bytes (1.48 KB)
+
+```
+

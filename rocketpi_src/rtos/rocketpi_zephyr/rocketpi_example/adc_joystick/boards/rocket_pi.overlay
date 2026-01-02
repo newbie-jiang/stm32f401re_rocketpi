@@ -1,0 +1,83 @@
+
+#include <zephyr/dt-bindings/adc/adc.h>
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+
+#ifdef GPIO_PULL_UP
+#define ROCKETPI_JOYSTICK_BTN_FLAGS (GPIO_ACTIVE_LOW | GPIO_PULL_UP)
+#else
+#define ROCKETPI_JOYSTICK_BTN_FLAGS GPIO_ACTIVE_LOW
+#endif
+
+/ {
+	aliases {
+		joystick0 = &joystick0;
+		joystickbutton0 = &joystick_buttons;
+	};
+
+	joystick0: joystick0 {
+		compatible = "analog-axis";
+		poll-period-ms = <15>;
+		status = "okay";
+
+		x_axis {
+			io-channels = <&adc1 14>;
+			in-min = <0>;
+			in-max = <4095>;
+			in-deadzone = <80>;
+			out-min = <0>;
+			out-max = <255>;
+			zephyr,axis = <INPUT_ABS_X>;
+		};
+
+		y_axis {
+			io-channels = <&adc1 15>;
+			in-min = <0>;
+			in-max = <4095>;
+			in-deadzone = <80>;
+			out-min = <0>;
+			out-max = <255>;
+			zephyr,axis = <INPUT_ABS_Y>;
+		};
+	};
+
+	joystick_buttons: joystick_buttons {
+		compatible = "gpio-keys";
+		status = "okay";
+		debounce-interval-ms = <15>;
+
+		select_button: select_button {
+			label = "Joystick Select";
+			gpios = <&gpioc 13 ROCKETPI_JOYSTICK_BTN_FLAGS>;
+			zephyr,code = <INPUT_BTN_SELECT>;
+		};
+	};
+};
+
+&adc1 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	st,adc-clock-source = "SYNC";
+	st,adc-prescaler = <4>;
+	pinctrl-0 = <&adc1_in14_pc4 &adc1_in15_pc5>;
+	pinctrl-names = "default";
+	label = "adc1_joystick";
+
+	channel@14 {
+		reg = <14>;
+		zephyr,gain = "ADC_GAIN_1";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_TICKS, 112)>;
+		zephyr,resolution = <12>;
+	};
+
+	channel@15 {
+		reg = <15>;
+		zephyr,gain = "ADC_GAIN_1";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_TICKS, 112)>;
+		zephyr,resolution = <12>;
+	};
+};

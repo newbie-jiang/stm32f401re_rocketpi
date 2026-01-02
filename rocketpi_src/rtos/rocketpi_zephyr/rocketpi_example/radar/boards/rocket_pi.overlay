@@ -1,0 +1,22 @@
+/*
+ * Rocket Pi + MG58F18 radar: enable USART1 (PA9/PA10) and provide an
+ * example radar_out GPIO.
+ */
+
+/ {
+	aliases {
+		radaruart = &usart1;
+	};
+
+	zephyr,user {
+		radar_out_gpios = <&gpioa 6 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+&usart1 {
+	pinctrl-0 = <&usart1_tx_pa9 &usart1_rx_pa10>;
+	pinctrl-names = "default";
+	status = "okay";
+	current-speed = <9600>;
+	label = "radar_uart";
+};

@@ -1,0 +1,14 @@
+/ {
+	aliases {
+		ir-sen = &ir_sensor0;
+	};
+
+	ir_sensor {
+		compatible = "gpio-keys";
+
+		ir_sensor0: ir_sensor0 {
+			label = "IR0";
+			gpios = <&gpioa 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+		};
+	};
+};

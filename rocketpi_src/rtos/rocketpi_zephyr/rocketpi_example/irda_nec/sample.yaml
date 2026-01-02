@@ -1,0 +1,14 @@
+sample:
+  name: IR NEC send/receive shell
+tests:
+  sample.irda.nec:
+    tags:
+      - ir
+      - shell
+    depends_on:
+      - gpio
+      - pwm
+    harness: manual
+    platform_allow:
+      - rocket_pi
+      - nucleo_f401re

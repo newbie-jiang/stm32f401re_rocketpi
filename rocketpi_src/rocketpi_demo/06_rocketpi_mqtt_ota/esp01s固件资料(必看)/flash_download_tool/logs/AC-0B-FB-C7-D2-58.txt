@@ -1,0 +1,266 @@
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-02:58
+Connect baud: 115200
+Com:COM29
+connecting...
+0x3ff00050: 58480000
+0x3ff00054: 0200c7d2
+0x3ff00058: 6300b000
+0x3ff0005c: 00ac0bfb
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 99
+target crc val: 99
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 72
+target crc val: 72
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:58480000
+    REG1:0200C7D2
+    REG2:6300b000
+    REG3:00AC0BFB
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ ac 0b fb c7 d2 58CUSTOM_ID: 06 30 00 00 00 04 80 00 
+MAC AP : AE-0B-FB-C7-D2-58
+MAC STA: AC-0B-FB-C7-D2-58
+manufacturer_id: 0x5e
+device_id: 0x6014
+fs:0x0
+
+Leaving...
+com closed
+Total use time: 4 s
+Download result: PASS
+*************************** END ****************************
+
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-02:59
+Connect baud: 115200
+Com:COM29
+connecting...
+0x3ff00050: 58480000
+0x3ff00054: 0200c7d2
+0x3ff00058: 6300b000
+0x3ff0005c: 00ac0bfb
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 99
+target crc val: 99
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 72
+target crc val: 72
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:58480000
+    REG1:0200C7D2
+    REG2:6300b000
+    REG3:00AC0BFB
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ ac 0b fb c7 d2 58CUSTOM_ID: 06 30 00 00 00 04 80 00 
+MAC AP : AE-0B-FB-C7-D2-58
+MAC STA: AC-0B-FB-C7-D2-58
+manufacturer_id: 0x5e
+device_id: 0x6014
+com closed
+Total use time: 5 s
+Download result: PASS
+*************************** END ****************************
+
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-02:59
+Connect baud: 115200
+Com:COM29
+connecting...
+0x3ff00050: 58480000
+0x3ff00054: 0200c7d2
+0x3ff00058: 6300b000
+0x3ff0005c: 00ac0bfb
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 99
+target crc val: 99
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 72
+target crc val: 72
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:58480000
+    REG1:0200C7D2
+    REG2:6300b000
+    REG3:00AC0BFB
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ ac 0b fb c7 d2 58CUSTOM_ID: 06 30 00 00 00 04 80 00 
+MAC AP : AE-0B-FB-C7-D2-58
+MAC STA: AC-0B-FB-C7-D2-58
+manufacturer_id: 0x5e
+device_id: 0x6014
+com closed
+Total use time: 5 s
+Download result: PASS
+*************************** END ****************************
+
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:02
+Connect baud: 115200
+Com:COM29
+connecting...
+0x3ff00050: 58480000
+0x3ff00054: 0200c7d2
+0x3ff00058: 6300b000
+0x3ff0005c: 00ac0bfb
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 99
+target crc val: 99
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 72
+target crc val: 72
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:58480000
+    REG1:0200C7D2
+    REG2:6300b000
+    REG3:00AC0BFB
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ ac 0b fb c7 d2 58CUSTOM_ID: 06 30 00 00 00 04 80 00 
+MAC AP : AE-0B-FB-C7-D2-58
+MAC STA: AC-0B-FB-C7-D2-58
+manufacturer_id: 0x5e
+device_id: 0x6014
+fs:0x0
+address/file: 0 <_io.BufferedReader name='D:\\œ¬‘ÿ\\flash_download_tool\\flash_download_tool\\dl_temp\\bin_tmp\\downloadPanel1\\esp-at.bin_rep'>
+Wrote 876656 bytes at 0x00000000 in 49.0 seconds (effective 143.2 kbit/s)...
+File: D:\œ¬‘ÿ\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp-at.bin
+File  md5: 380e7d2c8463ed9429af501d36603193
+Flash md5: 380e7d2c8463ed9429af501d36603193
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 52 s
+Download result: PASS
+*************************** END ****************************
+
+*************************** START ****************************
+Chip: ESP8266
+Download mode: uart
+Start time: 20251028-03:09
+Connect baud: 115200
+Com:COM29
+connecting...
+0x3ff00050: 58480000
+0x3ff00054: 0200c7d2
+0x3ff00058: 6300b000
+0x3ff0005c: 00ac0bfb
+check_err_0: 0bcheck_err_1: 00check_err_2: 00check_err_3: 02check_err_4: 0b====================
+EFUSE NORMAL MODE
+====================
+=========================
+CRC IN MODE 1: 
+crc_calc_res: 99
+target crc val: 99
+=========================
+=========================
+CRC IN MODE 1:
+crc_calc_res: 72
+target crc val: 72
+=========================
+==================
+EFUSE LOG:
+======================
+    EFUSE LOG:
+    ---------------
+    REG0:58480000
+    REG1:0200C7D2
+    REG2:6300b000
+    REG3:00AC0BFB
+    ----------------
+    ====================
+                                   EFUSE NORMAL MODE
+                                   ====================
+EFUSE CHECK PASS...48bit mac
+-----------------------
+ ac 0b fb c7 d2 58CUSTOM_ID: 06 30 00 00 00 04 80 00 
+MAC AP : AE-0B-FB-C7-D2-58
+MAC STA: AC-0B-FB-C7-D2-58
+manufacturer_id: 0x5e
+device_id: 0x6014
+fs:0x0
+address/file: 0 <_io.BufferedReader name='G:\\desktop\\f401\\esp8266\\flash_download_tool\\dl_temp\\bin_tmp\\downloadPanel1\\£®1471£©ESP8266-AT_MQTT-1M.bin_rep'>
+Wrote 1048576 bytes at 0x00000000 in 47.5 seconds (effective 176.8 kbit/s)...
+File: G:\desktop\f401\esp8266\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\£®1471£©ESP8266-AT_MQTT-1M.bin
+File  md5: e178f5d36f9e91f72ab094e7f1ea663e
+Flash md5: e178f5d36f9e91f72ab094e7f1ea663e
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 50 s
+Download result: PASS
+*************************** END ****************************
+

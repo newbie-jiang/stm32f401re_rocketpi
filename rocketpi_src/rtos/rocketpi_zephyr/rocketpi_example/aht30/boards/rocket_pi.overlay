@@ -1,0 +1,17 @@
+
+/ {
+	aliases {
+		aht30 = &aht30_sensor;
+	};
+};
+
+&i2c1 {
+	status = "okay";
+
+	aht30_sensor: aht30@38 {
+		compatible = "aosong,aht20";
+		reg = <0x38>;
+		status = "okay";
+		label = "AHT30";
+	};
+};
