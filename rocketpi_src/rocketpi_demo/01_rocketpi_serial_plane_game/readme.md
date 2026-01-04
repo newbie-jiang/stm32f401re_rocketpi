@@ -1,7 +1,5 @@
 ## 效果展示
 
-视频待更新。。。。。。。。。。。。。。。
-
 <img src="https://cloud.rocketpi.club/cloud/image-20251116200846693.png" width="400" height="800" />
 
 ## 功能说明

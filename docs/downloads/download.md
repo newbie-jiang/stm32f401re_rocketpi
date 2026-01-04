@@ -9,28 +9,19 @@
 - CubemxV6.15.0 <a href="https://cloud.rocketpi.club/cloud/SetupSTM32CubeMX-6.15.0-Win.zip" target="_blank">Download</a>
 - stlink <a href="https://cloud.rocketpi.club/cloud/stsw-link009.zip" target="_blank">Download</a>
 - Chrome <a href="https://cloud.rocketpi.club/cloud/ChromeSetup.exe" target="_blank">Download</a>
+- CubeProgrammer  <a href="https://www.st.com/en/development-tools/stm32cubeprog.html" target="_blank">Download</a>
 
 原理图下载  <a href="https://cloud.rocketpi.club/cloud/Rocket-Pi_原理图_v1.0.pdf" target="_blank">Download</a>
 
 ## 源码下载
 
-base_samples:
+ <a href="https://github.com/newbie-jiang/stm32f401re_rocketpi" target="_blank">github  Download</a> 
 
-boot:
-
-factory:
-
-rtos:
-
-demo:
-
-other:
+ <a href="https://gitee.com/he-dejiang/stm32f401re_rocketpi" target="_blank">gitee Download</a> 
 
 ## ST官方导航（多逛逛）
 
 🌏STM32F401RE 中文官网资料文件 <a href="https://www.st.com.cn/zh/microcontrollers-microprocessors/stm32f401re.html#documentation/" target="_blank">Link</a>
-
-🌏ST官方 软件开发工具一览 <a href="https://www.st.com.cn/zh/development-tools/stm32-software-development-tools/products.html/" target="_blank">Link</a>
 
 🌏ST中文官网 <a href="https://www.st.com.cn/content/st_com/zh.html/" target="_blank">Link</a>
 

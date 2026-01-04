@@ -30,20 +30,20 @@ nav:
 
       - 【前言】嵌入式常见术语:  roadmap/嵌入式常见术语.md
       - 【Cubemx通用配置】 : roadmap/0.1Cubemx基本配置.md
-      - 【三种打印方式不来看看】 :  roadmap/rocketpi_printf.md
-      - 【超炫的可编程LED】 : roadmap/rocketpi_ws2812b.md
-      - 【温湿度这就出来了？】 : roadmap/rocketpi_aht30_hardware_i2c_base.md
-      - 【求求你，别让它抖了】: roadmap/rocketpi_key_irq.md
-      - 【微秒延时你这样做嘛】: roadmap/rocketpi_delay_us.md
-      - 【用双轴遥杆打飞机】: roadmap/rocketpi_serial_plane_game_joystick.md
-      - 【小小舵机拿捏】: roadmap/rocketpi_sg90.md
-      - 【这个雷达太酷了】: roadmap/rocketpi_hcsr04_radar.md
-      - 【蜂鸣器演奏家】: roadmap/rocketpi_pwm_passive_buzzer.md
-      - 【三分钟就会红外解码】: roadmap/rocketpi_irda.md
-      - 【EEPROM so easy】: roadmap/rocketpi_at24xx_soft_i2c.md
-      - 【读写tf卡原来这么简单】: roadmap/rocketpi_sdio_card.md
-      - 【FATFS文件系统使用】: roadmap/rocketpi_sdio_card_fatfs.md
-      - 【littlefs文件系统使用】: roadmap/rocketpi_flash_littlefs.md
+      # - 【三种打印方式不来看看】 :  roadmap/rocketpi_printf.md
+      # - 【超炫的可编程LED】 : roadmap/rocketpi_ws2812b.md
+      # - 【温湿度这就出来了？】 : roadmap/rocketpi_aht30_hardware_i2c_base.md
+      # - 【求求你，别让它抖了】: roadmap/rocketpi_key_irq.md
+      # - 【微秒延时你这样做嘛】: roadmap/rocketpi_delay_us.md
+      # - 【用双轴遥杆打飞机】: roadmap/rocketpi_serial_plane_game_joystick.md
+      # - 【小小舵机拿捏】: roadmap/rocketpi_sg90.md
+      # - 【这个雷达太酷了】: roadmap/rocketpi_hcsr04_radar.md
+      # - 【蜂鸣器演奏家】: roadmap/rocketpi_pwm_passive_buzzer.md
+      # - 【三分钟就会红外解码】: roadmap/rocketpi_irda.md
+      # - 【EEPROM so easy】: roadmap/rocketpi_at24xx_soft_i2c.md
+      # - 【读写tf卡原来这么简单】: roadmap/rocketpi_sdio_card.md
+      # - 【FATFS文件系统使用】: roadmap/rocketpi_sdio_card_fatfs.md
+      # - 【littlefs文件系统使用】: roadmap/rocketpi_flash_littlefs.md
       
   - "📁 资料下载":
       - 资料下载 : downloads/download.md

@@ -12,7 +12,7 @@ hide:
   </div>
   <div class="hero__content">
     <h1>Rocket-Pi</h1>
-    <p>基于Rocket-Pi开发套件，构建90+示例程序，由浅到深，聚焦快速入门。</p>
+    <p>基于Rocket-Pi开发套件，构建100+示例程序，由浅到深，聚焦快速入门。</p>
     <div class="hero__highlights">
       <div class="hero__highlight-card">
         <span class="hero__highlight-title">初出茅驴：</span>
