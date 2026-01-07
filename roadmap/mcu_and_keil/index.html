@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/5.0ADC%E5%8E%9F%E7%90%86/">
+        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/roadmap/mcu_and_keil/">
       
       
+        <link rel="prev" href="../0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">
+      
+      
+        <link rel="next" href="../../downloads/download/">
       
       
         
@@ -21,11 +25,11 @@
     
     
       
-        <title>5.0ADC原理 - Rocket-Pi</title>
+        <title>【多家MCU示例分析总结】 - Rocket-Pi</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
       
 
@@ -44,15 +48,15 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/custom.css">
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
-   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -61,7 +65,7 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     <body dir="ltr">
@@ -73,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#adcanalog-to-digital-converter" class="md-skip">
+        <a href="#mcu" class="md-skip">
           跳转至
         </a>
       
@@ -90,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href=".." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+    <a href="../.." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
       
 
 <img src="https://cloud.rocketpi.club/cloud/rocket.svg"
@@ -113,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5.0ADC原理
+              【多家MCU示例分析总结】
             
           </span>
         </div>
@@ -127,7 +131,7 @@
           
             
           
-          <a href=".." class="md-header__link">
+          <a href="../.." class="md-header__link">
             🏠 首页
           </a>
         
@@ -136,7 +140,7 @@
           
             
           
-          <a href="../roadmap/roadmap/" class="md-header__link">
+          <a href="../roadmap/" class="md-header__link">
             🧭 学习路线
           </a>
         
@@ -145,7 +149,7 @@
           
             
           
-          <a href="../downloads/download/" class="md-header__link">
+          <a href="../../downloads/download/" class="md-header__link">
             📁 资料下载
           </a>
         
@@ -154,7 +158,7 @@
           
             
           
-          <a href="../doc/rocketpi_src/" class="md-header__link">
+          <a href="../../doc/rocketpi_src/" class="md-header__link">
             🧪 示例程序
           </a>
         
@@ -163,7 +167,7 @@
           
             
           
-          <a href="../faq/faq/" class="md-header__link">
+          <a href="../../faq/faq/" class="md-header__link">
             ❓ 常见问题
           </a>
         
@@ -172,7 +176,7 @@
           
             
           
-          <a href="../tools/tools/" class="md-header__link">
+          <a href="../../tools/tools/" class="md-header__link">
             💼 工具
           </a>
         
@@ -181,7 +185,7 @@
           
             
           
-          <a href="../community/announcement/" class="md-header__link">
+          <a href="../../community/announcement/" class="md-header__link">
             📣 公告
           </a>
         
@@ -190,7 +194,7 @@
           
             
           
-          <a href="../community/column/" class="md-header__link">
+          <a href="../../community/column/" class="md-header__link">
             👥 社区专栏
           </a>
         
@@ -269,7 +273,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+    <a href="../.." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
       
 
 <img src="https://cloud.rocketpi.club/cloud/rocket.svg"
@@ -290,7 +294,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -319,18 +323,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -356,7 +362,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             🧭 学习路线
@@ -370,7 +376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/roadmap/" class="md-nav__link">
+      <a href="../roadmap/" class="md-nav__link">
         
   
   
@@ -403,7 +409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/hardware/" class="md-nav__link">
+      <a href="../hardware/" class="md-nav__link">
         
   
   
@@ -436,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
+      <a href="../0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
         
   
   
@@ -469,7 +475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
+      <a href="../1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -502,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
+      <a href="../2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -535,7 +541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
+      <a href="../3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -568,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
+      <a href="../4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
         
   
   
@@ -601,7 +607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
+      <a href="../5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -634,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+      <a href="../6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
         
   
   
@@ -667,7 +673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+      <a href="../%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
         
   
   
@@ -700,7 +706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../roadmap/0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   
@@ -730,10 +736,40 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../roadmap/mcu_and_keil/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【多家MCU示例分析总结】
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -754,6 +790,101 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mcu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        看国内,部分MCU厂商,来选择最优学习路线
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gd32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        兆易创新GD32
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#at32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        雅特力AT32
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mm32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        灵动微MM32
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        小华半导体
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        沁恒半导体
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        国民技术
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -821,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../downloads/download/" class="md-nav__link">
+      <a href="../../downloads/download/" class="md-nav__link">
         
   
   
@@ -909,7 +1040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rocketpi_src/" class="md-nav__link">
+      <a href="../../doc/rocketpi_src/" class="md-nav__link">
         
   
   
@@ -942,7 +1073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/factory/factory/" class="md-nav__link">
+      <a href="../../doc/factory/factory/" class="md-nav__link">
         
   
   
@@ -975,7 +1106,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_led/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_led/" class="md-nav__link">
         
   
   
@@ -1008,7 +1139,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_key_scan/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_key_scan/" class="md-nav__link">
         
   
   
@@ -1041,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_key_irq/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_key_irq/" class="md-nav__link">
         
   
   
@@ -1074,7 +1205,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_key_multi_button/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_key_multi_button/" class="md-nav__link">
         
   
   
@@ -1107,7 +1238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_delay_us/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_delay_us/" class="md-nav__link">
         
   
   
@@ -1140,7 +1271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_uart_printf/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_printf/" class="md-nav__link">
         
   
   
@@ -1173,7 +1304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_uart_echo/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_echo/" class="md-nav__link">
         
   
   
@@ -1206,7 +1337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_uart_control_led/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led/" class="md-nav__link">
         
   
   
@@ -1239,7 +1370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
         
   
   
@@ -1272,7 +1403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
         
   
   
@@ -1305,7 +1436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
         
   
   
@@ -1338,7 +1469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
         
   
   
@@ -1371,7 +1502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_uart_radar/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_radar/" class="md-nav__link">
         
   
   
@@ -1404,7 +1535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
         
   
   
@@ -1437,7 +1568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
         
   
   
@@ -1470,7 +1601,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
         
   
   
@@ -1503,7 +1634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
         
   
   
@@ -1536,7 +1667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_pwm_motor/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_pwm_motor/" class="md-nav__link">
         
   
   
@@ -1569,7 +1700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_hcsr04/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_hcsr04/" class="md-nav__link">
         
   
   
@@ -1602,7 +1733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
         
   
   
@@ -1635,7 +1766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_adc_joystick/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_adc_joystick/" class="md-nav__link">
         
   
   
@@ -1668,7 +1799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_irda/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_irda/" class="md-nav__link">
         
   
   
@@ -1701,7 +1832,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_ws2812b/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_ws2812b/" class="md-nav__link">
         
   
   
@@ -1734,7 +1865,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
         
   
   
@@ -1767,7 +1898,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
         
   
   
@@ -1800,7 +1931,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
         
   
   
@@ -1833,7 +1964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_i2s/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_i2s/" class="md-nav__link">
         
   
   
@@ -1866,7 +1997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_sdio_card/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_sdio_card/" class="md-nav__link">
         
   
   
@@ -1899,7 +2030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
         
   
   
@@ -1932,7 +2063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
         
   
   
@@ -1965,7 +2096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
         
   
   
@@ -1998,7 +2129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_usb_cdc/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_usb_cdc/" class="md-nav__link">
         
   
   
@@ -2031,7 +2162,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_usb_msc/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_usb_msc/" class="md-nav__link">
         
   
   
@@ -2064,7 +2195,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_w25qxx/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_w25qxx/" class="md-nav__link">
         
   
   
@@ -2097,7 +2228,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
         
   
   
@@ -2130,7 +2261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
         
   
   
@@ -2163,7 +2294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_esp8266/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_esp8266/" class="md-nav__link">
         
   
   
@@ -2196,7 +2327,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
         
   
   
@@ -2229,7 +2360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_standby_wkup/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_standby_wkup/" class="md-nav__link">
         
   
   
@@ -2262,7 +2393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_crc/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_crc/" class="md-nav__link">
         
   
   
@@ -2295,7 +2426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_mbedtls/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_mbedtls/" class="md-nav__link">
         
   
   
@@ -2328,7 +2459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/base_samples/rocketpi_extern_io_check/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_extern_io_check/" class="md-nav__link">
         
   
   
@@ -2361,7 +2492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/boot/bootloader/" class="md-nav__link">
+      <a href="../../doc/boot/bootloader/" class="md-nav__link">
         
   
   
@@ -2394,7 +2525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/boot/bootloader_iap/" class="md-nav__link">
+      <a href="../../doc/boot/bootloader_iap/" class="md-nav__link">
         
   
   
@@ -2427,7 +2558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rocketpi_demo/01_rocketpi_serial_plane_game/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/01_rocketpi_serial_plane_game/" class="md-nav__link">
         
   
   
@@ -2460,7 +2591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rocketpi_demo/02_don%27t_approach_me_alarm/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/02_don%27t_approach_me_alarm/" class="md-nav__link">
         
   
   
@@ -2493,7 +2624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rocketpi_demo/03_rocketpi_usb_audio_i2s/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/03_rocketpi_usb_audio_i2s/" class="md-nav__link">
         
   
   
@@ -2526,7 +2657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rocketpi_demo/04_rocketpi_hcsr04_radar/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/04_rocketpi_hcsr04_radar/" class="md-nav__link">
         
   
   
@@ -2559,7 +2690,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rocketpi_demo/05_rocketpi_smart_home/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/05_rocketpi_smart_home/" class="md-nav__link">
         
   
   
@@ -2592,7 +2723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rocketpi_demo/06_rocketpi_mqtt_ota/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/06_rocketpi_mqtt_ota/" class="md-nav__link">
         
   
   
@@ -2625,7 +2756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rtos/rocketpi_freertos/" class="md-nav__link">
+      <a href="../../doc/rtos/rocketpi_freertos/" class="md-nav__link">
         
   
   
@@ -2658,7 +2789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rtos/rocketpi_zephyr/" class="md-nav__link">
+      <a href="../../doc/rtos/rocketpi_zephyr/" class="md-nav__link">
         
   
   
@@ -2691,7 +2822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rtos/rocketpi_rt-thread/" class="md-nav__link">
+      <a href="../../doc/rtos/rocketpi_rt-thread/" class="md-nav__link">
         
   
   
@@ -2724,7 +2855,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../doc/rtos/rocketpi_threadx/" class="md-nav__link">
+      <a href="../../doc/rtos/rocketpi_threadx/" class="md-nav__link">
         
   
   
@@ -2812,7 +2943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../faq/faq/" class="md-nav__link">
+      <a href="../../faq/faq/" class="md-nav__link">
         
   
   
@@ -2900,7 +3031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tools/tools/" class="md-nav__link">
+      <a href="../../tools/tools/" class="md-nav__link">
         
   
   
@@ -2988,7 +3119,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../community/announcement/" class="md-nav__link">
+      <a href="../../community/announcement/" class="md-nav__link">
         
   
   
@@ -3076,7 +3207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../community/column/" class="md-nav__link">
+      <a href="../../community/column/" class="md-nav__link">
         
   
   
@@ -3134,10 +3265,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#adcanalog-to-digital-converter" class="md-nav__link">
+  <a href="#mcu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ADC（Analog to Digital Converter，模数转换器）
+        看国内,部分MCU厂商,来选择最优学习路线
       
     </span>
   </a>
@@ -3145,10 +3276,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adc" class="md-nav__link">
+  <a href="#gd32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、ADC 的基本功能
+        兆易创新GD32
       
     </span>
   </a>
@@ -3156,60 +3287,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adc_1" class="md-nav__link">
+  <a href="#at32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚙️ 二、ADC 的工作原理
+        雅特力AT32
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="⚙️ 二、ADC 的工作原理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-sampling" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1️⃣ 取样（Sampling）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-quantization" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2️⃣ 量化（Quantization）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-encoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3️⃣ 编码（Encoding）
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#adc_2" class="md-nav__link">
+  <a href="#mm32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔢 三、ADC 的关键参数
+        灵动微MM32
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        小华半导体
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        沁恒半导体
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        国民技术
       
     </span>
   </a>
@@ -3233,80 +3358,34 @@
 
 
 
-  <h1>5.0ADC原理</h1>
+  <h1>【多家MCU示例分析总结】</h1>
 
-<h2 id="adcanalog-to-digital-converter">ADC（<strong>Analog to Digital Converter</strong>，模数转换器）<a class="headerlink" href="#adcanalog-to-digital-converter" title="Permanent link">&para;</a></h2>
-<p>ADC（<strong>Analog to Digital Converter</strong>，模数转换器）是嵌入式系统中非常重要的一个模块，用来将<strong>连续的模拟信号（电压）*<em>转换成*</em>离散的数字信号（数值）</strong>，方便 MCU 或 MPU 进行处理。从原理、过程、精度、类型几个角度理解</p>
-<h2 id="adc">一、ADC 的基本功能<a class="headerlink" href="#adc" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p><strong>ADC 的作用：</strong>
- 把现实世界中的模拟量（电压、温度、光强、声音等）转换为 MCU 能处理的数字量。</p>
-</blockquote>
-<p>例如：
- 传感器输出 0 ~ 3.3 V 的电压，ADC 将其转换成一个二进制数。
- 在 12 位精度的 ADC 下：</p>
-<p>3.3V→4095   </p>
-<p>则每一位对应的最小电压变化为：</p>
-<p>3.3/4096=0.000805V≈0.805mV</p>
-<h2 id="adc_1">⚙️ 二、ADC 的工作原理<a class="headerlink" href="#adc_1" title="Permanent link">&para;</a></h2>
-<p>ADC 的本质是 <strong>取样 + 量化 + 编码</strong>。</p>
-<h3 id="1-sampling">1️⃣ 取样（Sampling）<a class="headerlink" href="#1-sampling" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>周期性地对模拟信号进行“快照”，获取某个时刻的电压值；</p>
-</li>
-<li>
-<p>取样频率需满足 <strong>奈奎斯特采样定理</strong>：</p>
-</li>
-</ul>
-<p>fs≥2×fmaxf_s ≥ 2 × f_{max}fs≥2×fmax</p>
-<p>否则会产生<strong>混叠（Aliasing）</strong>。</p>
-<hr />
-<h3 id="2-quantization">2️⃣ 量化（Quantization）<a class="headerlink" href="#2-quantization" title="Permanent link">&para;</a></h3>
-<ul>
-<li>把连续的电压值映射到有限的等级（由 ADC 分辨率决定）；</li>
-<li>例如 10 位 ADC → 2¹⁰ = 1024 个电平；</li>
-<li>每个电平对应一个电压区间，称为 <strong>LSB（Least Significant Bit）电压</strong>。</li>
-</ul>
-<hr />
-<h3 id="3-encoding">3️⃣ 编码（Encoding）<a class="headerlink" href="#3-encoding" title="Permanent link">&para;</a></h3>
-<ul>
-<li>把量化后的电平值转换为二进制输出；</li>
-<li>MCU 读取该数值（一般通过寄存器或 DMA）。</li>
-</ul>
-<hr />
-<h2 id="adc_2">🔢 三、ADC 的关键参数<a class="headerlink" href="#adc_2" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>分辨率 (Resolution)</strong></td>
-<td>ADC 输出的位数，决定精度</td>
-<td>8、10、12、16 位</td>
-</tr>
-<tr>
-<td><strong>参考电压 (Vref)</strong></td>
-<td>对应 ADC 满量程输入的电压</td>
-<td>常见 3.3 V、5 V、2.5 V</td>
-</tr>
-<tr>
-<td><strong>采样率 (Sample Rate)</strong></td>
-<td>每秒采样次数</td>
-<td>1 kSPS、1 MSPS 等</td>
-</tr>
-<tr>
-<td><strong>输入范围</strong></td>
-<td>可测的电压范围</td>
-<td>0 ~ Vref 或 ±Vref</td>
-</tr>
-</tbody>
-</table>
+<h2 id="mcu">看国内,部分MCU厂商,来选择最优学习路线<a class="headerlink" href="#mcu" title="Permanent link">&para;</a></h2>
+<p>选取了6家国内知名半导体，下载部分系列的示例库，查看对不同  编译器/工具链的支持</p>
+<p>KEIL (ARMCC/ARMCLANG)</p>
+<p>IAR(ICCARM)</p>
+<p>GCC(arm-none-eabi-gcc)</p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="2" src="https://cloud.rocketpi.club/cloud/2.png" /></a></p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="3" src="https://cloud.rocketpi.club/cloud/3.png" /></a></p>
+<h2 id="gd32">兆易创新GD32<a class="headerlink" href="#gd32" title="Permanent link">&para;</a></h2>
+<p>https://www.gd32mcu.com/cn/download/8</p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image-20260107181141254.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20260107181141254" src="https://cloud.rocketpi.club/cloud/image-20260107181141254.png" /></a></p>
+<h2 id="at32">雅特力AT32<a class="headerlink" href="#at32" title="Permanent link">&para;</a></h2>
+<p>https://www.arterytek.com/cn/product/AT32F403A.jsp#Resource</p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image-20260107234626785.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20260107234626785" src="https://cloud.rocketpi.club/cloud/image-20260107234626785.png" /></a></p>
+<h2 id="mm32">灵动微MM32<a class="headerlink" href="#mm32" title="Permanent link">&para;</a></h2>
+<p>https://www.mindmotion.com.cn/products/mm32mcu/performance_line/mm32f_performance/mm32f3270/</p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image-20260107181557049.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20260107181557049" src="https://cloud.rocketpi.club/cloud/image-20260107181557049.png" /></a></p>
+<h2 id="_1">小华半导体<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>https://www.xhsc.com.cn/product/1220.html</p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image-20260107182936099.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20260107182936099" src="https://cloud.rocketpi.club/cloud/image-20260107182936099.png" /></a></p>
+<h2 id="_2">沁恒半导体<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>https://www.wch.cn/downloads/CH32V307EVT_ZIP.html</p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image-20260108014228810.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20260108014228810" src="https://cloud.rocketpi.club/cloud/image-20260108014228810.png" /></a></p>
+<h2 id="_3">国民技术<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>https://www.nationstech.com/product/general/n32g/n32g4fr</p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image-20260107183355700.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20260107183355700" src="https://cloud.rocketpi.club/cloud/image-20260107183355700.png" /></a></p>
+<p>资料下载：https://cloud.rocketpi.club/cloud/mcu_lib.zip</p>
 
 
 
@@ -3356,10 +3435,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
