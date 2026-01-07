@@ -30,6 +30,10 @@ nav:
 
       - 【前言】嵌入式常见术语:  roadmap/嵌入式常见术语.md
       - 【Cubemx通用配置】 : roadmap/0.1Cubemx基本配置.md
+      - 【多家MCU示例分析总结】 : roadmap/mcu_and_keil.md
+
+
+
       # - 【三种打印方式不来看看】 :  roadmap/rocketpi_printf.md
       # - 【超炫的可编程LED】 : roadmap/rocketpi_ws2812b.md
       # - 【温湿度这就出来了？】 : roadmap/rocketpi_aht30_hardware_i2c_base.md
