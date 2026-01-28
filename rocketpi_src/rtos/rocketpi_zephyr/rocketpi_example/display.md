@@ -22,7 +22,7 @@ west build -p always -b rocket_pi display
 
 声明
 
-    staticconststructgpio_dt_specbl = GPIO_DT_SPEC_GET(DT_ALIAS(bl0), gpios);
+    static const struct gpio_dt_specbl = GPIO_DT_SPEC_GET(DT_ALIAS(bl0), gpios);
 
 从设备树获取io点亮，添加至main.c最开始
 

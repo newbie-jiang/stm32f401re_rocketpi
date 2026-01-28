@@ -1,5 +1,7 @@
 # RocketPi（STM32）可编译的 Zephyr Samples 汇总（含源码路径）
 
+- support  zephyr v4.3.99
+
 开发板详情 https://www.rocketpi.club
 
 https://github.com/zephyrproject-rtos/zephyr/tree/main

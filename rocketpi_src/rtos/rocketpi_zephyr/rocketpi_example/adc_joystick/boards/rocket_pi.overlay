@@ -65,7 +65,8 @@
 	pinctrl-names = "default";
 	label = "adc1_joystick";
 
-	channel@14 {
+	/* unit-address is hex; @e/@f match io-channels 14/15 */
+	channel@e {
 		reg = <14>;
 		zephyr,gain = "ADC_GAIN_1";
 		zephyr,reference = "ADC_REF_INTERNAL";
@@ -73,7 +74,7 @@
 		zephyr,resolution = <12>;
 	};
 
-	channel@15 {
+	channel@f {
 		reg = <15>;
 		zephyr,gain = "ADC_GAIN_1";
 		zephyr,reference = "ADC_REF_INTERNAL";

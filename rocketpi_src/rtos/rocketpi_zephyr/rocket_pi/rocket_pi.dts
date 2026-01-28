@@ -349,10 +349,12 @@ zephyr_udc0: &usbotg_fs {
 };
 
 &plli2s {
+        div-m = <4>;
         mul-n = <128>;
         div-r = <5>;
 	// mul-n = <50>;
         // div-r = <4>;
+        clocks = <&clk_hse>;
         status = "okay";
 };
 
