@@ -3,7 +3,7 @@
 <title>Static Call Graph - [rocketpi_spi_lcd_240x240_lvgl\rocketpi_spi_lcd_240x240_lvgl.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image rocketpi_spi_lcd_240x240_lvgl\rocketpi_spi_lcd_240x240_lvgl.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed Dec 17 19:44:46 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Feb 20 10:58:37 2026
 <BR><P>
 <H3>Maximum Stack Usage =       1268 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -4395,9 +4395,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[481]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_free_core
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_delete
+<BR>[Called By]<UL><LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
+<LI><a href="#[3ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_delete
 <LI><a href="#[379]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_set_text
-<LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
 <LI><a href="#[60b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_textarea_set_placeholder_text
 <LI><a href="#[5b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_textarea_set_text
 <LI><a href="#[5f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_table_set_row_count
@@ -5560,11 +5560,11 @@ Global Symbols
 <P><STRONG><a name="[4e1]"></a>lv_list_add_button</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, lv_list.o(i.lv_list_add_button))
 <BR><BR>[Stack]<UL><LI>Max Depth = 720<LI>Call Chain = lv_list_add_button &rArr; lv_image_set_src &rArr; update_align &rArr; lv_image_set_rotation &rArr; lv_obj_update_layout &rArr; layout_update_core &rArr;  layout_update_core (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_flex_flow
+<BR>[Calls]<UL><LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
+<LI><a href="#[491]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_create
+<LI><a href="#[3dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_flex_flow
 <LI><a href="#[379]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_set_text
 <LI><a href="#[47e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_create
-<LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
-<LI><a href="#[491]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_create
 <LI><a href="#[3de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_flex_grow
 <LI><a href="#[4c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_set_long_mode
 <LI><a href="#[3c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_class_init_obj
@@ -5600,8 +5600,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[79]"></a>lv_ll_get_head</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, lv_ll.o(i.lv_ll_get_head))
-<BR><BR>[Called By]<UL><LI><a href="#[351]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_anim_delete
-<LI><a href="#[613]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_handler
+<BR><BR>[Called By]<UL><LI><a href="#[613]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_handler
+<LI><a href="#[351]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_anim_delete
 <LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_indev_get_next
 <LI><a href="#[33a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_group_focus_obj
 <LI><a href="#[489]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_group_add_obj
@@ -5643,8 +5643,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[78]"></a>lv_ll_get_next</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, lv_ll.o(i.lv_ll_get_next))
-<BR><BR>[Called By]<UL><LI><a href="#[351]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_anim_delete
-<LI><a href="#[613]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_handler
+<BR><BR>[Called By]<UL><LI><a href="#[613]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_handler
+<LI><a href="#[351]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_anim_delete
 <LI><a href="#[2f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_indev_get_next
 <LI><a href="#[33a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_group_focus_obj
 <LI><a href="#[48a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_group_remove_obj
@@ -5977,8 +5977,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[18c]"></a>lv_memset</STRONG> (Thumb, 88 bytes, Stack size 0 bytes, lv_string_builtin.o(i.lv_memset))
-<BR><BR>[Called By]<UL><LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_anim_init
-<LI><a href="#[4aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_init
+<BR><BR>[Called By]<UL><LI><a href="#[4aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_init
+<LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_anim_init
 <LI><a href="#[5f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_table_set_row_count
 <LI><a href="#[239]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_draw_label_dsc_init
 <LI><a href="#[565]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_style_reset
@@ -6114,12 +6114,12 @@ Global Symbols
 <P><STRONG><a name="[4f7]"></a>lv_msgbox_create</STRONG> (Thumb, 142 bytes, Stack size 16 bytes, lv_msgbox.o(i.lv_msgbox_create))
 <BR><BR>[Stack]<UL><LI>Max Depth = 528<LI>Call Chain = lv_msgbox_create &rArr; lv_obj_center &rArr; lv_obj_align &rArr; lv_obj_set_pos &rArr; lv_obj_set_y &rArr; lv_obj_set_style_y &rArr; lv_obj_set_local_style_prop &rArr; lv_obj_refresh_style &rArr; refresh_children_style &rArr;  refresh_children_style (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_size
+<BR>[Calls]<UL><LI><a href="#[4f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_center
+<LI><a href="#[4f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_size
 <LI><a href="#[3dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_flex_flow
 <LI><a href="#[38f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_add_flag
 <LI><a href="#[3da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_add_event_cb
 <LI><a href="#[4db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_layer_top
-<LI><a href="#[4f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_center
 <LI><a href="#[390]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_remove_flag
 <LI><a href="#[3c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_class_init_obj
 <LI><a href="#[3c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_class_create_obj
@@ -6370,11 +6370,11 @@ Global Symbols
 <LI><a href="#[2dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_realloc
 <LI><a href="#[210]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_malloc_zeroed
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_table_create
+<BR>[Called By]<UL><LI><a href="#[491]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_create
+<LI><a href="#[5f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_table_create
 <LI><a href="#[40b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_create
 <LI><a href="#[47e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_create
 <LI><a href="#[3c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_button_create
-<LI><a href="#[491]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_create
 <LI><a href="#[605]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_textarea_create
 <LI><a href="#[400]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_tabview_create
 <LI><a href="#[5ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_switch_create
@@ -6412,11 +6412,11 @@ Global Symbols
 <LI><a href="#[4f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_mark_layout_as_dirty
 <LI><a href="#[50f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_enable_style_refresh
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_table_create
+<BR>[Called By]<UL><LI><a href="#[491]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_create
+<LI><a href="#[5f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_table_create
 <LI><a href="#[40b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_create
 <LI><a href="#[47e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_create
 <LI><a href="#[3c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_button_create
-<LI><a href="#[491]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_create
 <LI><a href="#[605]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_textarea_create
 <LI><a href="#[400]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_tabview_create
 <LI><a href="#[5ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_switch_create
@@ -7128,8 +7128,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_selector_style_prop
 <LI><a href="#[549]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_style_prop_get_default
 </UL>
-<BR>[Called By]<UL><LI><a href="#[4a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_scroll_bottom
-<LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
+<BR>[Called By]<UL><LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
+<LI><a href="#[4a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_scroll_bottom
 <LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_tabview_set_active
 <LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_dropdown_open
 <LI><a href="#[3c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_buttonmatrix_set_map
@@ -7630,9 +7630,9 @@ Global Symbols
 <LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_invalidate_area
 <LI><a href="#[506]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_area_copy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[38f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_add_flag
+<BR>[Called By]<UL><LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
+<LI><a href="#[38f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_add_flag
 <LI><a href="#[379]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_set_text
-<LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
 <LI><a href="#[60b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_textarea_set_placeholder_text
 <LI><a href="#[390]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_remove_flag
 <LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_group_set_editing
@@ -7937,8 +7937,8 @@ Global Symbols
 <LI><a href="#[48b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_allocate_spec_attr
 <LI><a href="#[37d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_ext_draw_size
 </UL>
-<BR>[Called By]<UL><LI><a href="#[499]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_rotation
-<LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
+<BR>[Called By]<UL><LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
+<LI><a href="#[499]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_rotation
 <LI><a href="#[598]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_roller_set_options
 <LI><a href="#[497]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_pivot
 <LI><a href="#[3c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_buttonmatrix_clear_button_ctrl
@@ -9835,15 +9835,15 @@ Global Symbols
 <P><STRONG><a name="[401]"></a>lv_tabview_add_tab</STRONG> (Thumb, 158 bytes, Stack size 32 bytes, lv_tabview.o(i.lv_tabview_add_tab))
 <BR><BR>[Stack]<UL><LI>Max Depth = 688<LI>Call Chain = lv_tabview_add_tab &rArr; lv_tabview_set_active &rArr; lv_obj_set_state &rArr; lv_obj_add_state &rArr; update_obj_state &rArr; lv_obj_style_create_transition &rArr; lv_obj_refresh_style &rArr; refresh_children_style &rArr;  refresh_children_style (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_pct
+<BR>[Calls]<UL><LI><a href="#[4f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_center
+<LI><a href="#[512]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_group_get_default
+<LI><a href="#[3db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_pct
 <LI><a href="#[4f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_size
 <LI><a href="#[40b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_create
 <LI><a href="#[3da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_add_event_cb
 <LI><a href="#[379]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_set_text
 <LI><a href="#[47e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_create
 <LI><a href="#[3c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_button_create
-<LI><a href="#[4f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_center
-<LI><a href="#[512]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_group_get_default
 <LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_tabview_set_active
 <LI><a href="#[3de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_flex_grow
 <LI><a href="#[1ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_get_child_count
@@ -10342,9 +10342,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[19c]"></a>lv_tick_get</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, lv_tick.o(i.lv_tick_get))
-<BR><BR>[Called By]<UL><LI><a href="#[38a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_create
+<BR><BR>[Called By]<UL><LI><a href="#[613]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_handler
+<LI><a href="#[38a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_create
 <LI><a href="#[1b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_anim_start
-<LI><a href="#[613]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_handler
 <LI><a href="#[410]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_timer_ready
 <LI><a href="#[19b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_tick_elaps
 <LI><a href="#[407]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_display_create
@@ -10780,11 +10780,11 @@ Local Symbols
 <P><STRONG><a name="[403]"></a>text_input_create</STRONG> (Thumb, 116 bytes, Stack size 16 bytes, lv_demo_keypad_encoder.o(i.text_input_create))
 <BR><BR>[Stack]<UL><LI>Max Depth = 664<LI>Call Chain = text_input_create &rArr; lv_textarea_set_one_line &rArr; lv_obj_scroll_to &rArr; lv_obj_scroll_to_y &rArr; lv_obj_scroll_by_bounded &rArr; lv_obj_update_layout &rArr; layout_update_core &rArr;  layout_update_core (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[3dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_width
+<BR>[Calls]<UL><LI><a href="#[3ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_screen_active
+<LI><a href="#[3dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_width
 <LI><a href="#[3dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_flex_flow
 <LI><a href="#[38f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_add_flag
 <LI><a href="#[3da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_add_event_cb
-<LI><a href="#[3ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_screen_active
 <LI><a href="#[60b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_textarea_set_placeholder_text
 <LI><a href="#[5ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_textarea_set_one_line
 <LI><a href="#[605]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_textarea_create
@@ -16595,7 +16595,9 @@ Local Symbols
 <P><STRONG><a name="[e3]"></a>lv_menu_constructor</STRONG> (Thumb, 296 bytes, Stack size 24 bytes, lv_menu.o(i.lv_menu_constructor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 728<LI>Call Chain = lv_menu_constructor &rArr; lv_image_set_src &rArr; update_align &rArr; lv_image_set_rotation &rArr; lv_obj_update_layout &rArr; layout_update_core &rArr;  layout_update_core (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_size
+<BR>[Calls]<UL><LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
+<LI><a href="#[491]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_create
+<LI><a href="#[4f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_size
 <LI><a href="#[4ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_layout
 <LI><a href="#[3dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_flex_flow
 <LI><a href="#[4f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_flex_align
@@ -16604,8 +16606,6 @@ Local Symbols
 <LI><a href="#[3da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_add_event_cb
 <LI><a href="#[47e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_label_create
 <LI><a href="#[3c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_button_create
-<LI><a href="#[494]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_set_src
-<LI><a href="#[491]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_image_create
 <LI><a href="#[475]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_height
 <LI><a href="#[390]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_remove_flag
 <LI><a href="#[3de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lv_obj_set_flex_grow
