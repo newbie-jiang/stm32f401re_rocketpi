@@ -426,7 +426,7 @@ time：软件定时器必须在使用之前显式创建。
 软件定时器可以在调度程序运行之前创建，或者从
 调度程序启动后的任务。
 
-[Section 2.5: Data Types and Coding Style Guide](ch02.md#25-data-types-and-coding-style-guide) 描述了所使用的数据类型和命名约定。
+[Section 2.5: Data Types and Coding Style Guide](ch02_zh.md#25-data-types-and-coding-style-guide) 描述了所使用的数据类型和命名约定。
 
 
 <a name="list6.3" title="Listing 6.3 The xTimerCreate() API function prototype"></a>

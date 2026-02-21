@@ -400,7 +400,7 @@ typedef struct xTASK_STATUS
   比应用程序编写者分配给任务的优先级，如果
   任务已暂时被分配了更高的优先级
   章节中描述的优先级继承机制
-  [8.3 Mutexes (and Binary Semaphores)](ch08.md#83-mutexes-and-binary-semaphores)。
+  [8.3 Mutexes (and Binary Semaphores)](ch08_zh.md#83-mutexes-and-binary-semaphores)。
 
 - `uxBasePriority`
 
