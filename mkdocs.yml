@@ -31,19 +31,19 @@ nav:
       - 【前言】嵌入式常见术语:  roadmap/嵌入式常见术语.md
       - 【Cubemx通用配置】 : roadmap/0.1Cubemx基本配置.md
       - 【多家MCU示例分析总结】 : roadmap/mcu_and_keil.md
-      - 【freeRTOS_01_前言】 : roadmap/ch01_zh.md
-      - 【freeRTOS_02_内核发行版】 : roadmap/ch02_zh.md
-      - 【freeRTOS_03_堆内存管理】 : roadmap/ch03_zh.md
-      - 【freeRTOS_04_任务管理】 : roadmap/ch04_zh.md
-      - 【freeRTOS_05_队列管理】 : roadmap/ch05_zh.md
-      - 【freeRTOS_06_软件定时器管理】 : roadmap/ch06_zh.md
-      - 【freeRTOS_07_中断管理】 : roadmap/ch07_zh.md
-      - 【freeRTOS_08_资源管理】 : roadmap/ch08_zh.md
-      - 【freeRTOS_09_事件组】 : roadmap/ch09_zh.md
-      - 【freeRTOS_10_任务通知】 : roadmap/ch10_zh.md
-      - 【freeRTOS_11_低功耗支持】 : roadmap/ch11_zh.md
-      - 【freeRTOS_12_开发者支持】 : roadmap/ch12_zh.md
-      - 【freeRTOS_13_故障排除】 : roadmap/ch13_zh.md
+      - 【FreeRTOS_1前言】 : roadmap/ch01_zh.md
+      - 【FreeRTOS_2内核发行版】 : roadmap/ch02_zh.md
+      - 【FreeRTOS_3堆内存管理】 : roadmap/ch03_zh.md
+      - 【FreeRTOS_4任务管理】 : roadmap/ch04_zh.md
+      - 【FreeRTOS_5队列管理】 : roadmap/ch05_zh.md
+      - 【FreeRTOS_6软定时器管理】 : roadmap/ch06_zh.md
+      - 【FreeRTOS_7中断管理】 : roadmap/ch07_zh.md
+      - 【FreeRTOS_8资源管理】 : roadmap/ch08_zh.md
+      - 【FreeRTOS_9事件组】 : roadmap/ch09_zh.md
+      - 【FreeRTOS_10任务通知】 : roadmap/ch10_zh.md
+      - 【FreeRTOS_11低功耗支持】 : roadmap/ch11_zh.md
+      - 【FreeRTOS_12开发者支持】 : roadmap/ch12_zh.md
+      - 【FreeRTOS_13故障排除】 : roadmap/ch13_zh.md
 
 
       # - 【三种打印方式不来看看】 :  roadmap/rocketpi_printf.md
