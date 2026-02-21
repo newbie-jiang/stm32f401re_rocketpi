@@ -1,0 +1,4467 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/roadmap/ch13_zh/">
+      
+      
+        <link rel="prev" href="../ch12_zh/">
+      
+      
+        <link rel="next" href="../../downloads/download/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://cloud.rocketpi.club/cloud/rocket.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>【freeRTOS_13_故障排除】 - Rocket-Pi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#13" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rocket-Pi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              【freeRTOS_13_故障排除】
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <div class="md-header__links">
+        
+          
+          
+          
+            
+          
+          <a href="../.." class="md-header__link">
+            🏠 首页
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../roadmap/" class="md-header__link">
+            🧭 学习路线
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../downloads/download/" class="md-header__link">
+            📁 资料下载
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../doc/rocketpi_src/" class="md-header__link">
+            🧪 示例程序
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../faq/faq/" class="md-header__link">
+            ❓ 常见问题
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../tools/tools/" class="md-header__link">
+            💼 工具
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/announcement/" class="md-header__link">
+            📣 公告
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/column/" class="md-header__link">
+            👥 社区专栏
+          </a>
+        
+      </div>
+    
+    
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    Rocket-Pi
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🏠 首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧭 学习路线
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🧭 学习路线
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    学习路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【硬件】硬件一览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】开发路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】CubeMX安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stm32F4xx_DFP安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5注册
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stlink安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】验证开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【前言】嵌入式常见术语
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【Cubemx通用配置】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mcu_and_keil/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【多家MCU示例分析总结】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_01_前言】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_02_内核发行版】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_03_堆内存管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_04_任务管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_05_队列管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_06_软件定时器管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_07_中断管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_08_资源管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_09_事件组】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_10_任务通知】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_11_低功耗支持】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_12_开发者支持】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_13_故障排除】
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_13_故障排除】
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 章节简介和范围
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 中断优先级
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 堆栈溢出
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.3 堆栈溢出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1331-uxtaskgetstackhighwatermark-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.1 uxTaskGetStackHighWaterMark() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1332-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.2 运行时堆栈检查 - 概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1333-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.3 运行时堆栈检查 - 方法 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1334-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.4 运行时堆栈检查——方法 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1334-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.4 运行时堆栈检查——方法 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134-printf-sprintf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 printf() 和 sprintf() 的使用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.4 printf() 和 sprintf() 的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1341-printf-stdargc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.1 Printf-stdarg.c
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#135" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5 其他常见错误源
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.5 其他常见错误源">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1351" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.1 症状：向演示添加简单任务会导致演示崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1352-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.2 症状：在中断内使用 API 函数会导致应用程序崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1353" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.3 症状：有时应用程序会在中断服务例程中崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1354" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.4 症状：尝试启动第一个任务时调度程序崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1355" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.5 症状：中断意外被禁用，或者关键部分未正确嵌套
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1356" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.6 症状：应用程序在调度程序启动之前就崩溃了
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1357-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.7 症状：在调度程序挂起时或从关键部分内部调用 API 函数会导致应用程序崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#136" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.6 附加调试步骤
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📁 资料下载
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            📁 资料下载
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../downloads/download/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    资料下载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧪 示例程序
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🧪 示例程序
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_src/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi所有示例程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/factory/factory/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    厂测程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_scan/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_scan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_irq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_irq
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_multi_button/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_multi_button
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_delay_us/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_delay_us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_printf/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_printf
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_echo/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_echo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led_cjson
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_ymodem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_shell_microrl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_easylogger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_radar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_aht30
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_at24cxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_passive_buzzer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_sg90
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_motor/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_motor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_hcsr04/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_hcsr04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_mcu_temperature
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_joystick/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_joystick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_irda/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_irda
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_ws2812b/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_ws2812b
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_speedtest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_bitmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_240x240_lvgl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card_fatfs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_audio_to_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_pic_to_lcd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_cdc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_cdc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_msc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_msc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_flash_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266_tcp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_standby_wkup/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_standby_wkup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_crc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_crc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_mbedtls/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_mbedtls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_extern_io_check/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_extern_io_check
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader_iap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader_iap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/01_rocketpi_serial_plane_game/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    飞行大乱斗
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/02_don%27t_approach_me_alarm/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    别靠近我报警器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/03_rocketpi_usb_audio_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    超炫桌面节奏大师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/04_rocketpi_hcsr04_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    雷达探测器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/05_rocketpi_smart_home/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    物联网智能家居
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/06_rocketpi_mqtt_ota/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    FOTA固件升级
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_freertos/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_freertos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_zephyr/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_zephyr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_rt-thread/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_rt-thread
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_threadx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_threadx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    ❓ 常见问题
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ❓ 常见问题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/faq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    常见问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    💼 工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            💼 工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/tools/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📣 公告
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            📣 公告
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/announcement/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    公告
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    👥 社区专栏
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            👥 社区专栏
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/column/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    社区专栏
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 章节简介和范围
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 中断优先级
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 堆栈溢出
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.3 堆栈溢出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1331-uxtaskgetstackhighwatermark-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.1 uxTaskGetStackHighWaterMark() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1332-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.2 运行时堆栈检查 - 概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1333-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.3 运行时堆栈检查 - 方法 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1334-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.4 运行时堆栈检查——方法 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1334-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3.4 运行时堆栈检查——方法 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134-printf-sprintf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 printf() 和 sprintf() 的使用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.4 printf() 和 sprintf() 的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1341-printf-stdargc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.1 Printf-stdarg.c
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#135" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5 其他常见错误源
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.5 其他常见错误源">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1351" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.1 症状：向演示添加简单任务会导致演示崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1352-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.2 症状：在中断内使用 API 函数会导致应用程序崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1353" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.3 症状：有时应用程序会在中断服务例程中崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1354" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.4 症状：尝试启动第一个任务时调度程序崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1355" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.5 症状：中断意外被禁用，或者关键部分未正确嵌套
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1356" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.6 症状：应用程序在调度程序启动之前就崩溃了
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1357-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5.7 症状：在调度程序挂起时或从关键部分内部调用 API 函数会导致应用程序崩溃
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#136" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.6 附加调试步骤
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="13">13 故障排除<a class="headerlink" href="#13" title="Permanent link">&para;</a></h1>
+<h2 id="131">13.1 章节简介和范围<a class="headerlink" href="#131" title="Permanent link">&para;</a></h2>
+<p>本章重点介绍了用户遇到的最常见问题
+是 FreeRTOS 的新手。首先，它重点关注三个已被证明的问题
+多年来成为最常见的支持请求来源：
+错误的中断优先级分配、堆栈溢出和
+printf() 的不当使用。然后以 FAQ 的风格简短地说明：
+涉及其他常见错误、其可能的原因及其后果
+解决方案。</p>
+<blockquote>
+<p><em>使用 <code>configASSERT()</code> 通过立即捕获和
+识别许多最常见的错误来源。它是强烈的
+建议在开发或调试时定义 <code>configASSERT()</code>
+FreeRTOS 应用程序。 <code>configASSERT()</code> 在第 12.2 节中进行了描述。</em></p>
+</blockquote>
+<h2 id="132">13.2 中断优先级<a class="headerlink" href="#132" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><em>注意：这是支持请求的首要原因，并且在大多数情况下
+定义 <code>configASSERT()</code> 的端口将立即捕获错误！</em></p>
+</blockquote>
+<p>如果使用的FreeRTOS端口支持中断嵌套，并且服务
+中断例程使用 FreeRTOS API，那么它是
+<em>必要</em>中断优先级设置为等于或低于
+<code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code>，如第 7.8 节所述，
+中断嵌套。如果不这样做将导致无效
+关键部分，这反过来会导致间歇性故障。</p>
+<p>如果在以下处理器上运行 FreeRTOS，请特别小心：</p>
+<ul>
+<li>
+<p>中断优先级默认为尽可能高
+  优先级，某些 ARM Cortex 处理器就是这种情况，以及
+  可能是其他人。在此类处理器上，中断的优先级
+  使用 FreeRTOS API 的程序不能保持未初始化状态。</p>
+</li>
+<li>
+<p>数字高优先级数字代表逻辑低中断
+  优先级，这可能看起来违反直觉，因此会导致
+  混乱。 ARM Cortex 处理器上也是如此，并且
+  可能是其他人。</p>
+</li>
+<li>
+<p>例如，在这样的处理器上，正在执行的中断
+  优先级 5 本身可以被具有以下优先级的中断中断：
+  优先级为 4。因此，如果 <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> 为
+  设置为 5，任何使用 FreeRTOS API 的中断都只能
+  分配的优先级数字高于或等于 5。
+  在这种情况下，中断优先级 5 或 6 是有效的，但是
+  中断优先级为3肯定是无效的。</p>
+</li>
+</ul>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image91.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image91.png" /></a></p>
+<ul>
+<li>
+<p>不同的库实现期望优先级
+  中断以不同的方式指定。再次强调，这是特别
+  与针对 ARM Cortex 处理器的库相关，其中
+  中断优先级在写入之前会进行位移位
+  硬件寄存器。有些库会执行位移
+  他们自己，而其他人则期望执行位移位
+  在将优先级传递给库函数之前。</p>
+</li>
+<li>
+<p>同一架构的不同实现实现了
+  不同数量的中断优先级位。例如，Cortex-M
+  一个制造商的处理器可以实现 3 个优先级位，而
+  来自其他制造商的 Cortex-M 处理器可以实现 4
+  优先级位。</p>
+</li>
+<li>
+<p>定义中断优先级的位可以拆分
+  定义抢占优先级的位和定义抢占优先级的位之间
+  定义一个子优先级。确保所有位都分配给
+  指定抢占优先级，以便不使用子优先级。</p>
+</li>
+</ul>
+<p>在某些 FreeRTOS 移植中，<code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> 具有
+替代名称 <code>configMAX_API_CALL_INTERRUPT_PRIORITY</code>。</p>
+<h2 id="133">13.3 堆栈溢出<a class="headerlink" href="#133" title="Permanent link">&para;</a></h2>
+<p>堆栈溢出是第二个最常见的支持请求来源。
+FreeRTOS 提供了多种功能来协助捕获和调试
+堆栈相关问题[^28]。</p>
+<p>[^28]：这些功能在 FreeRTOS Windows 端口中不可用。</p>
+<h3 id="1331-uxtaskgetstackhighwatermark-api">13.3.1 uxTaskGetStackHighWaterMark() API 功能<a class="headerlink" href="#1331-uxtaskgetstackhighwatermark-api" title="Permanent link">&para;</a></h3>
+<p>每个任务维护自己的堆栈，其总大小是指定的
+当任务创建时。 <code>uxTaskGetStackHighWaterMark()</code>用于查询
+任务有多接近溢出分配给的堆栈空间
+它。该值称为堆栈“高水位线”。</p>
+<p><a name="list13.1" title="Listing 13.1 The uxTaskGetStackHighWaterMark() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">UBaseType_t</span><span class="w"> </span><span class="nf">uxTaskGetStackHighWaterMark</span><span class="p">(</span><span class="w"> </span><span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">xTask</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 13.1</em></strong> <em>uxTaskGetStackHighWaterMark() API 函数原型</em></p>
+<p><strong>uxTaskGetStackHighWaterMark()参数及返回值</strong></p>
+<ul>
+<li><code>xTask</code></li>
+</ul>
+<p>正在处理堆栈高水位线的任务句柄
+  queried (the subject task)—请参阅 pxCreatedTask 参数
+  <code>xTaskCreate()</code> API 函数获取有关获取句柄的信息
+  任务。</p>
+<p>任务可以通过传入 NULL 来查询自己的堆栈高水位线
+  有效任务句柄的位置。</p>
+<ul>
+<li>返回值</li>
+</ul>
+<p>任务使用的堆栈量随着任务的增加和减少
+  执行并处理中断。 <code>uxTaskGetStackHighWaterMark()</code>
+  返回已分配的最小剩余堆栈空间量
+  自任务开始执行以来可用。这是堆栈的数量
+  当堆栈使用量达到 greatest (or deepest) 时保持未使用状态
+  值。高水位线越接近零，任务就越接近
+  堆栈已经溢出。</p>
+<p>可以使用 <code>uxTaskGetStackHighWaterMark2()</code> API 代替
+<code>uxTaskGetStackHighWaterMark()</code> 仅在返回类型上有所不同。</p>
+<p><a name="list13.2" title="Listing 13.2 The uxTaskGetStackHighWaterMark2() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">configSTACK_DEPTH_TYPE</span><span class="w"> </span><span class="nf">uxTaskGetStackHighWaterMark2</span><span class="p">(</span><span class="w"> </span><span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">xTask</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 13.2</em></strong> <em>uxTaskGetStackHighWaterMark2() API 函数原型</em></p>
+<p>使用 <code>configSTACK_DEPTH_TYPE</code> 允许应用程序编写者控制类型
+用于堆栈深度。</p>
+<h3 id="1332-">13.3.2 运行时堆栈检查 - 概述<a class="headerlink" href="#1332-" title="Permanent link">&para;</a></h3>
+<p>FreeRTOS 包括三种可选的运行时堆栈检查机制。这些
+由 <code>configCHECK_FOR_STACK_OVERFLOW</code> 编译时间控制
+FreeRTOSConfig.h 内的配置常量。两种方法都会增加
+执行上下文切换所需的时间。</p>
+<p>堆栈溢出 hook (or stack overflow callback) 是一个函数
+当内核检测到堆栈溢出时调用。使用堆栈
+溢出钩子函数：</p>
+<ol>
+<li>将 <code>configCHECK_FOR_STACK_OVERFLOW</code> 设置为 1、2 或 3 英寸
+   FreeRTOSConfig.h，如以下小节所述。</li>
+</ol>
+<p>1.提供hook函数的实现，使用准确
+   函数名称和原型如清单 13.3 所示。</p>
+<p><a name="list13.3" title="Listing 13.3 The stack overflow hook function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vApplicationStackOverflowHook</span><span class="p">(</span><span class="w"> </span><span class="n">TaskHandle_t</span><span class="w"> </span><span class="o">*</span><span class="n">pxTask</span><span class="p">,</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pcTaskName</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 13.3</em></strong> <em>堆栈溢出钩子函数原型</em></p>
+<p>提供堆栈溢出钩子来捕获和调试堆栈
+错误更容易，但没有真正的方法可以从堆栈溢出中恢复
+当它发生时。该函数的参数传递句柄和名称
+堆栈溢出到钩子函数中的任务。</p>
+<p>堆栈溢出钩子是从中断上下文中调用的。</p>
+<p>一些微控制器在检测到异常时会生成故障异常
+内存访问错误，有可能触发故障
+在内核有机会调用堆栈溢出钩子函数之前。</p>
+<h3 id="1333-1">13.3.3 运行时堆栈检查 - 方法 1<a class="headerlink" href="#1333-1" title="Permanent link">&para;</a></h3>
+<p>当 <code>configCHECK_FOR_STACK_OVERFLOW</code> 设置为 1 时，选择方法 1。</p>
+<p>任务的整个执行上下文每次都会保存到其堆栈中
+被换掉。这很可能是堆栈的时间
+使用量达到顶峰。当<code>configCHECK_FOR_STACK_OVERFLOW</code>设置为1时，
+内核检查堆栈指针是否保留在有效堆栈内
+保存上下文后的空间。堆栈溢出钩子是
+如果发现堆栈指针超出其有效范围，则调用。</p>
+<p>方法 1 执行速度很快，但可能会错过发生的堆栈溢出
+上下文切换之间。</p>
+<h3 id="1334-2">13.3.4 运行时堆栈检查——方法 2<a class="headerlink" href="#1334-2" title="Permanent link">&para;</a></h3>
+<p>方法 2 对已经描述的检查执行附加检查
+方法1.当<code>configCHECK_FOR_STACK_OVERFLOW</code>设置为2时选择。</p>
+<p>创建任务时，其堆栈会填充已知模式。方法
+2 测试任务堆栈空间的最后有效20字节以验证
+该模式尚未被覆盖。堆栈溢出钩子函数
+如果 20 个字节中的任何一个与预期发生了变化，则调用
+价值观。</p>
+<p>方法2执行速度不如方法1快，但也比较
+速度很快，因为只测试了 20 个字节。最有可能的是，它会捕获所有堆栈
+溢出；然而，有些人认为 possible (but highly improbable)
+溢出将会被错过。</p>
+<h3 id="1334-3">13.3.4 运行时堆栈检查——方法 3<a class="headerlink" href="#1334-3" title="Permanent link">&para;</a></h3>
+<p>当 <code>configCHECK_FOR_STACK_OVERFLOW</code> 设置为 3 时，选择方法 3。</p>
+<p>此方法仅适用于选定的端口。当可用时，此方法
+启用 ISR 堆栈检查。当检测到 ISR 堆栈溢出时，
+断言被触发。注意这里并没有调用栈溢出钩子函数
+这种情况是因为它特定于任务堆栈而不是 ISR 堆栈。</p>
+<h2 id="134-printf-sprintf">13.4 printf() 和 sprintf() 的使用<a class="headerlink" href="#134-printf-sprintf" title="Permanent link">&para;</a></h2>
+<p>通过 <code>printf()</code> 进行记录是常见的错误来源，并且，
+没有意识到这一点，应用程序开发人员通常会添加
+进一步调用 <code>printf()</code> 来帮助调试，这样做会加剧
+问题。</p>
+<p>许多交叉编译器供应商将提供 <code>printf()</code> 实现，
+适合在小型嵌入式系统中使用。即使那是
+在这种情况下，实现可能不是线程安全的，可能不会
+适合在中断服务程序内使用，并且取决于
+输出定向的地方，需要比较长的时间来执行。</p>
+<p>如果 <code>printf()</code> 实现是
+专门为小型嵌入式系统设计的不可用，并且
+而是使用通用 <code>printf()</code> 实现，如下所示：</p>
+<ul>
+<li>
+<p>只需调用 <code>printf()</code> 或 <code>sprintf()</code> 就可以大量
+  增加应用程序可执行文件的大小。</p>
+</li>
+<li>
+<p><code>printf()</code> 和 <code>sprintf()</code> 可能会调用 <code>malloc()</code>，如果
+  正在使用除 heap_3 之外的内存分配方案。参见部分
+  3.2，内存分配方案示例，了解更多信息。</p>
+</li>
+<li>
+<p><code>printf()</code> 和 <code>sprintf()</code> 可能需要大很多倍的堆栈
+  比其他情况下需要的。</p>
+</li>
+</ul>
+<h3 id="1341-printf-stdargc">13.4.1 Printf-stdarg.c<a class="headerlink" href="#1341-printf-stdargc" title="Permanent link">&para;</a></h3>
+<p>许多 FreeRTOS 演示项目都使用名为
+printf-stdarg.c，提供最小且堆栈高效的
+<code>sprintf()</code> 的实施可用于代替标准
+库版本。在大多数情况下，这将允许更小的堆栈
+分配给调用 <code>sprintf()</code> 及相关函数的每个任务。</p>
+<p>printf-stdarg.c 还提供了一种用于引导 <code>printf()</code> 的机制
+逐字符输出到端口，虽然速度较慢，但允许堆栈
+使用量进一步减少。</p>
+<p>请注意，并非 <code>printf-stdarg.c</code> 的所有副本都包含在 FreeRTOS 中
+下载工具 <code>snprintf()</code>。未实现 <code>snprintf()</code> 的副本
+只需忽略缓冲区大小参数，因为它们直接映射到
+<code>sprintf()</code>。</p>
+<p>printf-stdarg.c 是开源的，但归第三方所有，并且
+因此与 FreeRTOS 分开许可。许可条款是
+包含在源文件的顶部。</p>
+<h2 id="135">13.5 其他常见错误源<a class="headerlink" href="#135" title="Permanent link">&para;</a></h2>
+<h3 id="1351">13.5.1 症状：向演示添加简单任务会导致演示崩溃<a class="headerlink" href="#1351" title="Permanent link">&para;</a></h3>
+<p>创建任务需要从堆中获取内存。许多
+演示应用程序项目将堆设计得非常大
+足以创建演示任务 - 因此，创建任务后，
+剩余的堆将不足以用于任何进一步的任务、队列、事件
+要添加的组或信号量。</p>
+<p>创建空闲任务，也可能创建 RTOS 守护程序任务
+调用 <code>vTaskStartScheduler()</code> 时自动执行。
+仅当堆不足时才会返回 <code>vTaskStartScheduler()</code>
+用于创建这些任务的剩余内存。包括空循环 <code>[ for(;;); ]</code>
+调用 <code>vTaskStartScheduler()</code> 后可以使此错误更容易调试。</p>
+<p>为了能够添加更多任务，您必须增加堆大小，或删除
+一些现有的演示任务。堆大小的增加总是
+受可用 RAM 数量的限制。请参见第 3.2 节，示例内存
+分配方案，了解更多信息。</p>
+<h3 id="1352-api">13.5.2 症状：在中断内使用 API 函数会导致应用程序崩溃<a class="headerlink" href="#1352-api" title="Permanent link">&para;</a></h3>
+<p>不要在中断服务程序中使用 API 函数，除非
+API 函数的名称以“...FromISR()”结尾。特别是，不要
+除非使用中断，否则在中断内创建临界区
+安全宏。请参阅第 7.2 节，从 ISR 使用 FreeRTOS API，了解
+更多信息。</p>
+<p>在支持中断嵌套的 FreeRTOS 端口中，请勿使用任何 API
+已分配中断优先级的中断中的函数
+高于 <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code>。请参见第 7.8 节“中断”
+嵌套，了解更多信息。</p>
+<h3 id="1353">13.5.3 症状：有时应用程序会在中断服务例程中崩溃<a class="headerlink" href="#1353" title="Permanent link">&para;</a></h3>
+<p>首先要检查的是中断是否导致堆栈
+溢出。某些端口仅检查任务内的堆栈溢出，而不检查
+在中断内。</p>
+<p>中断的定义和使用方式因端口而异
+编译器之间。因此，第二件事要检查的是
+中断服务中使用的语法、宏和调用约定
+例程与所提供的文档页面上的描述完全相同
+正在使用的端口，与演示应用程序中演示的完全相同
+随端口提供。</p>
+<p>如果应用程序运行在使用数值较低的处理器上
+优先级数字代表逻辑上的高优先级，然后确保
+分配给每个中断的优先级都会考虑到这一点，因为它可以
+似乎违反直觉。如果应用程序正在处理器上运行
+将每个中断的优先级默认为最大可能
+优先级，然后确保每个中断的优先级不保留在其
+默认值。请参见第 7.8 节“中断嵌套”和第 13.2 节，
+中断优先级，了解更多信息。</p>
+<h3 id="1354">13.5.4 症状：尝试启动第一个任务时调度程序崩溃<a class="headerlink" href="#1354" title="Permanent link">&para;</a></h3>
+<p>确保已安装 FreeRTOS 中断处理程序。请参阅
+正在使用的 FreeRTOS 端口的文档页面以获取信息，以及
+为端口提供的演示应用程序作为示例。</p>
+<p>某些处理器必须处于特权模式才能进行调度
+开始了。实现这一点的最简单方法是将处理器放入
+在调用 main() 之前，C 启动代码中的特权模式。</p>
+<h3 id="1355">13.5.5 症状：中断意外被禁用，或者关键部分未正确嵌套<a class="headerlink" href="#1355" title="Permanent link">&para;</a></h3>
+<p>如果在调度程序之前调用 FreeRTOS API 函数
+开始然后中断将故意被禁用，而不是
+再次重新启用，直到第一个任务开始执行。这样做是为了
+保护系统免受尝试使用中断导致的崩溃
+FreeRTOS API 在系统初始化期间、在
+调度程序已经启动，并且虽然调度程序可能处于
+不一致的状态。</p>
+<p>不要更改微控制器中断使能位或优先级标志
+使用除调用 <code>taskENTER_CRITICAL()</code> 之外的任何方法和
+<code>taskEXIT_CRITICAL()</code>。这些宏保留其调用嵌套的计数
+深度以确保仅当调用时才再次启用中断
+嵌套已完全降至零。请注意，有些图书馆
+函数本身可以启用和禁用中断。</p>
+<h3 id="1356">13.5.6 症状：应用程序在调度程序启动之前就崩溃了<a class="headerlink" href="#1356" title="Permanent link">&para;</a></h3>
+<p>可能导致上下文的中断服务例程
+在调度程序被执行之前，不得允许 switch 执行
+开始了。这同样适用于任何尝试的中断服务例程
+发送到 FreeRTOS 对象或从 FreeRTOS 对象接收，例如队列或
+信号量。上下文切换只有在调度程序完成之后才能发生
+开始了。</p>
+<p>许多 API 函数只有在调度程序完成后才能调用
+开始了。最好将 API 的使用限制为创建对象
+例如任务、队列和信号量，而不是使用这些
+对象，直到调用 <code>vTaskStartScheduler()</code> 之后。</p>
+<h3 id="1357-api">13.5.7 症状：在调度程序挂起时或从关键部分内部调用 API 函数会导致应用程序崩溃<a class="headerlink" href="#1357-api" title="Permanent link">&para;</a></h3>
+<p>通过调用 <code>vTaskSuspendAll()</code> 来暂停调度程序，通过调用 <code>xTaskResumeAll()</code> 来暂停调度程序 resumed
+(unsuspended)。进入临界区
+通过调用 <code>taskENTER_CRITICAL()</code>，并通过调用退出
+<code>taskEXIT_CRITICAL()</code>。</p>
+<p>当调度程序挂起或从
+在关键部分内。</p>
+<h2 id="136">13.6 附加调试步骤<a class="headerlink" href="#136" title="Permanent link">&para;</a></h2>
+<p>如果您遇到上述常见原因未涵盖的问题，
+您可以尝试使用以下一些调试步骤。</p>
+<ul>
+<li>定义<code>configASSERT()</code>，启用malloc失败检查和堆栈溢出
+  检查应用程序的 FreeRTOSConfig 文件。</li>
+<li>检查 FreeRTOS API 的返回值以确保它们是
+  成功了。</li>
+<li>检查调度程序相关配置，例如 <code>configUSE_TIME_SLICING</code>，以及
+  <code>configUSE_PREEMPTION</code> 根据应用要求正确设置。</li>
+<li><a href="https://www.freertos.org/Debugging-Hard-Faults-On-Cortex-M-Microcontrollers.html">This page</a>
+  提供有关调试 Cortex-M 微控制器上的硬故障的详细信息。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

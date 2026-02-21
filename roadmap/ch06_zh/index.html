@@ -1,0 +1,5657 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/roadmap/ch06_zh/">
+      
+      
+        <link rel="prev" href="../ch05_zh/">
+      
+      
+        <link rel="next" href="../ch07_zh/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://cloud.rocketpi.club/cloud/rocket.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>【freeRTOS_06_软件定时器管理】 - Rocket-Pi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rocket-Pi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              【freeRTOS_06_软件定时器管理】
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <div class="md-header__links">
+        
+          
+          
+          
+            
+          
+          <a href="../.." class="md-header__link">
+            🏠 首页
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../roadmap/" class="md-header__link">
+            🧭 学习路线
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../downloads/download/" class="md-header__link">
+            📁 资料下载
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../doc/rocketpi_src/" class="md-header__link">
+            🧪 示例程序
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../faq/faq/" class="md-header__link">
+            ❓ 常见问题
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../tools/tools/" class="md-header__link">
+            💼 工具
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/announcement/" class="md-header__link">
+            📣 公告
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/column/" class="md-header__link">
+            👥 社区专栏
+          </a>
+        
+      </div>
+    
+    
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    Rocket-Pi
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🏠 首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧭 学习路线
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🧭 学习路线
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    学习路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【硬件】硬件一览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】开发路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】CubeMX安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stm32F4xx_DFP安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5注册
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stlink安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】验证开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【前言】嵌入式常见术语
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【Cubemx通用配置】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mcu_and_keil/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【多家MCU示例分析总结】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_01_前言】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_02_内核发行版】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_03_堆内存管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_04_任务管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_05_队列管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_06_软件定时器管理】
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_06_软件定时器管理】
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 章节简介和范围
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 章节简介和范围">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1 范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 软件定时器回调函数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 软件定时器的属性和状态
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 软件定时器的属性和状态">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.1 软件定时器的周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.2 一次性和自动重新加载计时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#633" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.3 软件定时器状态
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 软件定时器的上下文
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 软件定时器的上下文">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#641-rtos-daemon-timer-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.1 RTOS Daemon (Timer Service) 任务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#642" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2 定时器命令队列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#643" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.3 守护进程任务调度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 创建并启动软件定时器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 创建并启动软件定时器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#651-xtimercreate-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.1 xTimerCreate() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#652-xtimerstart-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.2 xTimerStart() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 定时器 ID
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.6 定时器 ID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#661-vtimersettimerid-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6.1 vTimerSetTimerID() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#662-pvtimergettimerid-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6.2 pvTimerGetTimerID() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 改变定时器的周期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.7 改变定时器的周期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#671-xtimerchangeperiod-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7.1 xTimerChangePeriod() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 重置软件定时器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.8 重置软件定时器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#681-xtimerreset-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8.1 xTimerReset() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_07_中断管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_08_资源管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_09_事件组】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_10_任务通知】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_11_低功耗支持】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_12_开发者支持】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_13_故障排除】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📁 资料下载
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            📁 资料下载
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../downloads/download/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    资料下载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧪 示例程序
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🧪 示例程序
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_src/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi所有示例程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/factory/factory/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    厂测程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_scan/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_scan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_irq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_irq
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_multi_button/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_multi_button
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_delay_us/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_delay_us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_printf/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_printf
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_echo/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_echo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led_cjson
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_ymodem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_shell_microrl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_easylogger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_radar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_aht30
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_at24cxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_passive_buzzer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_sg90
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_motor/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_motor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_hcsr04/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_hcsr04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_mcu_temperature
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_joystick/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_joystick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_irda/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_irda
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_ws2812b/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_ws2812b
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_speedtest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_bitmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_240x240_lvgl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card_fatfs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_audio_to_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_pic_to_lcd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_cdc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_cdc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_msc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_msc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_flash_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266_tcp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_standby_wkup/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_standby_wkup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_crc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_crc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_mbedtls/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_mbedtls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_extern_io_check/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_extern_io_check
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader_iap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader_iap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/01_rocketpi_serial_plane_game/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    飞行大乱斗
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/02_don%27t_approach_me_alarm/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    别靠近我报警器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/03_rocketpi_usb_audio_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    超炫桌面节奏大师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/04_rocketpi_hcsr04_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    雷达探测器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/05_rocketpi_smart_home/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    物联网智能家居
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/06_rocketpi_mqtt_ota/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    FOTA固件升级
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_freertos/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_freertos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_zephyr/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_zephyr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_rt-thread/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_rt-thread
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_threadx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_threadx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    ❓ 常见问题
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ❓ 常见问题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/faq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    常见问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    💼 工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            💼 工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/tools/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📣 公告
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            📣 公告
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/announcement/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    公告
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    👥 社区专栏
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            👥 社区专栏
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/column/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    社区专栏
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 章节简介和范围
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 章节简介和范围">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1 范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 软件定时器回调函数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 软件定时器的属性和状态
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 软件定时器的属性和状态">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.1 软件定时器的周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.2 一次性和自动重新加载计时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#633" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.3 软件定时器状态
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 软件定时器的上下文
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 软件定时器的上下文">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#641-rtos-daemon-timer-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.1 RTOS Daemon (Timer Service) 任务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#642" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.2 定时器命令队列
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#643" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4.3 守护进程任务调度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 创建并启动软件定时器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 创建并启动软件定时器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#651-xtimercreate-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.1 xTimerCreate() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#652-xtimerstart-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5.2 xTimerStart() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6 定时器 ID
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.6 定时器 ID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#661-vtimersettimerid-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6.1 vTimerSetTimerID() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#662-pvtimergettimerid-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6.2 pvTimerGetTimerID() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7 改变定时器的周期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.7 改变定时器的周期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#671-xtimerchangeperiod-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7.1 xTimerChangePeriod() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8 重置软件定时器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.8 重置软件定时器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#681-xtimerreset-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8.1 xTimerReset() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6">6 软件定时器管理<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
+<h2 id="61">6.1 章节简介和范围<a class="headerlink" href="#61" title="Permanent link">&para;</a></h2>
+<p>软件定时器用于安排函数的执行时间
+设定未来的时间，或以固定频率定期进行。的
+由软件定时器执行的函数称为软件定时器的
+回调函数。</p>
+<p>软件定时器由以下器件实现并受其控制：
+FreeRTOS 内核。它们不需要硬件支持，并且不
+与硬件定时器或硬件计数器相关。</p>
+<p>请注意，符合 FreeRTOS 使用创新理念
+设计确保最大效率，软件定时器不使用任何
+处理时间，除非软件定时器回调函数实际上是
+执行。</p>
+<p>软件定时器功能是可选的。包括软件定时器
+功能：</p>
+<ol>
+<li>
+<p>构建 FreeRTOS 源文件 FreeRTOS/Source/timers.c 作为
+   你的项目。</p>
+</li>
+<li>
+<p>在应用程序的 FreeRTOSConfig.h 头文件中定义下面详述的常量：</p>
+</li>
+<li>
+<p><code>configUSE_TIMERS</code></p>
+</li>
+</ol>
+<p>将 FreeRTOSConfig.h 中的 <code>configUSE_TIMERS</code> 设置为 1。</p>
+<ul>
+<li><code>configTIMER_TASK_PRIORITY</code></li>
+</ul>
+<p>设置定时器服务任务的优先级在 0 and ( <code>configMAX_PRIORITIES</code> - 1 ) 之间。</p>
+<ul>
+<li><code>configTIMER_QUEUE_LENGTH</code></li>
+</ul>
+<p>设置定时器命令队列在任一时刻可以容纳的未处理命令的最大数量。</p>
+<ul>
+<li><code>configTIMER_TASK_STACK_DEPTH</code></li>
+</ul>
+<p>设置分配给定时器服务任务的stack (in words, not bytes)的大小。</p>
+<h3 id="611">6.1.1 范围<a class="headerlink" href="#611" title="Permanent link">&para;</a></h3>
+<p>本章内容包括：</p>
+<ul>
+<li>软件定时器与定时器相比的特点
+  任务的特征。</li>
+<li>RTOS 守护程序任务。</li>
+<li>定时器命令队列。</li>
+<li>一次性软件定时器和周期性软件定时器之间的区别
+  软件定时器。</li>
+<li>如何创建、启动、重置和更改软件计时器的周期。</li>
+</ul>
+<h2 id="62">6.2 软件定时器回调函数<a class="headerlink" href="#62" title="Permanent link">&para;</a></h2>
+<p>软件定时器回调函数以 C 函数的形式实现。的
+它们唯一特别的是它们的原型，它必须返回
+void，并将软件计时器的句柄作为其唯一参数。的
+回调函数原型如清单 6.1 所示。</p>
+<p><a name="list" title="Listing 6.1 The software timer callback function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">ATimerCallback</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.1</em></strong> <em>软件定时器回调函数原型</em></p>
+<p>软件定时器回调函数从头到尾执行，然后退出
+以正常方式。它们应该保持较短，并且不得进入
+封锁状态。</p>
+<blockquote>
+<p><em>注意：正如我们将看到的，软件定时器回调函数在
+FreeRTOS 运行时自动创建的任务上下文
+调度程序已启动。因此，软件定时器至关重要
+回调函数永远不会调用 FreeRTOS API 函数，这会导致
+调用任务进入阻塞状态。调用函数就可以了
+例如 <code>xQueueReceive()</code>，但前提是函数为 <code>xTicksToWait</code>
+parameter (which specifies the function's block time) 设置为 0。
+不能调用 <code>vTaskDelay()</code> 等函数，就像调用 <code>vTaskDelay()</code> 一样
+始终将调用任务置于阻塞状态。</em></p>
+</blockquote>
+<h2 id="63">6.3 软件定时器的属性和状态<a class="headerlink" href="#63" title="Permanent link">&para;</a></h2>
+<h3 id="631">6.3.1 软件定时器的周期<a class="headerlink" href="#631" title="Permanent link">&para;</a></h3>
+<p>软件定时器的“周期”是软件定时器被执行之间的时间
+启动，软件定时器的回调函数执行。</p>
+<h3 id="632">6.3.2 一次性和自动重新加载计时器<a class="headerlink" href="#632" title="Permanent link">&para;</a></h3>
+<p>软件定时器有两种类型：</p>
+<ol>
+<li>一次性定时器</li>
+</ol>
+<p>一旦启动，一次性定时器将执行其回调函数
+   仅一次。一次性计时器可以手动重新启动，但不会
+   自行重启。</p>
+<p>1.自动重新加载计时器</p>
+<p>一旦启动，自动重新加载计时器每次都会重新启动
+   过期，导致其回调函数定期执行。</p>
+<p>图 6.1 显示了一次性定时器和一次性定时器之间的行为差异
+自动重新加载计时器。垂直虚线标记了时间
+发生滴答中断。</p>
+<p><a name="fig6.1" title="Figure 6.1 The difference in behavior between one-shot and auto-reload software timers"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image38.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image38.png" /></a>
+<strong><em>图 6.1</em></strong> <em>一次性和自动重新加载软件计时器之间的行为差​​异</em></p>
+<hr />
+<p>参见图6.1：</p>
+<ul>
+<li>定时器1</li>
+</ul>
+<p>定时器 1 是一个单次定时器，周期为 6 个滴答声。它是
+  从时间 t1 开始，因此其回调函数在 6 个时钟周期后执行，
+  在时间t7。由于定时器 1 是一次性定时器，因此它的回调函数
+  不再执行。</p>
+<ul>
+<li>定时器2</li>
+</ul>
+<p>定时器 2 是一个自动重载定时器，周期为 5 个滴答声。它是
+  从时间 t1 开始，因此其回调函数每 5 个周期执行一次
+  时间 t1 之后。在图 6.1 中，时间为 t6、t11 和 t16。</p>
+<h3 id="633">6.3.3 软件定时器状态<a class="headerlink" href="#633" title="Permanent link">&para;</a></h3>
+<p>软件定时器可以处于以下两种状态之一：</p>
+<ul>
+<li>休眠</li>
+</ul>
+<p>存在休眠软件定时器，并且可以通过其句柄引用，
+  但没有运行，所以它的回调函数不会执行。</p>
+<ul>
+<li>跑步</li>
+</ul>
+<p>正在运行的软件计时器将在经过一段时间后执行其回调函数
+  自软件定时器进入以来已经过去了等于其周期的时间
+  运行状态，或自上次重置软件计时器以来。</p>
+<p>图 6.2 和图 6.3 显示了之间可能的转换
+自动重新加载计时器和一次性计时器的休眠和运行状态
+分别。两个图之间的主要区别在于状态
+定时器到期后输入；自动重新加载计时器执行其
+然后回调函数重新进入Running状态，一次性定时器
+执行其回调函数然后进入休眠状态。</p>
+<p><a name="fig6.2" title="Figure 6.2 Auto-reload software timer states and transitions"></a>
+<a name="fig6.3" title="Figure 6.3 One-shot software timer states and transitions"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image39.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image39.png" /></a>
+<strong><em>图 6.2</em></strong> <em>自动重新加载软件定时器状态和转换</em></p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image40.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image40.png" /></a>
+<strong><em>图 6.3</em></strong> <em>一次性软件定时器状态和转换</em></p>
+<hr />
+<p><code>xTimerDelete()</code> API 函数删除定时器。定时器可以删除
+随时。函数原型如清单 6.2 所示。</p>
+<p><a name="list6.2" title="Listing 6.2 The xTimerDelete() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">BaseType_t</span><span class="w"> </span><span class="nf">xTimerDelete</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="p">,</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTicksToWait</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.2</em></strong> <em>xTimerDelete() API 函数原型</em></p>
+<p><strong>xTimerDelete()参数及返回值</strong></p>
+<ul>
+<li><code>xTimer</code></li>
+</ul>
+<p>正在删除的计时器的句柄。</p>
+<ul>
+<li><code>xTicksToWait</code></li>
+</ul>
+<p>指定调用任务应保留的时间（以刻度为单位）
+  处于Blocked状态等待删除命令成功
+  发送到计时器命令队列，如果队列已满，则
+  xTimerDelete() 被称为。  如果 xTimerDelete() 则忽略 xTicksToWait
+  在调度程序启动之前调用。</p>
+<ul>
+<li>返回值</li>
+</ul>
+<p>有两种可能的返回值：</p>
+<ul>
+<li><code>pdPASS</code></li>
+</ul>
+<p>如果命令成功发送到，将返回 <code>pdPASS</code>
+     定时器命令队列。</p>
+<ul>
+<li><code>pdFAIL</code></li>
+</ul>
+<p>如果删除命令无法发送到，将返回 <code>pdFAIL</code>
+    即使在 xBlockTime 滴答过去之后，计时器命令队列仍然存在。</p>
+<h2 id="64">6.4 软件定时器的上下文<a class="headerlink" href="#64" title="Permanent link">&para;</a></h2>
+<h3 id="641-rtos-daemon-timer-service">6.4.1 RTOS Daemon (Timer Service) 任务<a class="headerlink" href="#641-rtos-daemon-timer-service" title="Permanent link">&para;</a></h3>
+<p>所有软件定时器回调函数都在相同的上下文中执行
+RTOS daemon (or 'timer service') 任务[^10]。</p>
+<p>[^10]：该任务过去被称为“定时服务任务”，因为
+原本只是用来执行软件定时器回调
+功能。现在相同的任务也用于其他目的，所以它
+以更通用的名称“RTOS 守护程序任务”而闻名。</p>
+<p>守护进程任务是创建的标准 FreeRTOS 任务
+当调度程序启动时自动执行。它的优先级和堆栈大小
+由 <code>configTIMER_TASK_PRIORITY</code> 设置和
+<code>configTIMER_TASK_STACK_DEPTH</code> 编译时配置常量
+分别。这两个常量均在 FreeRTOSConfig.h 中定义。</p>
+<p>软件定时器回调函数不得调用 FreeRTOS API 函数
+这将导致调用任务进入阻塞状态，至于
+这样做将导致守护任务进入阻塞状态。</p>
+<h3 id="642">6.4.2 定时器命令队列<a class="headerlink" href="#642" title="Permanent link">&para;</a></h3>
+<p>软件定时器 API 函数将命令从调用任务发送到
+称为“计时器命令队列”的队列上的守护程序任务。这是显示的
+如图 6.4 所示。命令的示例包括“启动计时器”、“停止计时器”
+计时器”和“重置计时器”。</p>
+<p>定时器命令队列是创建的标准FreeRTOS队列
+当调度程序启动时自动执行。定时器的长度
+命令队列由 <code>configTIMER_QUEUE_LENGTH</code> 编译时设置
+FreeRTOSConfig.h 中的配置常量。</p>
+<p><a name="fig6.4" title="Figure 6.4 The timer command queue being used by a software timer API function to communicate with the RTOS daemon task"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image41.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image41.png" /></a>
+<strong><em>图 6.4</em></strong> <em>软件计时器 API 功能使用计时器命令队列与 RTOS 守护程序任务进行通信</em></p>
+<hr />
+<h3 id="643">6.4.3 守护进程任务调度<a class="headerlink" href="#643" title="Permanent link">&para;</a></h3>
+<p>守护进程任务的调度与任何其他 FreeRTOS 任务一样；只会
+处理命令，或执行定时器回调函数，当它是
+能够运行的最高优先级任务。图6.5和图6.6
+演示 <code>configTIMER_TASK_PRIORITY</code> 设置如何影响
+执行模式。</p>
+<p>图 6.5 显示了守护进程优先级时的执行模式
+任务的优先级低于调用 <code>xTimerStart()</code> API 的任务的优先级
+功能。</p>
+<p><a name="fig6.5" title="Figure 6.5 The execution pattern when the priority of a task calling xTimerStart() is above the priority of the daemon task"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image42.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image42.png" /></a>
+<strong><em>图6.5</em></strong> <em>调用xTimerStart()的任务优先级高于守护任务优先级时的执行模式</em></p>
+<hr />
+<p>参见图6.5，其中任务1的优先级高于
+守护任务的优先级，守护任务的优先级为
+高于空闲任务的优先级：</p>
+<p>1.在时间t1</p>
+<p>任务1处于运行状态，守护任务处于
+    封锁状态。</p>
+<p>如果命令发送到，守护进程任务将离开阻塞状态
+    计时器命令队列，在这种情况下它将处理命令，
+    或者如果软件定时器到期，在这种情况下它将执行
+    软件定时器的回调函数。</p>
+<p>1.在时间t2</p>
+<p>任务 1 调用 <code>xTimerStart()</code>。</p>
+<p><code>xTimerStart()</code>向定时器命令队列发送命令，导致
+   守护进程任务离开阻塞状态。任务 1 的优先级
+   比守护任务的优先级高，所以守护任务
+   不抢占任务 1。</p>
+<p>任务1仍处于Running状态，守护任务已离开
+   Blocked 状态并进入 Ready 状态。</p>
+<p>1.在时间t3</p>
+<p>任务 1 完成 <code>xTimerStart()</code> API 函数的执行。任务1
+   从函数开始到函数结束执行了<code>xTimerStart()</code>
+   该功能，无需离开运行状态。</p>
+<p>1.在时间t4</p>
+<p>任务 1 调用 API 函数，导致其进入阻塞状态
+   状态。守护进程任务现在是Ready中优先级最高的任务
+   状态，因此调度程序选择守护任务作为要进入的任务
+   运行状态。然后守护进程开始处理
+   命令由任务 1 发送到定时器命令队列。</p>
+<blockquote>
+<p><em>注：软件定时器启动的时间将
+过期时间是从“启动计时器”命令发出的时间开始计算的
+发送到定时器命令队列——不是从时间开始计算
+守护进程任务从计时器接收到“启动计时器”命令
+命令队列。</em></p>
+</blockquote>
+<p>1.在时间t5</p>
+<p>守护进程任务已完成处理发送给它的命令
+   任务1，并尝试从定时器命令接收更多数据
+   队列。定时器命令队列为空，因此守护进程任务
+   重新进入阻塞状态。守护进程任务将离开阻塞状态
+   如果命令被发送到定时器命令队列，或者如果
+   软件定时器到期。</p>
+<p>空闲任务现在是就绪状态中优先级最高的任务，
+   所以调度器选择Idle任务作为进入任务
+   运行状态。</p>
+<p>图 6.6 显示了与图 6.5 类似的场景，但是这个
+守护任务的优先级高于本任务的优先级的时间
+调用 <code>xTimerStart()</code>。</p>
+<p><a name="fig6.6" title="Figure 6.6 The execution pattern when the priority of a task calling xTimerStart() is below the priority of the daemon task"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image43.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image43.png" /></a>
+<strong><em>图6.6</em></strong> <em>调用xTimerStart()的任务优先级低于守护任务优先级时的执行模式</em></p>
+<hr />
+<p>参见图6.6，其中守护任务的优先级为
+任务1的优先级高于任务1的优先级，任务1的优先级为
+高于空闲任务的优先级：</p>
+<p>1.在时间t1</p>
+<p>和之前一样，任务1处于运行状态，守护任务处于
+   阻塞状态。</p>
+<p>1.在时间t2</p>
+<p>任务 1 调用 <code>xTimerStart()</code>。</p>
+<p><code>xTimerStart()</code>向定时器命令队列发送命令，导致
+   守护进程任务离开阻塞状态。的优先级
+   守护进程任务的优先级高于任务1，因此调度程序
+   选择守护任务作为进入运行状态的任务。</p>
+<p>任务 1 在完成之前被守护任务抢占
+   执行 <code>xTimerStart()</code> 函数，现在处于就绪状态。</p>
+<p>守护任务开始处理发送给定时器的命令
+   任务 1 的命令队列。</p>
+<p>1.在时间t3</p>
+<p>守护进程任务已完成处理发送给它的命令
+   任务1，并尝试从定时器命令接收更多数据
+   队列。定时器命令队列为空，因此守护进程任务
+   重新进入阻塞状态。</p>
+<p>任务 1 现在是就绪状态中优先级最高的任务，因此
+   调度器选择Task 1作为进入Running状态的任务。</p>
+<p>1.在时间t4</p>
+<p>任务 1 在完成之前被守护任务抢占
+   执行 <code>xTimerStart()</code> 函数，并且仅执行 exits (returns from)
+   <code>xTimerStart()</code> 重新进入运行状态后。</p>
+<p>1.在时间t5</p>
+<p>任务 1 调用 API 函数，导致其进入阻塞状态
+   状态。空闲任务现在是就绪任务中优先级最高的任务
+   状态，所以调度器选择Idle任务作为进入的任务
+   运行状态。</p>
+<p>在图 6.5 所示的场景中，任务 1 发送一个
+命令到定时器命令队列，守护进程任务接收和
+处理命令。在图6.6所示的场景中，守护进程
+任务之前已接收并处理了任务 1 发送给它的命令
+任务 1 从发送命令的函数返回。</p>
+<p>发送到定时器命令队列的命令包含时间戳。时间
+时间戳用于计算命令之间经过的任何时间
+由应用程序任务发送，并且正在处理相同的命令
+通过守护进程任务。例如，如果“启动计时器”命令发送到
+启动一个周期为 10 个刻度的计时器，时间戳用于
+确保正在启动的计时器在命令执行后 10 个周期内到期
+已发送，不是守护程序任务处理命令后 10 个时钟周期。</p>
+<h2 id="65">6.5 创建并启动软件定时器<a class="headerlink" href="#65" title="Permanent link">&para;</a></h2>
+<h3 id="651-xtimercreate-api">6.5.1 xTimerCreate() API 功能<a class="headerlink" href="#651-xtimercreate-api" title="Permanent link">&para;</a></h3>
+<p>FreeRTOS 还包含 <code>xTimerCreateStatic()</code> 函数，该函数
+在编译时静态分配创建计时器所需的内存
+time：软件定时器必须在使用之前显式创建。</p>
+<p>软件定时器由 <code>TimerHandle_t</code> 类型的变量引用。
+<code>xTimerCreate()</code> 用于创建软件定时器并返回
+<code>TimerHandle_t</code> 来引用它创建的软件计时器。软件
+定时器是在休眠状态下创建的。</p>
+<p>软件定时器可以在调度程序运行之前创建，或者从
+调度程序启动后的任务。</p>
+<p><a href="../ch02_zh/#25-data-types-and-coding-style-guide">Section 2.5: Data Types and Coding Style Guide</a> 描述了所使用的数据类型和命名约定。</p>
+<p><a name="list6.3" title="Listing 6.3 The xTimerCreate() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">TimerHandle_t</span><span class="w"> </span><span class="nf">xTimerCreate</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pcTimerName</span><span class="p">,</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTimerPeriodInTicks</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xAutoReload</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">                            </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pvTimerID</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">                            </span><span class="n">TimerCallbackFunction_t</span><span class="w"> </span><span class="n">pxCallbackFunction</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.3</em></strong> <em>xTimerCreate() API 函数原型</em></p>
+<p><strong>xTimerCreate()参数及返回值</strong></p>
+<ul>
+<li><code>pcTimerName</code></li>
+</ul>
+<p>计时器的描述性名称。 FreeRTOS 不使用此功能
+  无论如何。它纯粹是作为调试辅助工具而包含在内。识别定时器
+  通过人类可读的名称比尝试识别它要简单得多
+  通过其手柄。</p>
+<ul>
+<li><code>xTimerPeriodInTicks</code></li>
+</ul>
+<p>计时器的周期以刻度为单位指定。 <code>pdMS_TO_TICKS()</code> 宏可以
+  用于将以毫秒为单位的时间转换为时间
+  以刻度指定。不能为 0。</p>
+<ul>
+<li><code>xAutoReload</code></li>
+</ul>
+<p>将 <code>xAutoReload</code> 设置为 <code>pdTRUE</code> 以创建自动重新加载计时器。套装
+  <code>xAutoReload</code> 至 <code>pdFALSE</code> 创建一次性定时器。</p>
+<ul>
+<li><code>pvTimerID</code></li>
+</ul>
+<p>每个软件定时器都有一个 ID 值。 ID 是一个空指针，
+  应用程序编写者可以将其用于任何目的。 ID 是
+  当同一个回调函数被多个用户使用时特别有用
+  一个软件定时器，因为它可用于提供定时器特定的存储。
+  本节中的示例演示了定时器 ID 的使用
+  章。</p>
+<p><code>pvTimerID</code> 为正在创建的任务的 ID 设置初始值。</p>
+<ul>
+<li><code>pxCallbackFunction</code></li>
+</ul>
+<p>软件定时器回调函数只是 C 函数，
+  符合清单 6.1 所示的原型。 <code>pxCallbackFunction</code>
+  参数是指向函数的指针（实际上，只是函数
+  name) 用作软件定时器的回调函数
+  创建的。</p>
+<ul>
+<li>返回值</li>
+</ul>
+<p>如果返回NULL，则无法创建软件定时器
+  因为 FreeRTOS 没有足够的可用堆内存
+  分配必要的数据结构。</p>
+<p>如果返回非 NULL 值，则表明软件定时器已
+  已创建成功。返回值是该对象的句柄
+  创建的计时器。</p>
+<p>第 3 章提供了有关堆内存管理的更多信息。</p>
+<h3 id="652-xtimerstart-api">6.5.2 xTimerStart() API 功能<a class="headerlink" href="#652-xtimerstart-api" title="Permanent link">&para;</a></h3>
+<p><code>xTimerStart()</code> 用于启动处于休眠状态的软件定时器
+状态，或 reset (re-start) 处于运行状态的软件定时器
+状态。 <code>xTimerStop()</code> 用于停止位于
+运行状态。停止软件定时器与转换相同
+定时器进入休眠状态。</p>
+<p><code>xTimerStart()</code> 可以在调度程序启动之前调用，但是当
+完成后，软件定时器将不会真正启动，直到时间
+调度程序启动的时间。</p>
+<blockquote>
+<p><em>注意：切勿从中断服务程序中调用 <code>xTimerStart()</code>。的
+应使用中断安全版本 <code>xTimerStartFromISR()</code>
+地点。</em></p>
+</blockquote>
+<p><a name="list6.4" title="Listing 6.4 The xTimerStart() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">BaseType_t</span><span class="w"> </span><span class="nf">xTimerStart</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="p">,</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTicksToWait</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.4</em></strong> <em>xTimerStart() API 函数原型</em></p>
+<p><strong>xTimerStart()参数及返回值</strong></p>
+<ul>
+<li><code>xTimer</code></li>
+</ul>
+<p>正在启动或重置的软件定时器的句柄。手柄
+  将从调用用于创建的 <code>xTimerCreate()</code> 返回
+  软件定时器。</p>
+<ul>
+<li><code>xTicksToWait</code></li>
+</ul>
+<p><code>xTimerStart()</code> 使用定时器命令队列发送“启动一个
+  向守护程序任务发送“timer”命令。 <code>xTicksToWait</code> 指定最大
+  调用任务应保持阻塞状态的时间
+  等待计时器命令队列上的空间变得可用，应该
+  队列已经满了。</p>
+<p>如果 <code>xTicksToWait</code> 为零并且 <code>xTimerStart()</code> 将立即返回
+  定时器命令队列已满。</p>
+<p>区块时间以滴答周期为单位指定，因此它的绝对时间
+  表示取决于滴答频率。宏 <code>pdMS_TO_TICKS()</code>
+  可用于将以毫秒为单位的时间转换为时间
+  以刻度指定。</p>
+<p>如果 <code>FreeRTOSConfig.h</code> 中的 <code>INCLUDE_vTaskSuspend</code> 设置为 1，则设置
+  <code>xTicksToWait</code> 到 <code>portMAX_DELAY</code> 将导致调用任务剩余
+  在Blocked状态indefinitely (without a timeout)等待空间
+  在计时器命令队列中变得可用。</p>
+<p>如果在调度程序启动之前调用 <code>xTimerStart()</code>，则
+  <code>xTicksToWait</code> 的值被忽略，并且 <code>xTimerStart()</code> 的行为就像
+  <code>xTicksToWait</code> 已设置为零。</p>
+<ul>
+<li>返回值</li>
+</ul>
+<p>有两种可能的返回值：</p>
+<ul>
+<li><code>pdPASS</code></li>
+</ul>
+<p>仅当“启动计时器”命令被执行时，才会返回 <code>pdPASS</code>
+    成功发送到定时器命令队列。</p>
+<p>如果守护任务的优先级高于任务的优先级
+    称为 <code>xTimerStart()</code>，那么调度程序将确保启动
+    命令在 <code>xTimerStart()</code> 返回之前处理。这是因为
+    守护进程任务将抢占调用 <code>xTimerStart()</code> 的任务
+    定时器命令队列中有数据。</p>
+<p>如果区块时间为 specified (<code>xTicksToWait</code> was not zero)，那么它是
+    可能调用任务被置于阻塞状态以等待
+    定时器命令队列中函数之前的可用空间
+    返回，但数据已成功写入定时器命令队列
+    在区块时间到期之前。</p>
+<ul>
+<li><code>pdFAIL</code></li>
+</ul>
+<p>如果无法执行“启动计时器”命令，将返回 <code>pdFAIL</code>
+    写入定时器命令队列，因为该队列已经
+    满。</p>
+<p>如果区块时间为 specified (<code>xTicksToWait</code> was not zero) 则
+    调用任务将被置于阻塞状态等待
+    守护进程任务在定时器命令队列中腾出空间，但是
+    指定的区块时间在此之前已过期。</p>
+<h2 id="_1"><a name="example6.1" title="Example 6.1 Creating one-shot and auto-reload timers"></a><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><strong><em>示例 6.1</em></strong> <em>创建一次性和自动重新加载计时器</em></p>
+<hr />
+<p>此示例创建并启动一次性计时器和自动重新加载
+计时器——如清单 6.5 所示。</p>
+<p><a name="list6.5" title="Listing 6.5 Creating and starting the timers used in Example 6.1"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#__codelineno-4-32">32</a></span>
+<span class="normal"><a href="#__codelineno-4-33">33</a></span>
+<span class="normal"><a href="#__codelineno-4-34">34</a></span>
+<span class="normal"><a href="#__codelineno-4-35">35</a></span>
+<span class="normal"><a href="#__codelineno-4-36">36</a></span>
+<span class="normal"><a href="#__codelineno-4-37">37</a></span>
+<span class="normal"><a href="#__codelineno-4-38">38</a></span>
+<span class="normal"><a href="#__codelineno-4-39">39</a></span>
+<span class="normal"><a href="#__codelineno-4-40">40</a></span>
+<span class="normal"><a href="#__codelineno-4-41">41</a></span>
+<span class="normal"><a href="#__codelineno-4-42">42</a></span>
+<span class="normal"><a href="#__codelineno-4-43">43</a></span>
+<span class="normal"><a href="#__codelineno-4-44">44</a></span>
+<span class="normal"><a href="#__codelineno-4-45">45</a></span>
+<span class="normal"><a href="#__codelineno-4-46">46</a></span>
+<span class="normal"><a href="#__codelineno-4-47">47</a></span>
+<span class="normal"><a href="#__codelineno-4-48">48</a></span>
+<span class="normal"><a href="#__codelineno-4-49">49</a></span>
+<span class="normal"><a href="#__codelineno-4-50">50</a></span>
+<span class="normal"><a href="#__codelineno-4-51">51</a></span>
+<span class="normal"><a href="#__codelineno-4-52">52</a></span>
+<span class="normal"><a href="#__codelineno-4-53">53</a></span>
+<span class="normal"><a href="#__codelineno-4-54">54</a></span>
+<span class="normal"><a href="#__codelineno-4-55">55</a></span>
+<span class="normal"><a href="#__codelineno-4-56">56</a></span>
+<span class="normal"><a href="#__codelineno-4-57">57</a></span>
+<span class="normal"><a href="#__codelineno-4-58">58</a></span>
+<span class="normal"><a href="#__codelineno-4-59">59</a></span>
+<span class="normal"><a href="#__codelineno-4-60">60</a></span>
+<span class="normal"><a href="#__codelineno-4-61">61</a></span>
+<span class="normal"><a href="#__codelineno-4-62">62</a></span>
+<span class="normal"><a href="#__codelineno-4-63">63</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cm">/* The periods assigned to the one-shot and auto-reload timers are 3.333</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="cm">   second and half a second respectively. */</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="cp">#define mainONE_SHOT_TIMER_PERIOD pdMS_TO_TICKS( 3333 )</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="cp">#define mainAUTO_RELOAD_TIMER_PERIOD pdMS_TO_TICKS( 500 )</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="p">{</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xAutoReloadTimer</span><span class="p">,</span><span class="w"> </span><span class="n">xOneShotTimer</span><span class="p">;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xTimer1Started</span><span class="p">,</span><span class="w"> </span><span class="n">xTimer2Started</span><span class="p">;</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10"></a>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">    </span><span class="cm">/* Create the one shot timer, storing the handle to the created timer in</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="cm">       xOneShotTimer. */</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">    </span><span class="n">xOneShotTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTimerCreate</span><span class="p">(</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">        </span><span class="cm">/* Text name for the software timer - not used by FreeRTOS. */</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">                                  </span><span class="s">&quot;OneShot&quot;</span><span class="p">,</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">        </span><span class="cm">/* The software timer&#39;s period in ticks. */</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">                                   </span><span class="n">mainONE_SHOT_TIMER_PERIOD</span><span class="p">,</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">        </span><span class="cm">/* Setting uxAutoRealod to pdFALSE creates a one-shot software timer. */</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="w">                                   </span><span class="n">pdFALSE</span><span class="p">,</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="w">        </span><span class="cm">/* This example does not use the timer id. */</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="w">                                   </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">        </span><span class="cm">/* Callback function to be used by the software timer being created. */</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="w">                                   </span><span class="n">prvOneShotTimerCallback</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24"></a>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="w">    </span><span class="cm">/* Create the auto-reload timer, storing the handle to the created timer</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="cm">       in xAutoReloadTimer. */</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="w">    </span><span class="n">xAutoReloadTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTimerCreate</span><span class="p">(</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28"></a><span class="w">        </span><span class="cm">/* Text name for the software timer - not used by FreeRTOS. */</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29"></a><span class="w">                                     </span><span class="s">&quot;AutoReload&quot;</span><span class="p">,</span>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="w">        </span><span class="cm">/* The software timer&#39;s period in ticks. */</span>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31"></a><span class="w">                                     </span><span class="n">mainAUTO_RELOAD_TIMER_PERIOD</span><span class="p">,</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32"></a><span class="w">        </span><span class="cm">/* Setting uxAutoRealod to pdTRUE creates an auto-reload timer. */</span>
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33"></a><span class="w">                                     </span><span class="n">pdTRUE</span><span class="p">,</span>
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34"></a><span class="w">        </span><span class="cm">/* This example does not use the timer id. */</span>
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35"></a><span class="w">                                     </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36"></a><span class="w">        </span><span class="cm">/* Callback function to be used by the software timer being created. */</span>
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37"></a><span class="w">                                     </span><span class="n">prvAutoReloadTimerCallback</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38"></a>
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39"></a><span class="w">    </span><span class="cm">/* Check the software timers were created. */</span>
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">xOneShotTimer</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">xAutoReloadTimer</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42"></a><span class="w">        </span><span class="cm">/* Start the software timers, using a block time of 0 (no block time).</span>
+</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43"></a><span class="cm">           The scheduler has not been started yet so any block time specified</span>
+</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44"></a><span class="cm">           here would be ignored anyway. */</span>
+</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45"></a><span class="w">        </span><span class="n">xTimer1Started</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTimerStart</span><span class="p">(</span><span class="w"> </span><span class="n">xOneShotTimer</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46"></a><span class="w">        </span><span class="n">xTimer2Started</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTimerStart</span><span class="p">(</span><span class="w"> </span><span class="n">xAutoReloadTimer</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47"></a>
+</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48"></a><span class="w">        </span><span class="cm">/* The implementation of xTimerStart() uses the timer command queue,</span>
+</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49"></a><span class="cm">           and xTimerStart() will fail if the timer command queue gets full.</span>
+</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50"></a><span class="cm">           The timer service task does not get created until the scheduler is</span>
+</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51"></a><span class="cm">           started, so all commands sent to the command queue will stay in the</span>
+</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52"></a><span class="cm">           queue until after the scheduler has been started. Check both calls</span>
+</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53"></a><span class="cm">           to xTimerStart() passed. */</span>
+</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">xTimer1Started</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdPASS</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">xTimer2Started</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdPASS</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56"></a><span class="w">            </span><span class="cm">/* Start the scheduler. */</span>
+</span><span id="__span-4-57"><a id="__codelineno-4-57" name="__codelineno-4-57"></a><span class="w">            </span><span class="n">vTaskStartScheduler</span><span class="p">();</span>
+</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60"></a>
+</span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61"></a><span class="w">    </span><span class="cm">/* As always, this line should not be reached. */</span>
+</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-4-63"><a id="__codelineno-4-63" name="__codelineno-4-63"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.5</em></strong> <em>创建并启动示例 6.1 中使用的计时器</em></p>
+<p>计时器的回调函数每次只打印一条消息
+叫。一次性定时器回调函数的实现是
+如清单 6.6 所示。自动重载定时器的实现
+回调函数如清单 6.7 所示。</p>
+<p><a name="list6.5" title="Listing 6.6 The callback function used by the one-shot timer in Example 6.1"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">prvOneShotTimerCallback</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="p">{</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTimeNow</span><span class="p">;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">    </span><span class="cm">/* Obtain the current tick count. */</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="n">xTimeNow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTaskGetTickCount</span><span class="p">();</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7"></a>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">    </span><span class="cm">/* Output a string to show the time at which the callback was executed. */</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="n">vPrintStringAndNumber</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;One-shot timer callback executing&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xTimeNow</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10"></a>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="cm">/* File scope variable. */</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="n">ulCallCount</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.6</em></strong> <em>示例 6.1 中的一次性定时器使用的回调函数</em></p>
+<p><a name="list6.7" title="Listing 6.7 The callback function used by the auto-reload timer in Example 6.1"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">prvAutoReloadTimerCallback</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="p">{</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTimeNow</span><span class="p">;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">    </span><span class="cm">/* Obtain the current tick count. */</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">    </span><span class="n">xTimeNow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTaskGetTickCount</span><span class="p">();</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="cm">/* Output a string to show the time at which the callback was executed. */</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="n">vPrintStringAndNumber</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Auto-reload timer callback executing&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xTimeNow</span><span class="p">);</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span><span class="n">ulCallCount</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.7</em></strong> <em>示例 6.1 中自动重载计时器使用的回调函数</em></p>
+<p>执行该示例会产生如图 6.7 所示的输出。图6.7
+显示自动重载计时器的回调函数以固定的执行
+500 个刻度周期（<code>mainAUTO_RELOAD_TIMER_PERIOD</code> 设置为 500）
+代码清单 6.5)，一次性定时器的回调函数只执行
+一次，当刻度计数为 3333 时（<code>mainONE_SHOT_TIMER_PERIOD</code> 设置为
+清单 6.5 中的 3333）。</p>
+<p><a name="fig6.7" title="Figure 6.7 The output produced when Example 6.1 is executed"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image44.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image44.jpg" /></a>
+<strong><em>图 6.7</em></strong> <em>执行例 6.1 时产生的输出</em></p>
+<hr />
+<h2 id="66-id">6.6 定时器 ID<a class="headerlink" href="#66-id" title="Permanent link">&para;</a></h2>
+<p>每个软件定时器都有一个ID，这是一个可以被使用的标签值
+出于任何目的的应用程序编写者。 ID 存储在 void 中
+pointer (<code>void *</code>)，因此可以直接存储一个整数值，指向任意
+其他对象，或用作函数指针。</p>
+<p>当软件定时器为 ID 时，初始值被分配
+创建后，可以使用 <code>vTimerSetTimerID()</code> 更新 ID
+API函数，并使用<code>pvTimerGetTimerID()</code> API函数进行查询。</p>
+<p>与其他软件定时器 API 功能不同，<code>vTimerSetTimerID()</code> 和
+<code>pvTimerGetTimerID()</code> 直接访问软件定时器——它们不发送
+发送到定时器命令队列的命令。</p>
+<h3 id="661-vtimersettimerid-api">6.6.1 vTimerSetTimerID() API 功能<a class="headerlink" href="#661-vtimersettimerid-api" title="Permanent link">&para;</a></h3>
+<p><a name="list6.8" title="Listing 6.8 The vTimerSetTimerID() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vTimerSetTimerID</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvNewID</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.8</em></strong> <em>vTimerSetTimerID() API 函数原型</em></p>
+<p><strong>vTimerSetTimerID() 参数</strong></p>
+<ul>
+<li><code>xTimer</code></li>
+</ul>
+<p>软件定时器的句柄正在更新为新的 ID 值。
+  句柄将从对 <code>xTimerCreate()</code> 的调用中返回
+  创建软件定时器。</p>
+<ul>
+<li><code>pvNewID</code></li>
+</ul>
+<p>软件定时器的 ID 将设置的值。</p>
+<h3 id="662-pvtimergettimerid-api">6.6.2 pvTimerGetTimerID() API 功能<a class="headerlink" href="#662-pvtimergettimerid-api" title="Permanent link">&para;</a></h3>
+<p><a name="list6.9" title="Listing 6.9 The pvTimerGetTimerID() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">pvTimerGetTimerID</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.9</em></strong> <em>pvTimerGetTimerID() API 函数原型</em></p>
+<p><strong>pvTimerGetTimerID()参数及返回值</strong></p>
+<ul>
+<li><code>xTimer</code></li>
+</ul>
+<p>正在查询的软件定时器的句柄。手柄上会有
+  已从对用于创建的 <code>xTimerCreate()</code> 的调用返回
+  软件定时器。</p>
+<ul>
+<li>返回值</li>
+</ul>
+<p>被查询的软件定时器的ID。</p>
+<h2 id="_2"><a name="example6.2" title="Example 6.2 Using the callback function parameter and the software timer ID"></a><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong><em>示例 6.2</em></strong> <em>使用回调函数参数和软件定时器 ID</em></p>
+<hr />
+<p>同一回调函数可以分配给多个软件
+计时器。完成后，回调函数参数用于
+确定哪个软件定时器到期。</p>
+<p>例 6.1 使用了两个独立的回调函数；一个回调函数
+由一次性定时器使用，并使用另一个回调函数
+通过自动重新加载计时器。例 6.2 创建了类似的功能
+由示例 6.1 创建，但分配了一个回调函数
+两个软件定时器。</p>
+<p>例 6.2 使用的 <code>main()</code> 函数与 <code>main()</code> 几乎相同
+例 6.1 中使用的函数。唯一的区别是软件所在的位置
+定时器被创建。这种差异如清单 6.10 所示，其中
+<code>prvTimerCallback()</code> 用作两个定时器的回调函数。</p>
+<p><a name="list6.10" title="Listing 6.10 Creating the timers used in Example 6.2"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cm">/* Create the one shot timer software timer, storing the handle in</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="cm">   xOneShotTimer. */</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="n">xOneShotTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTimerCreate</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;OneShot&quot;</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">                              </span><span class="n">mainONE_SHOT_TIMER_PERIOD</span><span class="p">,</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">                              </span><span class="n">pdFALSE</span><span class="p">,</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">                              </span><span class="cm">/* The timer&#39;s ID is initialized to NULL. */</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">                              </span><span class="nb">NULL</span><span class="p">,</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">                              </span><span class="cm">/* prvTimerCallback() is used by both timers. */</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">                              </span><span class="n">prvTimerCallback</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10"></a>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="cm">/* Create the auto-reload software timer, storing the handle in</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="cm">   xAutoReloadTimer */</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="n">xAutoReloadTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTimerCreate</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;AutoReload&quot;</span><span class="p">,</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">                                 </span><span class="n">mainAUTO_RELOAD_TIMER_PERIOD</span><span class="p">,</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">                                 </span><span class="n">pdTRUE</span><span class="p">,</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">                                 </span><span class="cm">/* The timer&#39;s ID is initialized to NULL. */</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">                                 </span><span class="nb">NULL</span><span class="p">,</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="w">                                 </span><span class="cm">/* prvTimerCallback() is used by both timers. */</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="w">                                 </span><span class="n">prvTimerCallback</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.10</em></strong> <em>创建示例 6.2 中使用的计时器</em></p>
+<p>当任一定时器到期时，<code>prvTimerCallback()</code> 将执行。的
+<code>prvTimerCallback()</code> 的实现使用函数的参数来
+确定是否由于一次性计时器到期而调用它，或者
+因为自动重新加载计时器已过期。</p>
+<p><code>prvTimerCallback()</code> 还演示了如何使用软件定时器 ID 作为
+定时器特定存储；每个软件定时器都会记录数字
+它在其自己的 ID 中已过期的次数，并且自动重新加载计时器使用
+计数在第五次执行时自行停止。</p>
+<p><code>prvTimerCallback()</code> 的实现如清单 6.9 所示。</p>
+<p><a name="list6.11" title="Listing 6.11 The timer callback function used in Example 6.2"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span>
+<span class="normal"><a href="#__codelineno-10-21">21</a></span>
+<span class="normal"><a href="#__codelineno-10-22">22</a></span>
+<span class="normal"><a href="#__codelineno-10-23">23</a></span>
+<span class="normal"><a href="#__codelineno-10-24">24</a></span>
+<span class="normal"><a href="#__codelineno-10-25">25</a></span>
+<span class="normal"><a href="#__codelineno-10-26">26</a></span>
+<span class="normal"><a href="#__codelineno-10-27">27</a></span>
+<span class="normal"><a href="#__codelineno-10-28">28</a></span>
+<span class="normal"><a href="#__codelineno-10-29">29</a></span>
+<span class="normal"><a href="#__codelineno-10-30">30</a></span>
+<span class="normal"><a href="#__codelineno-10-31">31</a></span>
+<span class="normal"><a href="#__codelineno-10-32">32</a></span>
+<span class="normal"><a href="#__codelineno-10-33">33</a></span>
+<span class="normal"><a href="#__codelineno-10-34">34</a></span>
+<span class="normal"><a href="#__codelineno-10-35">35</a></span>
+<span class="normal"><a href="#__codelineno-10-36">36</a></span>
+<span class="normal"><a href="#__codelineno-10-37">37</a></span>
+<span class="normal"><a href="#__codelineno-10-38">38</a></span>
+<span class="normal"><a href="#__codelineno-10-39">39</a></span>
+<span class="normal"><a href="#__codelineno-10-40">40</a></span>
+<span class="normal"><a href="#__codelineno-10-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">prvTimerCallback</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="p">{</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTimeNow</span><span class="p">;</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ulExecutionCount</span><span class="p">;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5"></a>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">    </span><span class="cm">/* A count of the number of times this software timer has expired is</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="cm">       stored in the timer&#39;s ID. Obtain the ID, increment it, then save it as</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="cm">       the new ID value. The ID is a void pointer, so is cast to a uint32_t. */</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">    </span><span class="n">ulExecutionCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">pvTimerGetTimerID</span><span class="p">(</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">    </span><span class="n">ulExecutionCount</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">    </span><span class="n">vTimerSetTimerID</span><span class="p">(</span><span class="w"> </span><span class="n">xTimer</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">ulExecutionCount</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">    </span><span class="cm">/* Obtain the current tick count. */</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">    </span><span class="n">xTimeNow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTaskGetTickCount</span><span class="p">();</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15"></a>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">    </span><span class="cm">/* The handle of the one-shot timer was stored in xOneShotTimer when the</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="cm">       timer was created. Compare the handle passed into this function with</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="cm">       xOneShotTimer to determine if it was the one-shot or auto-reload timer</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="cm">       that expired, then output a string to show the time at which the</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="cm">       callback was executed. */</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">xOneShotTimer</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="w">        </span><span class="n">vPrintStringAndNumber</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;One-shot timer callback executing&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xTimeNow</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="w">    </span><span class="k">else</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="w">        </span><span class="cm">/* xTimer did not equal xOneShotTimer, so it must have been the</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="cm">           auto-reload timer that expired. */</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="w">        </span><span class="n">vPrintStringAndNumber</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Auto-reload timer callback executing&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xTimeNow</span><span class="p">);</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30"></a>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ulExecutionCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33"></a><span class="w">            </span><span class="cm">/* Stop the auto-reload timer after it has executed 5 times. This</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34"></a><span class="cm">               callback function executes in the context of the RTOS daemon</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35"></a><span class="cm">               task so must not call any functions that might place the daemon</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36"></a><span class="cm">               task into the Blocked state. Therefore a block time of 0 is</span>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37"></a><span class="cm">               used. */</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38"></a><span class="w">            </span><span class="n">xTimerStop</span><span class="p">(</span><span class="w"> </span><span class="n">xTimer</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.11</em></strong> <em>示例 6.2 中使用的定时器回调函数</em></p>
+<p>例 6.2 产生的输出如图 6.8 所示。可见
+自动重新加载计时器仅执行五次。</p>
+<p><a name="fig6.8" title="Figure 6.8 The output produced when Example 6.2 is executed"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image45.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image45.jpg" /></a>
+<strong><em>图 6.8</em></strong> <em>执行例 6.2 时产生的输出</em></p>
+<hr />
+<h2 id="67">6.7 改变定时器的周期<a class="headerlink" href="#67" title="Permanent link">&para;</a></h2>
+<p>每个官方 FreeRTOS 端口都提供一个或多个示例
+项目。大多数示例项目都是自检的，并且使用 LED
+提供项目状态的视觉反馈；如果自检有
+如果自检始终通过，则 LED 会缓慢切换
+失败，然后 LED 快速切换。</p>
+<p>一些示例项目在任务中执行自检，并使用
+<code>vTaskDelay()</code> 功能用于控制 LED 的切换速率。
+其他示例项目在软件计时器中执行自检
+回调函数，并使用定时器的周期来控制速率
+LED 进行切换。</p>
+<h3 id="671-xtimerchangeperiod-api">6.7.1 xTimerChangePeriod() API 功能<a class="headerlink" href="#671-xtimerchangeperiod-api" title="Permanent link">&para;</a></h3>
+<p>使用 <code>xTimerChangePeriod()</code> 函数更改软件定时器的周期。</p>
+<p>如果使用 <code>xTimerChangePeriod()</code> 来改变定时器的周期，
+已经在运行，那么计时器将使用新的周期值
+重新计算其到期时间。重新计算的到期时间是相对于
+当 <code>xTimerChangePeriod()</code> 被调用时，与计时器被调用的时间无关
+最初开始。</p>
+<p>如果使用 <code>xTimerChangePeriod()</code> 来改变定时器的周期，
+在休眠state (a timer that is not running)，那么定时器将
+计算到期时间，并转换到运行状态（计时器
+将开始运行）。</p>
+<blockquote>
+<p><em>注意：切勿从中断服务中调用 <code>xTimerChangePeriod()</code>
+常规。中断安全版本 <code>xTimerChangePeriodFromISR()</code> 应
+在其位置使用。</em></p>
+</blockquote>
+<p><a name="list6.12" title="Listing 6.12 The xTimerChangePeriod() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">BaseType_t</span><span class="w"> </span><span class="nf">xTimerChangePeriod</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="p">,</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">                               </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xNewPeriod</span><span class="p">,</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">                               </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTicksToWait</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.12</em></strong> <em>xTimerChangePeriod() API 函数原型</em></p>
+<p><strong>xTimerChangePeriod()参数及返回值</strong></p>
+<ul>
+<li><code>xTimer</code></li>
+</ul>
+<p>软件定时器的句柄正在更新为新的周期
+  值。句柄将从调用中返回
+  <code>xTimerCreate()</code> 用于创建软件定时器。</p>
+<ul>
+<li><code>xTimerPeriodInTicks</code></li>
+</ul>
+<p>软件计时器的新周期，以刻度为单位指定。的
+  <code>pdMS_TO_TICKS()</code> 宏可用于转换指定的时间
+  以毫秒为单位指定的时间。</p>
+<ul>
+<li><code>xTicksToWait</code></li>
+</ul>
+<p><code>xTimerChangePeriod()</code> 使用定时器命令队列发送
+  向守护程序任务发出“更改周期”命令。 <code>xTicksToWait</code> 指定
+  调用任务应保留在阻塞状态的最长时间
+  状态等待计时器命令队列上的空间变得可用，
+  如果队列已经满了。</p>
+<p>如果 <code>xTicksToWait</code> 为零，<code>xTimerChangePeriod()</code> 将立即返回
+  并且定时器命令队列已满。</p>
+<p>宏 <code>pdMS_TO_TICKS()</code> 可用于转换指定的时间
+  以毫秒为单位指定的时间。</p>
+<p>如果 FreeRTOSConfig.h 中的 <code>INCLUDE_vTaskSuspend</code> 设置为 1，则设置
+  <code>xTicksToWait</code> 到 <code>portMAX_DELAY</code> 将导致调用任务剩余
+  在Blocked状态indefinitely (without a timeout)等待空间
+  在计时器命令队列中变得可用。</p>
+<p>如果在调度程序之前调用 <code>xTimerChangePeriod()</code>
+  启动后，<code>xTicksToWait</code> 的值将被忽略，并且
+  <code>xTimerChangePeriod()</code> 的行为就像 <code>xTicksToWait</code> 已设置为零一样。</p>
+<ul>
+<li>返回值</li>
+</ul>
+<p>有两种可能的返回值：</p>
+<ul>
+<li><code>pdPASS</code></li>
+</ul>
+<p>仅当数据成功发送到 <code>pdPASS</code> 时才会返回
+    定时器命令队列。</p>
+<p>如果区块时间为 specified (<code>xTicksToWait</code> was not zero)，那么它是
+    可能调用任务被置于阻塞状态以等待
+    定时器命令队列中函数之前的可用空间
+    返回，但数据已成功写入定时器命令队列
+    在区块时间到期之前。</p>
+<ul>
+<li><code>pdFAIL</code></li>
+</ul>
+<p>如果无法执行“更改周期”命令，将返回 <code>pdFAIL</code>
+    写入定时器命令队列，因为该队列已经
+    满。</p>
+<p>如果区块时间为 specified (<code>xTicksToWait</code> was not zero) 则
+    调用任务将被置于阻塞状态等待
+    守护进程任务在队列中腾出空间，但指定阻塞时间
+    在此之前已过期。</p>
+<p>清单 6.13 显示了包含自检功能的 FreeRTOS 示例如何
+软件定时器回调函数中的功能使用
+<code>xTimerChangePeriod()</code> 增加 LED 切换的速率
+自检失败。执行自检的软件定时器是
+称为“检查计时器”。</p>
+<p><a name="list6.13" title="Listing 6.13 Using xTimerChangePeriod()"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span>
+<span class="normal"><a href="#__codelineno-12-33">33</a></span>
+<span class="normal"><a href="#__codelineno-12-34">34</a></span>
+<span class="normal"><a href="#__codelineno-12-35">35</a></span>
+<span class="normal"><a href="#__codelineno-12-36">36</a></span>
+<span class="normal"><a href="#__codelineno-12-37">37</a></span>
+<span class="normal"><a href="#__codelineno-12-38">38</a></span>
+<span class="normal"><a href="#__codelineno-12-39">39</a></span>
+<span class="normal"><a href="#__codelineno-12-40">40</a></span>
+<span class="normal"><a href="#__codelineno-12-41">41</a></span>
+<span class="normal"><a href="#__codelineno-12-42">42</a></span>
+<span class="normal"><a href="#__codelineno-12-43">43</a></span>
+<span class="normal"><a href="#__codelineno-12-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cm">/* The check timer is created with a period of 3000 milliseconds, resulting</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="cm">   in the LED toggling every 3 seconds. If the self-checking functionality</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="cm">   detects an unexpected state, then the check timer&#39;s period is changed to</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="cm">   just 200 milliseconds, resulting in a much faster toggle rate. */</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="k">const</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xHealthyTimerPeriod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="w"> </span><span class="mi">3000</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="k">const</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xErrorTimerPeriod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="cm">/* The callback function used by the check timer. */</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">prvCheckTimerCallbackFunction</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="p">{</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xErrorDetected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdFALSE</span><span class="p">;</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xErrorDetected</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdFALSE</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">        </span><span class="cm">/* No errors have yet been detected. Run the self-checking function</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="cm">           again. The function asks each task created by the example to report</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="cm">           its own status, and also checks that all the tasks are actually</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="cm">           still running (and so able to report their status correctly). */</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">CheckTasksAreRunningWithoutError</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdFAIL</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">            </span><span class="cm">/* One or more tasks reported an unexpected status. An error might</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="cm">               have occurred. Reduce the check timer&#39;s period to increase the</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="cm">               rate at which this callback function executes, and in so doing</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="cm">               also increase the rate at which the LED is toggled. This</span>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="cm">               callback function is executing in the context of the RTOS daemon</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="cm">               task, so a block time of 0 is used to ensure the Daemon task</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="cm">               never enters the Blocked state. */</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">            </span><span class="n">xTimerChangePeriod</span><span class="p">(</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">                  </span><span class="n">xTimer</span><span class="p">,</span><span class="w">            </span><span class="cm">/* The timer being updated */</span>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="w">                  </span><span class="n">xErrorTimerPeriod</span><span class="p">,</span><span class="w"> </span><span class="cm">/* The new period for the timer */</span>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="w">                  </span><span class="mi">0</span><span class="w"> </span><span class="p">);</span><span class="w">               </span><span class="cm">/* Do not block when sending this command */</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32"></a>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">            </span><span class="cm">/* Latch that an error has already been detected. */</span>
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="w">            </span><span class="n">xErrorDetected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">;</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37"></a>
+</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38"></a><span class="w">    </span><span class="cm">/* Toggle the LED. The rate at which the LED toggles will depend on how</span>
+</span><span id="__span-12-39"><a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="cm">       often this function is called, which is determined by the period of the</span>
+</span><span id="__span-12-40"><a id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="cm">       check timer. The timer&#39;s period will have been reduced from 3000ms to</span>
+</span><span id="__span-12-41"><a id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="cm">       just 200ms if CheckTasksAreRunningWithoutError() has ever returned</span>
+</span><span id="__span-12-42"><a id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="cm">       pdFAIL. */</span>
+</span><span id="__span-12-43"><a id="__codelineno-12-43" name="__codelineno-12-43"></a><span class="w">    </span><span class="n">ToggleLED</span><span class="p">();</span>
+</span><span id="__span-12-44"><a id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.13</em></strong> <em>使用 xTimerChangePeriod()</em></p>
+<h2 id="68">6.8 重置软件定时器<a class="headerlink" href="#68" title="Permanent link">&para;</a></h2>
+<p>重置软件定时器是指重新启动定时器；计时器的
+到期时间将根据计时器重置时间重新计算，
+而不是计时器最初启动时。这被证明
+通过图 6.9，显示了一个周期为 6 的定时器正在启动，
+然后重置两次，最终过期并执行回调
+功能。</p>
+<p><a name="fig6.9" title="Figure 6.9 Starting and resetting a software timer that has a period of 6 ticks"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image46.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image46.png" /></a>
+<strong><em>图 6.9</em></strong> <em>启动和重置周期为 6 个滴答的软件定时器</em></p>
+<hr />
+<p>参见图6.9：</p>
+<ul>
+<li>
+<p>定时器 1 在时间 t1 启动。它的周期为 6，所以时间为
+  它将执行其回调函数最初是计算出来的
+  为 t7，即启动后 6 个时钟周期。</p>
+</li>
+<li>
+<p>定时器 1 在到达时间 t7 之前重置，即在它到期之前
+  并执行其回调函数。定时器 1 在时间 t5 复位，因此
+  它将执行回调函数的时间是
+  重新计算为t11，即重置后的6个tick。</p>
+</li>
+<li>
+<p>定时器 1 在时间 t11 之前再次重置，因此在它之前再次重置
+  过期并执行其回调函数。定时器1在某个时间复位
+  t9，所以执行回调函数的时间是
+  重新计算为 t15，即上次重置后的 6 个刻度。</p>
+</li>
+<li>
+<p>定时器 1 不再复位，因此在时间 t15 时到期，其
+  相应地执行回调函数。</p>
+</li>
+</ul>
+<h3 id="681-xtimerreset-api">6.8.1 xTimerReset() API 功能<a class="headerlink" href="#681-xtimerreset-api" title="Permanent link">&para;</a></h3>
+<p>使用 <code>xTimerReset()</code> API 函数重置定时器。</p>
+<p><code>xTimerReset()</code> 还可用于启动处于休眠状态的定时器。</p>
+<blockquote>
+<p><em>注意：切勿从中断服务程序中调用 <code>xTimerReset()</code>。的
+应使用中断安全版本 <code>xTimerResetFromISR()</code>
+地点。</em></p>
+</blockquote>
+<p><a name="list6.14" title="Listing 6.14 The xTimerReset() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">BaseType_t</span><span class="w"> </span><span class="nf">xTimerReset</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="p">,</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTicksToWait</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.14</em></strong> <em>xTimerReset() API 功能原型</em></p>
+<p><strong>xTimerReset()参数及返回值</strong></p>
+<ul>
+<li><code>xTimer</code></li>
+</ul>
+<p>正在重置或启动的软件定时器的句柄。手柄
+  将从调用用于创建的 <code>xTimerCreate()</code> 返回
+  软件定时器。</p>
+<ul>
+<li><code>xTicksToWait</code></li>
+</ul>
+<p><code>xTimerReset()</code> 使用定时器命令队列发送
+  守护进程任务的“重置”命令。 <code>xTicksToWait</code> 指定最大
+  调用任务应保持阻塞状态的时间
+  等待计时器命令队列上有空间可用，如果
+  队列已经满了。</p>
+<p>如果 <code>xTicksToWait</code> 为零并且 <code>xTimerReset()</code> 将立即返回
+  定时器命令队列已满。</p>
+<p>如果 <code>FreeRTOSConfig.h</code> 中的 <code>INCLUDE_vTaskSuspend</code> 设置为 1，则设置
+  <code>xTicksToWait</code> 到 <code>portMAX_DELAY</code> 将导致调用任务剩余
+  在Blocked状态indefinitely (without a timeout)等待空间
+  在计时器命令队列中变得可用。</p>
+<ul>
+<li>返回值</li>
+</ul>
+<p>有两种可能的返回值：</p>
+<ul>
+<li><code>pdPASS</code></li>
+</ul>
+<p>仅当数据成功发送到 <code>pdPASS</code> 时才会返回
+    定时器命令队列。</p>
+<p>如果区块时间为 specified (<code>xTicksToWait</code> was not zero)，那么它是
+    可能调用任务被置于阻塞状态以等待
+    定时器命令队列中函数之前的可用空间
+    返回，但数据已成功写入定时器命令队列
+    在区块时间到期之前。</p>
+<p><code>pdFAIL</code></p>
+<p>如果无法写入“reset”命令，将返回 <code>pdFAIL</code>
+    到计时器命令队列，因为队列已满。</p>
+<p>如果区块时间为 specified (<code>xTicksToWait</code> was not zero) 则
+    调用任务将被置于阻塞状态等待
+    守护进程任务在队列中腾出空间，但指定阻塞时间
+    在此之前已过期。</p>
+<h2 id="_3"><a name="example6.3" title="Example 6.3 Resetting a software timer"></a><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><strong><em>示例 6.3</em></strong> <em>重置软件定时器</em></p>
+<hr />
+<p>此示例模拟手机上背光的行为。背光：</p>
+<ul>
+<li>
+<p>按下某个键时打开。</p>
+</li>
+<li>
+<p>如果在一定时间内按下更多按键，则保持开启状态。</p>
+</li>
+<li>
+<p>如果在一定时间内没有按键，则自动关闭。</p>
+</li>
+</ul>
+<p>一次性软件定时器用于实现这一行为：</p>
+<ul>
+<li>
+<p>当按下按键时，[模拟]背光打开，并且
+  在软件定时器的回调函数中关闭。</p>
+</li>
+<li>
+<p>每次按下按键时软件计时器都会重置。</p>
+</li>
+<li>
+<p>必须按下某个键以防止发生故障的时间段
+  因此，背光关闭的时间等于
+  软件定时器；如果软件定时器没有通过按键重置
+  在定时器到期之前，然后是定时器的回调函数
+  执行，并且背光关闭。</p>
+</li>
+</ul>
+<p><code>xSimulatedBacklightOn</code> 变量保存背光状态。
+<code>xSimulatedBacklightOn</code> 设置为 <code>pdTRUE</code> 表示背光打开，
+<code>pdFALSE</code> 表示背光关闭。</p>
+<p>软件定时器回调函数如清单6.15所示。</p>
+<p><a name="list6.15" title="Listing 6.15 The callback function for the one-shot timer used in Example 6.3"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">prvBacklightTimerCallback</span><span class="p">(</span><span class="w"> </span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="p">{</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTimeNow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTaskGetTickCount</span><span class="p">();</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="cm">/* The backlight timer expired, turn the backlight off. */</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">    </span><span class="n">xSimulatedBacklightOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdFALSE</span><span class="p">;</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7"></a>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">    </span><span class="cm">/* Print the time at which the backlight was turned off. */</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="w">    </span><span class="n">vPrintStringAndNumber</span><span class="p">(</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="w">            </span><span class="s">&quot;Timer expired, turning backlight OFF at time</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xTimeNow</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.15</em></strong> <em>示例 6.3 中使用的一次性定时器的回调函数</em></p>
+<p>例 6.3 创建了一个任务来轮询键盘[^11]。任务已显示
+清单 6.16 中，但由于下一段所述的原因，
+清单 6.16 并不代表最佳设计。</p>
+<p>[^11]：打印到 Windows 控制台，并从
+Windows控制台，两者都会导致Windows系统的执行
+来电。 Windows 系统调用，包括使用 Windows 控制台，
+磁盘或 TCP/IP 堆栈可能会对
+FreeRTOS Windows 端口，通常应避免。*</p>
+<p>使用 FreeRTOS 允许您的应用程序是事件驱动的。事件驱动
+设计非常有效地利用处理时间，因为处理时间是
+仅在事件发生时使用，并且不会浪费处理时间
+轮询尚未发生的事件。例6.3无法制作
+事件驱动，因为处理键盘中断不切实际
+使用 FreeRTOS Windows 端口时，轮询效率要低得多
+必须使用技术来代替。如果清单 6.16 是一个中断服务
+例程，则 <code>xTimerResetFromISR()</code> 将用于代替
+<code>xTimerReset()</code>。</p>
+<p><a name="list6.16" title="Listing 6.16 The task used to reset the software timer in Example 6.3"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span>
+<span class="normal"><a href="#__codelineno-15-11">11</a></span>
+<span class="normal"><a href="#__codelineno-15-12">12</a></span>
+<span class="normal"><a href="#__codelineno-15-13">13</a></span>
+<span class="normal"><a href="#__codelineno-15-14">14</a></span>
+<span class="normal"><a href="#__codelineno-15-15">15</a></span>
+<span class="normal"><a href="#__codelineno-15-16">16</a></span>
+<span class="normal"><a href="#__codelineno-15-17">17</a></span>
+<span class="normal"><a href="#__codelineno-15-18">18</a></span>
+<span class="normal"><a href="#__codelineno-15-19">19</a></span>
+<span class="normal"><a href="#__codelineno-15-20">20</a></span>
+<span class="normal"><a href="#__codelineno-15-21">21</a></span>
+<span class="normal"><a href="#__codelineno-15-22">22</a></span>
+<span class="normal"><a href="#__codelineno-15-23">23</a></span>
+<span class="normal"><a href="#__codelineno-15-24">24</a></span>
+<span class="normal"><a href="#__codelineno-15-25">25</a></span>
+<span class="normal"><a href="#__codelineno-15-26">26</a></span>
+<span class="normal"><a href="#__codelineno-15-27">27</a></span>
+<span class="normal"><a href="#__codelineno-15-28">28</a></span>
+<span class="normal"><a href="#__codelineno-15-29">29</a></span>
+<span class="normal"><a href="#__codelineno-15-30">30</a></span>
+<span class="normal"><a href="#__codelineno-15-31">31</a></span>
+<span class="normal"><a href="#__codelineno-15-32">32</a></span>
+<span class="normal"><a href="#__codelineno-15-33">33</a></span>
+<span class="normal"><a href="#__codelineno-15-34">34</a></span>
+<span class="normal"><a href="#__codelineno-15-35">35</a></span>
+<span class="normal"><a href="#__codelineno-15-36">36</a></span>
+<span class="normal"><a href="#__codelineno-15-37">37</a></span>
+<span class="normal"><a href="#__codelineno-15-38">38</a></span>
+<span class="normal"><a href="#__codelineno-15-39">39</a></span>
+<span class="normal"><a href="#__codelineno-15-40">40</a></span>
+<span class="normal"><a href="#__codelineno-15-41">41</a></span>
+<span class="normal"><a href="#__codelineno-15-42">42</a></span>
+<span class="normal"><a href="#__codelineno-15-43">43</a></span>
+<span class="normal"><a href="#__codelineno-15-44">44</a></span>
+<span class="normal"><a href="#__codelineno-15-45">45</a></span>
+<span class="normal"><a href="#__codelineno-15-46">46</a></span>
+<span class="normal"><a href="#__codelineno-15-47">47</a></span>
+<span class="normal"><a href="#__codelineno-15-48">48</a></span>
+<span class="normal"><a href="#__codelineno-15-49">49</a></span>
+<span class="normal"><a href="#__codelineno-15-50">50</a></span>
+<span class="normal"><a href="#__codelineno-15-51">51</a></span>
+<span class="normal"><a href="#__codelineno-15-52">52</a></span>
+<span class="normal"><a href="#__codelineno-15-53">53</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">vKeyHitTask</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="p">{</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xShortDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTimeNow</span><span class="p">;</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="w">    </span><span class="n">vPrintString</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Press a key to turn the backlight on.</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7"></a>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="w">    </span><span class="cm">/* Ideally an application would be event driven, and use an interrupt to</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="cm">       process key presses. It is not practical to use keyboard interrupts</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="cm">       when using the FreeRTOS Windows port, so this task is used to poll for</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="cm">       a key press. */</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="w">        </span><span class="cm">/* Has a key been pressed? */</span>
+</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">_kbhit</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="w">            </span><span class="cm">/* A key has been pressed. Record the time. */</span>
+</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">            </span><span class="n">xTimeNow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTaskGetTickCount</span><span class="p">();</span>
+</span><span id="__span-15-19"><a id="__codelineno-15-19" name="__codelineno-15-19"></a>
+</span><span id="__span-15-20"><a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xSimulatedBacklightOn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdFALSE</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-15-21"><a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-15-22"><a id="__codelineno-15-22" name="__codelineno-15-22"></a>
+</span><span id="__span-15-23"><a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="w">                </span><span class="cm">/* The backlight was off, so turn it on and print the time at</span>
+</span><span id="__span-15-24"><a id="__codelineno-15-24" name="__codelineno-15-24"></a><span class="cm">                   which it was turned on. */</span>
+</span><span id="__span-15-25"><a id="__codelineno-15-25" name="__codelineno-15-25"></a><span class="w">                </span><span class="n">xSimulatedBacklightOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">;</span>
+</span><span id="__span-15-26"><a id="__codelineno-15-26" name="__codelineno-15-26"></a><span class="w">                </span><span class="n">vPrintStringAndNumber</span><span class="p">(</span>
+</span><span id="__span-15-27"><a id="__codelineno-15-27" name="__codelineno-15-27"></a><span class="w">                    </span><span class="s">&quot;Key pressed, turning backlight ON at time</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">,</span>
+</span><span id="__span-15-28"><a id="__codelineno-15-28" name="__codelineno-15-28"></a><span class="w">                    </span><span class="n">xTimeNow</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-15-29"><a id="__codelineno-15-29" name="__codelineno-15-29"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-15-30"><a id="__codelineno-15-30" name="__codelineno-15-30"></a><span class="w">            </span><span class="k">else</span>
+</span><span id="__span-15-31"><a id="__codelineno-15-31" name="__codelineno-15-31"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-15-32"><a id="__codelineno-15-32" name="__codelineno-15-32"></a><span class="w">                </span><span class="cm">/* The backlight was already on, so print a message to say the</span>
+</span><span id="__span-15-33"><a id="__codelineno-15-33" name="__codelineno-15-33"></a><span class="cm">                   timer is about to be reset and the time at which it was</span>
+</span><span id="__span-15-34"><a id="__codelineno-15-34" name="__codelineno-15-34"></a><span class="cm">                   reset. */</span>
+</span><span id="__span-15-35"><a id="__codelineno-15-35" name="__codelineno-15-35"></a><span class="w">                </span><span class="n">vPrintStringAndNumber</span><span class="p">(</span>
+</span><span id="__span-15-36"><a id="__codelineno-15-36" name="__codelineno-15-36"></a><span class="w">                    </span><span class="s">&quot;Key pressed, resetting software timer at time</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">,</span>
+</span><span id="__span-15-37"><a id="__codelineno-15-37" name="__codelineno-15-37"></a><span class="w">                    </span><span class="n">xTimeNow</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-15-38"><a id="__codelineno-15-38" name="__codelineno-15-38"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-15-39"><a id="__codelineno-15-39" name="__codelineno-15-39"></a>
+</span><span id="__span-15-40"><a id="__codelineno-15-40" name="__codelineno-15-40"></a><span class="w">            </span><span class="cm">/* Reset the software timer. If the backlight was previously off,</span>
+</span><span id="__span-15-41"><a id="__codelineno-15-41" name="__codelineno-15-41"></a><span class="cm">               then this call will start the timer. If the backlight was</span>
+</span><span id="__span-15-42"><a id="__codelineno-15-42" name="__codelineno-15-42"></a><span class="cm">               previously on, then this call will restart the timer. A real</span>
+</span><span id="__span-15-43"><a id="__codelineno-15-43" name="__codelineno-15-43"></a><span class="cm">               application may read key presses in an interrupt. If this</span>
+</span><span id="__span-15-44"><a id="__codelineno-15-44" name="__codelineno-15-44"></a><span class="cm">               function was an interrupt service routine then</span>
+</span><span id="__span-15-45"><a id="__codelineno-15-45" name="__codelineno-15-45"></a><span class="cm">               xTimerResetFromISR() must be used instead of xTimerReset(). */</span>
+</span><span id="__span-15-46"><a id="__codelineno-15-46" name="__codelineno-15-46"></a><span class="w">            </span><span class="n">xTimerReset</span><span class="p">(</span><span class="w"> </span><span class="n">xBacklightTimer</span><span class="p">,</span><span class="w"> </span><span class="n">xShortDelay</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-15-47"><a id="__codelineno-15-47" name="__codelineno-15-47"></a>
+</span><span id="__span-15-48"><a id="__codelineno-15-48" name="__codelineno-15-48"></a><span class="w">            </span><span class="cm">/* Read and discard the key that was pressed – it is not required</span>
+</span><span id="__span-15-49"><a id="__codelineno-15-49" name="__codelineno-15-49"></a><span class="cm">               by this simple example. */</span>
+</span><span id="__span-15-50"><a id="__codelineno-15-50" name="__codelineno-15-50"></a><span class="w">            </span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">_getch</span><span class="p">();</span>
+</span><span id="__span-15-51"><a id="__codelineno-15-51" name="__codelineno-15-51"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-15-52"><a id="__codelineno-15-52" name="__codelineno-15-52"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-15-53"><a id="__codelineno-15-53" name="__codelineno-15-53"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 6.16</em></strong> <em>示例 6.3 中用于重置软件定时器的任务</em></p>
+<p>执行例 6.3 时产生的输出如图 6.10 所示。
+参考图6.10：</p>
+<ul>
+<li>
+<p>第一次按键发生在刻度数为 812 时。
+  背光灯打开的时间，单次定时器
+  开始了。</p>
+</li>
+<li>
+<p>当滴答计数为 1813、3114 时发生进一步的按键操作，
+  4015 和 5016。所有这些按键都会导致计时器
+  在计时器到期之前重置。</p>
+</li>
+<li>
+<p>当滴答计数为 10016 时，计时器到期。此时
+  背光灯已关闭。</p>
+</li>
+</ul>
+<p><a name="fig6.10" title="Figure 6.10 The output produced when Example 6.3 is executed"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image47.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image47.jpg" /></a>
+<strong><em>图 6.10</em></strong> <em>执行例 6.3 时产生的输出</em></p>
+<hr />
+<p>从图 6.10 可以看出，定时器的周期为 5000 个刻度；
+最后一次按键后，背光恰好关闭 5000 次
+按下，所以在计时器上次重置后 5000 个滴答声。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

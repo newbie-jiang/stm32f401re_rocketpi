@@ -1,0 +1,5503 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/roadmap/ch03_zh/">
+      
+      
+        <link rel="prev" href="../ch02_zh/">
+      
+      
+        <link rel="next" href="../ch04_zh/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://cloud.rocketpi.club/cloud/rocket.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>【freeRTOS_03_堆内存管理】 - Rocket-Pi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rocket-Pi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              【freeRTOS_03_堆内存管理】
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <div class="md-header__links">
+        
+          
+          
+          
+            
+          
+          <a href="../.." class="md-header__link">
+            🏠 首页
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../roadmap/" class="md-header__link">
+            🧭 学习路线
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../downloads/download/" class="md-header__link">
+            📁 资料下载
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../doc/rocketpi_src/" class="md-header__link">
+            🧪 示例程序
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../faq/faq/" class="md-header__link">
+            ❓ 常见问题
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../tools/tools/" class="md-header__link">
+            💼 工具
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/announcement/" class="md-header__link">
+            📣 公告
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/column/" class="md-header__link">
+            👥 社区专栏
+          </a>
+        
+      </div>
+    
+    
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    Rocket-Pi
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🏠 首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧭 学习路线
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🧭 学习路线
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    学习路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【硬件】硬件一览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】开发路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】CubeMX安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stm32F4xx_DFP安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5注册
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stlink安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】验证开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【前言】嵌入式常见术语
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【Cubemx通用配置】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mcu_and_keil/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【多家MCU示例分析总结】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_01_前言】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_02_内核发行版】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_03_堆内存管理】
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_03_堆内存管理】
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 简介
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1 先决条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2 范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3 静态和动态内存分配之间的切换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4 使用动态内存分配
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5 动态内存分配选项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 内存分配方案示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 内存分配方案示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.1 堆_1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.2 堆_2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.3 堆_3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#324-_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.4 堆_4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#325-_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.5 堆_5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#326-_5vportdefineheapregions-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6 初始化堆_5：vPortDefineHeapRegions() API 函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 堆相关实用函数和宏
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 堆相关实用函数和宏">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1 定义堆起始地址
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-xportgetfreeheapsize-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2 xPortGetFreeHeapSize() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-xportgetminimumeverfreeheapsize-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3 xPortGetMinimumEverFreeHeapSize() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-vportgetheapstats-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.4 vPortGetHeapStats() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#335" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.5 收集每个任务堆使用统计信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#336-malloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.6 Malloc 失败的钩子函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#337" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.7 将任务堆栈放入快速内存中
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 使用静态内存分配
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 使用静态内存分配">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.1 启用静态内存分配
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2 静态内部内核内存
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4.2 静态内部内核内存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3421-vapplicationgettimertaskmemory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2.1 vApplicationGetTimerTaskMemory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3422-vapplicationgetidletaskmemory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2.2 vApplicationGetIdleTaskMemory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_04_任务管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_05_队列管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_06_软件定时器管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_07_中断管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_08_资源管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_09_事件组】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_10_任务通知】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_11_低功耗支持】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_12_开发者支持】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_13_故障排除】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📁 资料下载
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            📁 资料下载
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../downloads/download/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    资料下载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧪 示例程序
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🧪 示例程序
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_src/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi所有示例程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/factory/factory/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    厂测程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_scan/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_scan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_irq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_irq
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_multi_button/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_multi_button
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_delay_us/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_delay_us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_printf/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_printf
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_echo/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_echo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led_cjson
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_ymodem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_shell_microrl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_easylogger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_radar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_aht30
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_at24cxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_passive_buzzer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_sg90
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_motor/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_motor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_hcsr04/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_hcsr04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_mcu_temperature
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_joystick/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_joystick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_irda/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_irda
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_ws2812b/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_ws2812b
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_speedtest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_bitmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_240x240_lvgl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card_fatfs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_audio_to_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_pic_to_lcd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_cdc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_cdc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_msc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_msc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_flash_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266_tcp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_standby_wkup/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_standby_wkup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_crc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_crc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_mbedtls/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_mbedtls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_extern_io_check/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_extern_io_check
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader_iap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader_iap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/01_rocketpi_serial_plane_game/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    飞行大乱斗
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/02_don%27t_approach_me_alarm/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    别靠近我报警器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/03_rocketpi_usb_audio_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    超炫桌面节奏大师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/04_rocketpi_hcsr04_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    雷达探测器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/05_rocketpi_smart_home/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    物联网智能家居
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/06_rocketpi_mqtt_ota/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    FOTA固件升级
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_freertos/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_freertos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_zephyr/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_zephyr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_rt-thread/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_rt-thread
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_threadx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_threadx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    ❓ 常见问题
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ❓ 常见问题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/faq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    常见问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    💼 工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            💼 工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/tools/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📣 公告
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            📣 公告
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/announcement/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    公告
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    👥 社区专栏
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            👥 社区专栏
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/column/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    社区专栏
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 简介
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1 先决条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2 范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3 静态和动态内存分配之间的切换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4 使用动态内存分配
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5 动态内存分配选项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 内存分配方案示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 内存分配方案示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.1 堆_1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.2 堆_2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.3 堆_3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#324-_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.4 堆_4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#325-_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.5 堆_5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#326-_5vportdefineheapregions-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6 初始化堆_5：vPortDefineHeapRegions() API 函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 堆相关实用函数和宏
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 堆相关实用函数和宏">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1 定义堆起始地址
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-xportgetfreeheapsize-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2 xPortGetFreeHeapSize() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-xportgetminimumeverfreeheapsize-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3 xPortGetMinimumEverFreeHeapSize() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-vportgetheapstats-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.4 vPortGetHeapStats() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#335" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.5 收集每个任务堆使用统计信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#336-malloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.6 Malloc 失败的钩子函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#337" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.7 将任务堆栈放入快速内存中
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 使用静态内存分配
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 使用静态内存分配">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.1 启用静态内存分配
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2 静态内部内核内存
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4.2 静态内部内核内存">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3421-vapplicationgettimertaskmemory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2.1 vApplicationGetTimerTaskMemory
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3422-vapplicationgetidletaskmemory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2.2 vApplicationGetIdleTaskMemory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="3">3 堆内存管理<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
+<h2 id="31">3.1 简介<a class="headerlink" href="#31" title="Permanent link">&para;</a></h2>
+<h3 id="311">3.1.1 先决条件<a class="headerlink" href="#311" title="Permanent link">&para;</a></h3>
+<p>成为一名合格的 C 程序员是使用 FreeRTOS 的先决条件，所以
+本章假设读者熟悉以下概念：</p>
+<ul>
+<li>构建 C 项目的不同编译和链接阶段。</li>
+<li>什么是栈和堆。</li>
+<li>标准 C 库 <code>malloc()</code> 和 <code>free()</code> 函数。</li>
+</ul>
+<h3 id="312">3.1.2 范围<a class="headerlink" href="#312" title="Permanent link">&para;</a></h3>
+<p>本章内容包括：</p>
+<ul>
+<li>当 FreeRTOS 分配 RAM 时。</li>
+<li>FreeRTOS 提供的五个示例内存分配方案。</li>
+<li>选择哪种内存分配方案。</li>
+</ul>
+<h3 id="313">3.1.3 静态和动态内存分配之间的切换<a class="headerlink" href="#313" title="Permanent link">&para;</a></h3>
+<p>以下章节介绍了内核对象，例如任务、队列、
+信号量和事件组。容纳这些物体所需的 RAM 可以
+在编译时静态分配或在运行时动态分配。
+动态分配减少了设计和规划工作，简化了
+API，并最大限度地减少 RAM 占地面积。静态分配比较多
+确定性，无需处理内存分配失败，
+并消除堆碎片的风险（其中堆有足够的碎片）
+释放内存但不在一个可用的连续块中）。</p>
+<p>FreeRTOS API 函数静态创建内核对象
+分配的内存仅在 <code>configSUPPORT_STATIC_ALLOCATION</code> 时可用
+在 FreeRTOSConfig.h 中设置为 1。 FreeRTOS API 函数创建
+使用动态分配内存的内核对象仅可用
+当 <code>configSUPPORT_DYNAMIC_ALLOCATION</code> 设置为 1 或左侧时
+FreeRTOSConfig.h 中未定义。将两个常量设置为有效
+1 同时。</p>
+<p>有关 <code>configSUPPORT_STATIC_ALLOCATION</code> 的更多信息位于
+第 3.4 节使用静态内存分配。</p>
+<h3 id="314">3.1.4 使用动态内存分配<a class="headerlink" href="#314" title="Permanent link">&para;</a></h3>
+<p>动态内存分配是一个C编程概念，而不是一个概念
+特定于 FreeRTOS 或多任务处理。与FreeRTOS相关
+因为可以选择使用动态创建内核对象
+分配的内存，以及通用 C 库 <code>malloc()</code> 和 <code>free()</code>
+由于以下一个或多个原因，函数可能不适合：</p>
+<ul>
+<li>它们并不总是在小型嵌入式系统上可用。</li>
+<li>它们的实施可能相对较大，占用宝贵的资源
+  代码空间。</li>
+<li>它们很少是线程安全的。</li>
+<li>它们不是确定性的；执行该操作所花费的时间
+  不同的通话功能会有所不同。</li>
+<li>它们可能会遭受碎片（堆有足够的可用空间）
+  内存但不在一个可用的连续块中）。</li>
+<li>它们会使链接器配置复杂化。</li>
+<li>如果堆
+  允许空间增长到其他变量使用的内存中。</li>
+</ul>
+<h3 id="315">3.1.5 动态内存分配选项<a class="headerlink" href="#315" title="Permanent link">&para;</a></h3>
+<p>FreeRTOS 的早期版本使用内存池分配方案，其中
+不同大小的内存块池在编译时预先分配，
+然后由内存分配函数返回。虽然块
+分配在实时系统中很常见，它已从 FreeRTOS 中删除
+因为它在非常小的嵌入式系统中对 RAM 的低效使用导致
+许多支持请求。</p>
+<p>FreeRTOS 现在将内存分配视为便携式 layer
+(instead of part of the core codebase) 的一部分。这是因为不同
+嵌入式系统具有不同的动态内存分配和时序
+要求，因此单个动态内存分配算法只会
+永远适合应用程序的子集。另外，删除动态
+来自核心代码库的内存分配使应用程序编写者能够
+在适当的时候提供自己的具体实现。</p>
+<p>当 FreeRTOS 需要 RAM 时，它会调用 <code>pvPortMalloc()</code> 而不是 <code>malloc()</code>。
+同样，当 FreeRTOS 释放先前分配的 RAM 时，它会调用
+<code>vPortFree()</code> 而不是 <code>free()</code>。 <code>pvPortMalloc()</code> 具有相同的原型
+标准C库<code>malloc()</code>函数，与<code>vPortFree()</code>相同
+原型为标准C库<code>free()</code>函数。</p>
+<p><code>pvPortMalloc()</code> 和 <code>vPortFree()</code> 是公共函数，因此它们也可以
+从应用程序代码调用。</p>
+<p>FreeRTOS 附带 <code>pvPortMalloc()</code> 的五个示例实现和
+<code>vPortFree()</code>，这些都记录在本章中。自由实时操作系统
+应用程序可以使用示例实现之一或提供它们的
+拥有。</p>
+<p>这五个示例在 heap_1.c、heap_2.c、heap_3.c 中定义，
+分别是heap_4.c和heap_5.c源文件，都是
+位于 FreeRTOS/Source/portable/MemMang 目录中。</p>
+<h2 id="32">3.2 内存分配方案示例<a class="headerlink" href="#32" title="Permanent link">&para;</a></h2>
+<h3 id="321-_1">3.2.1 堆_1<a class="headerlink" href="#321-_1" title="Permanent link">&para;</a></h3>
+<p>对于小型专用嵌入式系统来说，仅创建任务是很常见的
+以及启动 FreeRTOS 调度程序之前的其他内核对象。当
+是这样的，内核分配的内存只有gets (dynamically)
+在应用程序开始执行任何实时功能之前，
+并且内存在应用程序的生命周期内保持分配状态。这个
+意味着选择的分配方案不必考虑更多
+复杂的内存分配问题，例如确定性和碎片，
+并且可以优先考虑代码大小和简单性等属性。</p>
+<p>Heap_1.c 实现了 <code>pvPortMalloc()</code> 的非常基本的版本，并且不
+实施 <code>vPortFree()</code>。永远不会删除任务或其他任务的应用程序
+内核对象有可能使用堆_1。有的商业化
+关键和安全关键系统，否则将禁止
+使用动态内存分配也有可能使用heap_1。
+关键系统通常禁止动态内存分配，因为
+与非决定论、内存碎片相关的不确定性
+分配失败。 Heap_1 始终是确定性的并且不能产生碎片
+记忆。</p>
+<p>Heap_1对<code>pvPortMalloc()</code>的实现简单的细分了一个简单的
+<code>uint8_t</code> 数组每次将 FreeRTOS 堆调用为更小的块
+它被称为。 FreeRTOSConfig.h 常数 <code>configTOTAL_HEAP_SIZE</code> 套
+数组的大小（以字节为单位）。将堆实现为静态的
+分配的数组使 FreeRTOS 看起来消耗大量 RAM，因为
+堆成为 FreeRTOS 数据的一部分。</p>
+<p>每个动态分配的任务都会导致两次调用 <code>pvPortMalloc()</code>。
+第一个分配任务控制 block (TCB)，第二个分配任务控制 block (TCB)
+任务的堆栈。图3.1演示了heap_1如何细分简单
+创建任务时的数组。</p>
+<p>参见图3.1：</p>
+<ul>
+<li>
+<p><strong>A</strong> 在创建任何任务之前显示数组 - 整个数组都是免费的。</p>
+</li>
+<li>
+<p><strong>B</strong> 显示创建一个任务后的数组。</p>
+</li>
+<li>
+<p><strong>C</strong> 显示创建三个任务后的数组。</p>
+</li>
+</ul>
+<p><a name="fig3.1" title="Figure 3.1 RAM being allocated from the heap\_1 array each time a task is created"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image05.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image05.png" /></a>
+<strong><em>图 3.1</em></strong> <em>每次创建任务时从堆_1数组中分配RAM</em></p>
+<hr />
+<h3 id="322-_2">3.2.2 堆_2<a class="headerlink" href="#322-_2" title="Permanent link">&para;</a></h3>
+<p>Heap_2 被 heap_4 取代，其中包括增强的功能。
+Heap_2 保留在 FreeRTOS 发行版中以实现向后兼容性
+不建议用于新设计。</p>
+<p>Heap_2.c 还可以通过细分尺寸为
+<code>configTOTAL_HEAP_SIZE</code> 常数。它使用最佳拟合算法来分配
+内存，并且与堆_1 不同，它确实实现了 <code>vPortFree()</code>。再次，
+将堆实现为静态分配的数组使得 FreeRTOS
+似乎消耗了大量 RAM，因为堆成为了
+FreeRTOS 数据。</p>
+<p>最佳拟合算法确保 <code>pvPortMalloc()</code> 使用空闲块
+大小与请求的字节数最接近的内存。对于
+例如，考虑以下场景：</p>
+<ul>
+<li>堆包含三个空闲内存块，分别为 5 字节、25
+  分别为 100 字节和 100 字节。</li>
+<li><code>pvPortMalloc()</code> 请求 20 字节的 RAM。</li>
+</ul>
+<p>RAM 的最小空闲块，其中包含请求的字节数
+适合的是25字节块，因此<code>pvPortMalloc()</code>分割25字节块
+返回前分成 1 个 20 字节块和 1 个 5 字节块
+指向 20 字节块的指针[^2]。新的 5 字节块仍然可用
+以便将来致电 <code>pvPortMalloc()</code>。</p>
+<p>[^2]：这过于简单化了，因为堆_2存储信息
+取决于堆区域内的块大小，因此两个分割的总和
+区块实际上会小于 25。</p>
+<p>与 heap_4 不同，heap_2 不会将相邻的空闲块组合成一个
+单个较大的块，因此比它更容易出现碎片
+堆_4。然而，如果分配的和
+随后释放的块始终具有相同的大小。</p>
+<p><a name="fig3.2" title="Figure 3.2 RAM being allocated and freed from the heap\_2 array as tasks are created and deleted"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image06.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image06.png" /></a>
+<strong><em>图 3.2</em></strong> <em>随着任务的创建和删除，RAM 被分配并从堆_2 数组中释放</em></p>
+<hr />
+<p>图 3.2 展示了当任务被执行时最佳拟合算法是如何工作的
+创建、删除、再次创建。参见图3.2：</p>
+<ul>
+<li>
+<p><strong>A</strong> 显示分配三个任务后的数组。一大免费
+  块保留在数组的顶部。</p>
+</li>
+<li>
+<p><strong>B</strong> 显示删除其中一项任务后的数组。大的
+  数组顶部的空闲块仍然存在。现在也有两个
+  先前保存 TCB 和堆栈的较小空闲块
+  已删除的任务。</p>
+</li>
+<li>
+<p><strong>C</strong> 显示创建另一个任务后的情况。创造
+  该任务导致从内部两次调用 <code>pvPortMalloc()</code>
+  <code>xTaskCreate()</code> API 函数，一个分配新的 TCB，另一个
+  分配任务堆栈。本书第3.4节描述了
+  <code>xTaskCreate()</code>。</p>
+</li>
+</ul>
+<p>每个 TCB 的大小相同，因此最佳拟合算法会重用该块
+  保存已删除任务的 TCB 的 RAM 保存已删除任务的 TCB
+  创建的任务。</p>
+<p>如果分配给新创建的任务的堆栈大小是
+  与分配给先前删除的任务的大小相同，则
+  最佳拟合算法重用了保存堆栈的 RAM 块
+  删除的任务保存创建的任务的堆栈。</p>
+<p>数组顶部较大的未分配块仍然存在
+  未受影响。</p>
+<p>Heap_2 不是确定性的，但比大多数标准库更快
+<code>malloc()</code> 和 <code>free()</code> 的实现。</p>
+<h3 id="323-_3">3.2.3 堆_3<a class="headerlink" href="#323-_3" title="Permanent link">&para;</a></h3>
+<p>Heap_3.c 使用标准库 <code>malloc()</code> 和 <code>free()</code> 函数，因此
+链接器配置定义了堆大小，以及
+未使用 <code>configTOTAL_HEAP_SIZE</code> 常数。</p>
+<p>Heap_3通过暂时挂起使<code>malloc()</code>和<code>free()</code>线程安全
+FreeRTOS 调度程序在其执行期间。第8章，
+资源管理，涵盖线程安全和调度程序挂起。</p>
+<h3 id="324-_4">3.2.4 堆_4<a class="headerlink" href="#324-_4" title="Permanent link">&para;</a></h3>
+<p>与 heap_1 和 heap_2 一样，heap_4 的工作原理是将数组细分为
+较小的块。和以前一样，数组是静态分配的并且
+尺寸为 <code>configTOTAL_HEAP_SIZE</code>，这使得 FreeRTOS 看起来使用
+大量 RAM，因为堆成为 FreeRTOS 数据的一部分。</p>
+<p>Heap_4使用first-fit算法来分配内存。与堆_2不同，
+heap_4 combines (coalesces) 将相邻的空闲内存块放入
+单个较大的块，最大限度地减少内存碎片的风险。</p>
+<p>首次拟合算法确保 <code>pvPortMalloc()</code> 使用第一个空闲块
+足够大以容纳所请求的字节数的内存。
+例如，考虑以下场景：</p>
+<ul>
+<li>堆包含三个空闲内存块，按顺序排列
+  它们出现在数组中的大小分别是 5 个字节、200 个字节和 100 个字节
+  分别为字节。</li>
+<li><code>pvPortMalloc()</code> 请求 20 字节的 RAM。</li>
+</ul>
+<p>所请求的字节数适合的 RAM 的第一个空闲块是
+200 字节块，因此 <code>pvPortMalloc()</code> 将 200 字节块拆分为一个
+返回指针之前，包含 20 个字节的块和 180 个字节 [^3] 之一
+到 20 字节块。新的 180 字节块将来仍然可用
+致电 <code>pvPortMalloc()</code>。</p>
+<p>[^3]：这过于简单化了，因为堆_4存储信息
+取决于堆区域内的块大小，因此两个分割的总和
+块实际上将小于 200 字节。</p>
+<p>Heap_4 combines (coalesces) 将相邻的空闲块合并为单个较大的块
+块，最大限度地减少碎片风险，并使其适合
+重复分配和释放不同大小块的应用程序
+RAM。</p>
+<p><a name="fig3.3" title="Figure 3.3 RAM being allocated and freed from the heap\_4 array"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image07.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image07.png" /></a>
+<strong><em>图 3.3</em></strong> <em>RAM 正在从堆_4 数组中分配和释放</em></p>
+<hr />
+<p>图3.3演示了heap_4算法如何与内存进行首次拟合
+合并工作。参见图3.3：</p>
+<ul>
+<li>
+<p><strong>A</strong> 显示创建三个任务后的数组。一大免费
+  块保留在数组的顶部。</p>
+</li>
+<li>
+<p><strong>B</strong> 显示删除其中一项任务后的数组。大的
+  数组顶部的空闲块仍然存在。现在还有另一个
+  已删除任务的 TCB 和堆栈所在的空闲块。
+  与 heap_2 示例不同，heap_4 合并了两个内存块
+  先前保存已删除任务的 TCB 和堆栈，
+  分别进入更大的单个空闲块。</p>
+</li>
+<li>
+<p><strong>C</strong> 显示创建 FreeRTOS 队列后的情况。
+  本书第 5.3 节介绍了 <code>xQueueCreate()</code> API 函数
+  用于动态分配队列。 <code>xQueueCreate()</code> 来电
+  <code>pvPortMalloc()</code> 分配队列使用的 RAM。作为堆_4使用
+  首次适应算法，<code>pvPortMalloc()</code> 从第一个开始分配 RAM
+  空闲的 RAM 块足够大以容纳队列，其中
+  图3.3是通过删除任务释放的RAM。队列没有
+  消耗掉空闲块中所有的RAM，因此该块被分割为
+  两个，未使用的部分仍然可供将来调用
+  <code>pvPortMalloc()</code>。</p>
+</li>
+<li>
+<p><strong>D</strong>显示直接调用<code>pvPortMalloc()</code>后的情况
+  来自应用程序代码，而不是通过调用 FreeRTOS 间接
+  API 函数。用户分配的块足够小，可以容纳
+  第一个空闲块，即内存之间的块
+  分配给队列，以及分配给TCB的内存
+  跟随它。</p>
+</li>
+</ul>
+<p>通过删除任务释放的内存现在已分为三部分
+  单独的块；第一个块保存队列，第二个块保存队列
+  保存用户分配的内存，第三块保持空闲。</p>
+<ul>
+<li>
+<p><strong>E</strong>显示删除队列后的情况，即
+  自动释放分配给已删除队列的内存。那里
+  现在用户分配块两侧都有空闲内存。</p>
+</li>
+<li>
+<p><strong>F</strong> 显示释放分配的用户后的情况
+  记忆。用户分配的块先前使用的内存已
+  与两侧的空闲内存相结合以创建更大的
+  单个空闲块。</p>
+</li>
+</ul>
+<p>Heap_4 不是确定性的，但比大多数标准库更快
+<code>malloc()</code> 和 <code>free()</code> 的实现。</p>
+<h3 id="325-_5">3.2.5 堆_5<a class="headerlink" href="#325-_5" title="Permanent link">&para;</a></h3>
+<p>堆_5 使用与堆_4 相同的分配算法。与堆_4不同，
+仅限于从单个数组分配内存，heap_5 可以
+将多个独立内存空间中的内存合并到一个堆中。
+当 FreeRTOS 所在的系统提供 RAM 时，Heap_5 很有用
+正在运行不会显示为单个 contiguous (without space) 块
+在系统的内存映射中。</p>
+<h3 id="326-_5vportdefineheapregions-api">3.2.6 初始化堆_5：vPortDefineHeapRegions() API 函数<a class="headerlink" href="#326-_5vportdefineheapregions-api" title="Permanent link">&para;</a></h3>
+<p><code>vPortDefineHeapRegions()</code>通过指定start来初始化heap_5
+组成堆的每个单独内存区域的地址和大小
+由堆_5 管理。 Heap_5是唯一提供的堆分配方案
+需要显式初始化并且在之后才能使用
+致电 <code>vPortDefineHeapRegions()</code>。这意味着内核对象，例如
+任务、队列和信号量，直到之后才能动态创建
+呼叫 <code>vPortDefineHeapRegions()</code>。</p>
+<p><a name="list3.1" title="Listing 3.1 The vPortDefineHeapRegions() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vPortDefineHeapRegions</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">HeapRegion_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pxHeapRegions</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.1</em></strong> <em>vPortDefineHeapRegions() API 功能原型</em></p>
+<p><code>vPortDefineHeapRegions()</code> 采用 <code>HeapRegion_t</code> 结构数组作为
+它的唯一参数。每个结构定义了起始地址和大小
+将成为堆一部分的内存块——整个数组
+结构体定义了整个堆空间。</p>
+<p><a name="list3.2" title="Listing 3.2 The HeapRegion\_t structure"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span>
+<span class="normal"><a href="#__codelineno-1-8">8</a></span>
+<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">HeapRegion</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="cm">/* The start address of a block of memory that will be part of the heap.*/</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">pucStartAddress</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="cm">/* The size of the block of memory in bytes. */</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">xSizeInBytes</span><span class="p">;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">}</span><span class="w"> </span><span class="n">HeapRegion_t</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.2</em></strong> <em>HeapRegion_t 结构</em></p>
+<p><strong>参数：</strong></p>
+<ul>
+<li><code>pxHeapRegions</code></li>
+</ul>
+<p>指向 <code>HeapRegion_t</code> 结构数组开头的指针。
+  每个结构体定义了内存块的起始地址和大小
+  将成为堆的一部分。</p>
+<p>数组中的 <code>HeapRegion_t</code> 结构必须按 start 排序
+  地址；描述内存区域的 <code>HeapRegion_t</code> 结构
+  最低起始地址必须是数组中的第一个结构，并且
+  <code>HeapRegion_t</code> 结构描述了内存区域
+  最高起始地址必须是数组中的最后一个结构。</p>
+<p>使用 <code>HeapRegion_t</code> 结构标记数组的末尾，该结构具有其
+  <code>pucStartAddress</code> 成员设置为 <code>NULL</code>。</p>
+<p>举例来说，考虑如图所示的假设内存映射
+3.4 <strong>A</strong> 包含三个独立的 RAM 块：RAM1、RAM2
+和 RAM3。假设可执行代码放置在只读存储器中，
+这没有显示。</p>
+<p><a name="fig3.4" title="Figure 3.4 Memory Map"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image08.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image08.png" /></a>
+<strong><em>图 3.4</em></strong> <em>内存映射</em></p>
+<hr />
+<p>清单 3.3 显示了一组 <code>HeapRegion_t</code> 结构，它们一起
+完整描述 RAM 的三个块。</p>
+<p><a name="list3.3" title="Listing 3.3 An array of HeapRegion\_t structures that together describe the 3 regions of RAM in their entirety"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span>
+<span class="normal"><a href="#__codelineno-2-27">27</a></span>
+<span class="normal"><a href="#__codelineno-2-28">28</a></span>
+<span class="normal"><a href="#__codelineno-2-29">29</a></span>
+<span class="normal"><a href="#__codelineno-2-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cm">/* Define the start address and size of the three RAM regions. */</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="cp">#define RAM1_START_ADDRESS ( ( uint8_t * ) 0x00010000 )</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="cp">#define RAM1_SIZE ( 64 * 1024 )</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="cp">#define RAM2_START_ADDRESS ( ( uint8_t * ) 0x00020000 )</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="cp">#define RAM2_SIZE ( 32 * 1024 )</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="cp">#define RAM3_START_ADDRESS ( ( uint8_t * ) 0x00030000 )</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="cp">#define RAM3_SIZE ( 32 * 1024 )</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="cm">/* Create an array of HeapRegion_t definitions, with an index for each</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="cm">   of the three RAM regions, and terminate the array with a HeapRegion_t</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="cm">   structure containing a NULL address. The HeapRegion_t structures must</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="cm">   appear in start address order, with the structure that contains the</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="cm">   lowest start address appearing first. */</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="k">const</span><span class="w"> </span><span class="n">HeapRegion_t</span><span class="w"> </span><span class="n">xHeapRegions</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="p">{</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">RAM1_START_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">RAM1_SIZE</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">RAM2_START_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">RAM2_SIZE</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">RAM3_START_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">RAM3_SIZE</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w">               </span><span class="mi">0</span><span class="w">         </span><span class="p">}</span><span class="w"> </span><span class="cm">/* Marks the end of the array. */</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="p">};</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23"></a>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25"></a><span class="p">{</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26"></a><span class="w">    </span><span class="cm">/* Initialize heap_5. */</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="w">    </span><span class="n">vPortDefineHeapRegions</span><span class="p">(</span><span class="w"> </span><span class="n">xHeapRegions</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28"></a>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29"></a><span class="w">    </span><span class="cm">/* Add application code here. */</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.3</em></strong> <em>HeapRegion_t 结构数组共同描述了 RAM 的 3 个区域的整体</em></p>
+<p>尽管清单 3.3 正确地描述了 RAM，但它并没有演示
+可用的示例，因为它将所有 RAM 分配到堆，不留下任何内容
+RAM 可供其他变量免费使用。</p>
+<p>构建过程的链接阶段为每个链接分配一个 RAM 地址
+变量。通常描述可供链接器使用的 RAM
+通过链接器配置文件，例如链接器脚本。在图3.4中
+<strong>B</strong> 假设链接器脚本包含以下信息
+RAM1，但不包括有关 RAM2 或 RAM3 的信息。结果，
+链接器将变量放置在 RAM1 中，仅保留上面 RAM1 的部分
+地址 0x0001nnnn 可供堆_5 使用。实际价值
+0x0001nnnn 取决于包含在中的所有变量的组合大小
+该应用程序。链接器未使用所有 RAM2 和所有 RAM3，
+使整个 RAM2 和整个 RAM3 可供使用
+堆_5。</p>
+<p>清单 3.3 中所示的代码将导致 RAM 分配到堆_5
+下面的地址 0x0001nnnn 与用于保存变量的 RAM 重叠。
+如果您设置第一个 <code>HeapRegion_t</code> 结构的起始地址
+<code>xHeapRegions[]</code> 数组为 0x0001nnnn，而不是起始地址
+0x00010000，堆不会与链接器使用的RAM重叠。
+但是，这不是推荐的解决方案，因为：</p>
+<ul>
+<li>起始地址可能不容易确定。</li>
+<li>链接器使用的 RAM 数量可能会在未来的版本中发生变化，
+  这将更新中使用的起始地址
+  <code>HeapRegion_t</code> 结构必需。</li>
+<li>构建工具不会知道，因此无法警告
+  应用程序编写器，如果链接器使用的 RAM 和使用的 RAM
+  通过堆_5重叠。</li>
+</ul>
+<p>清单 3.4 演示了一个更方便且可维护的示例。它
+声明一个名为 <code>ucHeap</code> 的数组。 <code>ucHeap</code> 是一个普通变量，所以它
+成为链接器分配给 RAM1 的数据的一部分。第一个
+<code>xHeapRegions</code>数组中的<code>HeapRegion_t</code>结构描述了启动
+<code>ucHeap</code> 的地址和大小，因此 <code>ucHeap</code> 成为内存管理的一部分
+通过堆_5。 <code>ucHeap</code>的大小可以增加，直到RAM被使用
+链接器消耗全部 RAM1，如图 3.4 <strong>C</strong> 所示。</p>
+<p><a name="list3.4" title="Listing 3.4 An array of HeapRegion\_t structures that describe all of RAM2, all of RAM3, but only part of RAM1"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span>
+<span class="normal"><a href="#__codelineno-3-21">21</a></span>
+<span class="normal"><a href="#__codelineno-3-22">22</a></span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span>
+<span class="normal"><a href="#__codelineno-3-24">24</a></span>
+<span class="normal"><a href="#__codelineno-3-25">25</a></span>
+<span class="normal"><a href="#__codelineno-3-26">26</a></span>
+<span class="normal"><a href="#__codelineno-3-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cm">/* Define the start address and size of the two RAM regions not used by</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="cm">   the linker. */</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="cp">#define RAM2_START_ADDRESS ( ( uint8_t * ) 0x00020000 )</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="cp">#define RAM2_SIZE ( 32 * 1024 )</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="cp">#define RAM3_START_ADDRESS ( ( uint8_t * ) 0x00030000 )</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="cp">#define RAM3_SIZE ( 32 * 1024 )</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="cm">/* Declare an array that will be part of the heap used by heap_5. The</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="cm">   array will be placed in RAM1 by the linker. */</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="cp">#define RAM1_HEAP_SIZE ( 30 * 1024 )</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucHeap</span><span class="p">[</span><span class="w"> </span><span class="n">RAM1_HEAP_SIZE</span><span class="w"> </span><span class="p">];</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="cm">/* Create an array of HeapRegion_t definitions. Whereas in Listing 3.3 the</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="cm">   first entry described all of RAM1, so heap_5 will have used all of</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="cm">   RAM1, this time the first entry only describes the ucHeap array, so</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="cm">   heap_5 will only use the part of RAM1 that contains the ucHeap array.</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="cm">   The HeapRegion_t structures must still appear in start address order,</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="cm">   with the structure that contains the lowest start address appearing first. */</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="k">const</span><span class="w"> </span><span class="n">HeapRegion_t</span><span class="w"> </span><span class="n">xHeapRegions</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="p">{</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">ucHeap</span><span class="p">,</span><span class="w">             </span><span class="n">RAM1_HEAP_SIZE</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">RAM2_START_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">RAM2_SIZE</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">RAM3_START_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">RAM3_SIZE</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26"></a><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w">               </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w">           </span><span class="cm">/* Marks the end of the array. */</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27"></a><span class="p">};</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.4</em></strong> <em>HeapRegion_t 结构数组，描述所有 RAM2、所有 RAM3，但仅描述部分 RAM1</em></p>
+<p>清单 3.4 中展示的技术的优点包括：</p>
+<ul>
+<li>没有必要使用硬编码的起始地址。</li>
+<li><code>HeapRegion_t</code>结构中使用的地址将被设置
+  由链接器自动执行，因此它始终是正确的，即使
+  链接器使用的 RAM 数量在未来版本中会发生变化。</li>
+<li>分配给heap_5的RAM不可能与放置的数据重叠
+  通过链接器进入 RAM1。</li>
+<li>如果 <code>ucHeap</code> 太大，应用程序将无法链接。</li>
+</ul>
+<h2 id="33">3.3 堆相关实用函数和宏<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
+<h3 id="331">3.3.1 定义堆起始地址<a class="headerlink" href="#331" title="Permanent link">&para;</a></h3>
+<p>Heap_1、heap_2 和 heap_4 从静态分配的内存中分配内存
+数组尺寸为 <code>configTOTAL_HEAP_SIZE</code>。本节参考了这些
+分配方案统称为堆_n。</p>
+<p>有时需要将堆放置在特定的内存地址处。对于
+例如，分配给动态创建的任务的堆栈来自
+堆，因此可能需要将堆定位在快速内部
+内存而不是缓慢的外部内存。 （参见“放置”小节
+下面的快速内存中的任务堆栈是分配任务的另一种方法
+堆栈在快速内存中）。 <code>configAPPLICATION_ALLOCATED_HEAP</code>
+编译时配置常量使应用程序能够声明
+数组代替声明，否则该声明将位于
+heap_n.c 源文件。在应用程序代码中声明数组
+使应用程序编写者能够指定其起始地址。</p>
+<p>如果 FreeRTOSConfig.h 中的 <code>configAPPLICATION_ALLOCATED_HEAP</code> 设置为 1，
+使用 FreeRTOS 的应用程序必须分配 <code>uint8_t</code> 数组
+称为 <code>ucHeap</code>，并由 <code>configTOTAL_HEAP_SIZE</code> 常数确定尺寸。</p>
+<p>将变量放置在特定内存地址所需的语法是
+取决于所使用的编译器，因此请参阅您的编译器的
+文档。两个编译器的示例如下：</p>
+<ul>
+<li>清单 3.5 显示了 GCC 编译器声明所需的语法
+  该数组并将该数组放置在名为 <code>.my_heap</code> 的内存部分中。</li>
+<li>清单 3.6 显示了 IAR 编译器声明所需的语法
+  数组并将数组放置在绝对内存地址处
+  0x20000000。</li>
+</ul>
+<p><a name="list3.5" title="Listing 3.5 Using GCC syntax to declare the array that will be used by heap\_4, and place the array in a memory section named .my\_heap"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucHeap</span><span class="p">[</span><span class="w"> </span><span class="n">configTOTAL_HEAP_SIZE</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="n">__attribute__</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">section</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;.my_heap&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单3.5</em></strong> <em>使用GCC语法声明heap_4将使用的数组，并将该数组放置在名为.my_heap的内存段中</em></p>
+<p><a name="list3.6" title="Listing 3.6 Using IAR syntax to declare the array that will be used by heap\_4, and place the array at the absolute address 0x20000000"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kt">uint8_t</span><span class="w"> </span><span class="n">ucHeap</span><span class="p">[</span><span class="w"> </span><span class="n">configTOTAL_HEAP_SIZE</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="err">@</span><span class="w"> </span><span class="mh">0x20000000</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单3.6</em></strong> <em>使用IAR语法声明heap_4将使用的数组，并将该数组放置在绝对地址0x20000000</em></p>
+<h3 id="332-xportgetfreeheapsize-api">3.3.2 xPortGetFreeHeapSize() API 功能<a class="headerlink" href="#332-xportgetfreeheapsize-api" title="Permanent link">&para;</a></h3>
+<p><code>xPortGetFreeHeapSize()</code> API 函数返回空闲字节数
+调用函数时在堆中。它不提供
+有关堆碎片的信息。</p>
+<p><code>xPortGetFreeHeapSize()</code> 未针对堆_3 实现。</p>
+<p><a name="list3.7" title="Listing 3.7 The xPortGetFreeHeapSize() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kt">size_t</span><span class="w"> </span><span class="nf">xPortGetFreeHeapSize</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.7</em></strong> <em>xPortGetFreeHeapSize() API 函数原型</em></p>
+<p><strong>返回值：</strong></p>
+<ul>
+<li><code>xPortGetFreeHeapSize()</code> 返回堆中未分配的字节数
+   被调用的时间。</li>
+</ul>
+<h3 id="333-xportgetminimumeverfreeheapsize-api">3.3.3 xPortGetMinimumEverFreeHeapSize() API 功能<a class="headerlink" href="#333-xportgetminimumeverfreeheapsize-api" title="Permanent link">&para;</a></h3>
+<p><code>xPortGetMinimumEverFreeHeapSize()</code> API 函数返回最小值
+自创建以来堆中曾经存在的未分配字节数
+FreeRTOS 应用程序开始执行。</p>
+<p><code>xPortGetMinimumEverFreeHeapSize()</code> 返回的值指示如何
+关闭应用程序曾经耗尽堆空间。对于
+例如，如果 <code>xPortGetMinimumEverFreeHeapSize()</code> 返回 200，那么，在某些情况下
+自应用程序开始执行以来的时间，它在 200 字节以内
+堆空间耗尽。</p>
+<p><code>xPortGetMinimumEverFreeHeapSize()</code>也可用于优化堆
+尺寸。例如，如果 <code>xPortGetMinimumEverFreeHeapSize()</code> 返回 2000
+执行您知道堆使用率最高的代码后，
+<code>configTOTAL_HEAP_SIZE</code> 最多可减少 2000 个字节。</p>
+<p><code>xPortGetMinimumEverFreeHeapSize()</code> 仅在堆_4 和堆_5 中实现。</p>
+<p><a name="list3.8" title="Listing 3.8 The xPortGetMinimumEverFreeHeapSize() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kt">size_t</span><span class="w"> </span><span class="nf">xPortGetMinimumEverFreeHeapSize</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.8</em></strong> <em>xPortGetMinimumEverFreeHeapSize() API 功能原型</em></p>
+<p><strong>返回值：</strong></p>
+<ul>
+<li><code>xPortGetMinimumEverFreeHeapSize()</code> 返回未分配的最小数量
+  自 FreeRTOS 应用程序开始执行以来堆中存在的字节数。</li>
+</ul>
+<h3 id="334-vportgetheapstats-api">3.3.4 vPortGetHeapStats() API 功能<a class="headerlink" href="#334-vportgetheapstats-api" title="Permanent link">&para;</a></h3>
+<p>堆_4和堆_5实现<code>vPortGetHeapStats()</code>，从而完成
+<code>HeapStats_t</code> 结构作为函数的唯一参数按引用传递。</p>
+<p>清单 3.9 显示了 <code>vPortGetHeapStats()</code> 函数原型。清单 3.10
+显示 <code>HeapStats_t</code> 结构成员。</p>
+<p><a name="list3.9" title="Listing 3.9 The vPortGetHeapStatus() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vPortGetHeapStats</span><span class="p">(</span><span class="w"> </span><span class="n">HeapStats_t</span><span class="w"> </span><span class="o">*</span><span class="n">xHeapStats</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.9</em></strong> <em>vPortGetHeapStatus() API 功能原型</em></p>
+<p><a name="list3.10" title="Listing 3.10 The HeapStatus\_t() structure"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span>
+<span class="normal"><a href="#__codelineno-9-22">22</a></span>
+<span class="normal"><a href="#__codelineno-9-23">23</a></span>
+<span class="normal"><a href="#__codelineno-9-24">24</a></span>
+<span class="normal"><a href="#__codelineno-9-25">25</a></span>
+<span class="normal"><a href="#__codelineno-9-26">26</a></span>
+<span class="normal"><a href="#__codelineno-9-27">27</a></span>
+<span class="normal"><a href="#__codelineno-9-28">28</a></span>
+<span class="normal"><a href="#__codelineno-9-29">29</a></span>
+<span class="normal"><a href="#__codelineno-9-30">30</a></span>
+<span class="normal"><a href="#__codelineno-9-31">31</a></span>
+<span class="normal"><a href="#__codelineno-9-32">32</a></span>
+<span class="normal"><a href="#__codelineno-9-33">33</a></span>
+<span class="normal"><a href="#__codelineno-9-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cm">/* Prototype of the vPortGetHeapStats() function. */</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vPortGetHeapStats</span><span class="p">(</span><span class="w"> </span><span class="n">HeapStats_t</span><span class="w"> </span><span class="o">*</span><span class="n">xHeapStats</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="cm">/* Definition of the HeapStats_t structure. All sizes specified in bytes. */</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">xHeapStats</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="p">{</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="cm">/* The total heap size currently available - this is the sum of all the</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="cm">       free blocks, not the largest available block. */</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">xAvailableHeapSpaceInBytes</span><span class="p">;</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10"></a>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">    </span><span class="cm">/* The size of the largest free block within the heap at the time</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="cm">       vPortGetHeapStats() is called. */</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">xSizeOfLargestFreeBlockInBytes</span><span class="p">;</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14"></a>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">    </span><span class="cm">/* The size of the smallest free block within the heap at the time</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="cm">       vPortGetHeapStats() is called. */</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">xSizeOfSmallestFreeBlockInBytes</span><span class="p">;</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18"></a>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="w">    </span><span class="cm">/* The number of free memory blocks within the heap at the time</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="cm">       vPortGetHeapStats() is called. */</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">xNumberOfFreeBlocks</span><span class="p">;</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22"></a>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23"></a><span class="w">    </span><span class="cm">/* The minimum amount of total free memory (sum of all free blocks)</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24"></a><span class="cm">       there has been in the heap since the system booted. */</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">xMinimumEverFreeBytesRemaining</span><span class="p">;</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26"></a>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27"></a><span class="w">    </span><span class="cm">/* The number of calls to pvPortMalloc() that have returned a valid</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28"></a><span class="cm">       memory block. */</span>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">xNumberOfSuccessfulAllocations</span><span class="p">;</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30"></a>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="w">    </span><span class="cm">/* The number of calls to vPortFree() that has successfully freed a</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32"></a><span class="cm">       block of memory. */</span>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">xNumberOfSuccessfulFrees</span><span class="p">;</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34"></a><span class="p">}</span><span class="w"> </span><span class="n">HeapStats_t</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.10</em></strong> <em>HeapStatus_t() 结构</em></p>
+<h3 id="335">3.3.5 收集每个任务堆使用统计信息<a class="headerlink" href="#335" title="Permanent link">&para;</a></h3>
+<p>应用程序编写者可以使用以下跟踪宏来收集每个任务
+堆使用统计：
+- <code>traceMALLOC</code>
+- <code>traceFREE</code></p>
+<p>清单 3.11 显示了这些要收集的跟踪宏的实现示例
+每个任务的堆使用统计信息。</p>
+<p><a name="list3.11" title="Listing 3.11 Collecting Per-task Heap Usage Statistics"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">  1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">  2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">  3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">  4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">  5</a></span>
+<span class="normal"><a href="#__codelineno-10-6">  6</a></span>
+<span class="normal"><a href="#__codelineno-10-7">  7</a></span>
+<span class="normal"><a href="#__codelineno-10-8">  8</a></span>
+<span class="normal"><a href="#__codelineno-10-9">  9</a></span>
+<span class="normal"><a href="#__codelineno-10-10"> 10</a></span>
+<span class="normal"><a href="#__codelineno-10-11"> 11</a></span>
+<span class="normal"><a href="#__codelineno-10-12"> 12</a></span>
+<span class="normal"><a href="#__codelineno-10-13"> 13</a></span>
+<span class="normal"><a href="#__codelineno-10-14"> 14</a></span>
+<span class="normal"><a href="#__codelineno-10-15"> 15</a></span>
+<span class="normal"><a href="#__codelineno-10-16"> 16</a></span>
+<span class="normal"><a href="#__codelineno-10-17"> 17</a></span>
+<span class="normal"><a href="#__codelineno-10-18"> 18</a></span>
+<span class="normal"><a href="#__codelineno-10-19"> 19</a></span>
+<span class="normal"><a href="#__codelineno-10-20"> 20</a></span>
+<span class="normal"><a href="#__codelineno-10-21"> 21</a></span>
+<span class="normal"><a href="#__codelineno-10-22"> 22</a></span>
+<span class="normal"><a href="#__codelineno-10-23"> 23</a></span>
+<span class="normal"><a href="#__codelineno-10-24"> 24</a></span>
+<span class="normal"><a href="#__codelineno-10-25"> 25</a></span>
+<span class="normal"><a href="#__codelineno-10-26"> 26</a></span>
+<span class="normal"><a href="#__codelineno-10-27"> 27</a></span>
+<span class="normal"><a href="#__codelineno-10-28"> 28</a></span>
+<span class="normal"><a href="#__codelineno-10-29"> 29</a></span>
+<span class="normal"><a href="#__codelineno-10-30"> 30</a></span>
+<span class="normal"><a href="#__codelineno-10-31"> 31</a></span>
+<span class="normal"><a href="#__codelineno-10-32"> 32</a></span>
+<span class="normal"><a href="#__codelineno-10-33"> 33</a></span>
+<span class="normal"><a href="#__codelineno-10-34"> 34</a></span>
+<span class="normal"><a href="#__codelineno-10-35"> 35</a></span>
+<span class="normal"><a href="#__codelineno-10-36"> 36</a></span>
+<span class="normal"><a href="#__codelineno-10-37"> 37</a></span>
+<span class="normal"><a href="#__codelineno-10-38"> 38</a></span>
+<span class="normal"><a href="#__codelineno-10-39"> 39</a></span>
+<span class="normal"><a href="#__codelineno-10-40"> 40</a></span>
+<span class="normal"><a href="#__codelineno-10-41"> 41</a></span>
+<span class="normal"><a href="#__codelineno-10-42"> 42</a></span>
+<span class="normal"><a href="#__codelineno-10-43"> 43</a></span>
+<span class="normal"><a href="#__codelineno-10-44"> 44</a></span>
+<span class="normal"><a href="#__codelineno-10-45"> 45</a></span>
+<span class="normal"><a href="#__codelineno-10-46"> 46</a></span>
+<span class="normal"><a href="#__codelineno-10-47"> 47</a></span>
+<span class="normal"><a href="#__codelineno-10-48"> 48</a></span>
+<span class="normal"><a href="#__codelineno-10-49"> 49</a></span>
+<span class="normal"><a href="#__codelineno-10-50"> 50</a></span>
+<span class="normal"><a href="#__codelineno-10-51"> 51</a></span>
+<span class="normal"><a href="#__codelineno-10-52"> 52</a></span>
+<span class="normal"><a href="#__codelineno-10-53"> 53</a></span>
+<span class="normal"><a href="#__codelineno-10-54"> 54</a></span>
+<span class="normal"><a href="#__codelineno-10-55"> 55</a></span>
+<span class="normal"><a href="#__codelineno-10-56"> 56</a></span>
+<span class="normal"><a href="#__codelineno-10-57"> 57</a></span>
+<span class="normal"><a href="#__codelineno-10-58"> 58</a></span>
+<span class="normal"><a href="#__codelineno-10-59"> 59</a></span>
+<span class="normal"><a href="#__codelineno-10-60"> 60</a></span>
+<span class="normal"><a href="#__codelineno-10-61"> 61</a></span>
+<span class="normal"><a href="#__codelineno-10-62"> 62</a></span>
+<span class="normal"><a href="#__codelineno-10-63"> 63</a></span>
+<span class="normal"><a href="#__codelineno-10-64"> 64</a></span>
+<span class="normal"><a href="#__codelineno-10-65"> 65</a></span>
+<span class="normal"><a href="#__codelineno-10-66"> 66</a></span>
+<span class="normal"><a href="#__codelineno-10-67"> 67</a></span>
+<span class="normal"><a href="#__codelineno-10-68"> 68</a></span>
+<span class="normal"><a href="#__codelineno-10-69"> 69</a></span>
+<span class="normal"><a href="#__codelineno-10-70"> 70</a></span>
+<span class="normal"><a href="#__codelineno-10-71"> 71</a></span>
+<span class="normal"><a href="#__codelineno-10-72"> 72</a></span>
+<span class="normal"><a href="#__codelineno-10-73"> 73</a></span>
+<span class="normal"><a href="#__codelineno-10-74"> 74</a></span>
+<span class="normal"><a href="#__codelineno-10-75"> 75</a></span>
+<span class="normal"><a href="#__codelineno-10-76"> 76</a></span>
+<span class="normal"><a href="#__codelineno-10-77"> 77</a></span>
+<span class="normal"><a href="#__codelineno-10-78"> 78</a></span>
+<span class="normal"><a href="#__codelineno-10-79"> 79</a></span>
+<span class="normal"><a href="#__codelineno-10-80"> 80</a></span>
+<span class="normal"><a href="#__codelineno-10-81"> 81</a></span>
+<span class="normal"><a href="#__codelineno-10-82"> 82</a></span>
+<span class="normal"><a href="#__codelineno-10-83"> 83</a></span>
+<span class="normal"><a href="#__codelineno-10-84"> 84</a></span>
+<span class="normal"><a href="#__codelineno-10-85"> 85</a></span>
+<span class="normal"><a href="#__codelineno-10-86"> 86</a></span>
+<span class="normal"><a href="#__codelineno-10-87"> 87</a></span>
+<span class="normal"><a href="#__codelineno-10-88"> 88</a></span>
+<span class="normal"><a href="#__codelineno-10-89"> 89</a></span>
+<span class="normal"><a href="#__codelineno-10-90"> 90</a></span>
+<span class="normal"><a href="#__codelineno-10-91"> 91</a></span>
+<span class="normal"><a href="#__codelineno-10-92"> 92</a></span>
+<span class="normal"><a href="#__codelineno-10-93"> 93</a></span>
+<span class="normal"><a href="#__codelineno-10-94"> 94</a></span>
+<span class="normal"><a href="#__codelineno-10-95"> 95</a></span>
+<span class="normal"><a href="#__codelineno-10-96"> 96</a></span>
+<span class="normal"><a href="#__codelineno-10-97"> 97</a></span>
+<span class="normal"><a href="#__codelineno-10-98"> 98</a></span>
+<span class="normal"><a href="#__codelineno-10-99"> 99</a></span>
+<span class="normal"><a href="#__codelineno-10-100">100</a></span>
+<span class="normal"><a href="#__codelineno-10-101">101</a></span>
+<span class="normal"><a href="#__codelineno-10-102">102</a></span>
+<span class="normal"><a href="#__codelineno-10-103">103</a></span>
+<span class="normal"><a href="#__codelineno-10-104">104</a></span>
+<span class="normal"><a href="#__codelineno-10-105">105</a></span>
+<span class="normal"><a href="#__codelineno-10-106">106</a></span>
+<span class="normal"><a href="#__codelineno-10-107">107</a></span>
+<span class="normal"><a href="#__codelineno-10-108">108</a></span>
+<span class="normal"><a href="#__codelineno-10-109">109</a></span>
+<span class="normal"><a href="#__codelineno-10-110">110</a></span>
+<span class="normal"><a href="#__codelineno-10-111">111</a></span>
+<span class="normal"><a href="#__codelineno-10-112">112</a></span>
+<span class="normal"><a href="#__codelineno-10-113">113</a></span>
+<span class="normal"><a href="#__codelineno-10-114">114</a></span>
+<span class="normal"><a href="#__codelineno-10-115">115</a></span>
+<span class="normal"><a href="#__codelineno-10-116">116</a></span>
+<span class="normal"><a href="#__codelineno-10-117">117</a></span>
+<span class="normal"><a href="#__codelineno-10-118">118</a></span>
+<span class="normal"><a href="#__codelineno-10-119">119</a></span>
+<span class="normal"><a href="#__codelineno-10-120">120</a></span>
+<span class="normal"><a href="#__codelineno-10-121">121</a></span>
+<span class="normal"><a href="#__codelineno-10-122">122</a></span>
+<span class="normal"><a href="#__codelineno-10-123">123</a></span>
+<span class="normal"><a href="#__codelineno-10-124">124</a></span>
+<span class="normal"><a href="#__codelineno-10-125">125</a></span>
+<span class="normal"><a href="#__codelineno-10-126">126</a></span>
+<span class="normal"><a href="#__codelineno-10-127">127</a></span>
+<span class="normal"><a href="#__codelineno-10-128">128</a></span>
+<span class="normal"><a href="#__codelineno-10-129">129</a></span>
+<span class="normal"><a href="#__codelineno-10-130">130</a></span>
+<span class="normal"><a href="#__codelineno-10-131">131</a></span>
+<span class="normal"><a href="#__codelineno-10-132">132</a></span>
+<span class="normal"><a href="#__codelineno-10-133">133</a></span>
+<span class="normal"><a href="#__codelineno-10-134">134</a></span>
+<span class="normal"><a href="#__codelineno-10-135">135</a></span>
+<span class="normal"><a href="#__codelineno-10-136">136</a></span>
+<span class="normal"><a href="#__codelineno-10-137">137</a></span>
+<span class="normal"><a href="#__codelineno-10-138">138</a></span>
+<span class="normal"><a href="#__codelineno-10-139">139</a></span>
+<span class="normal"><a href="#__codelineno-10-140">140</a></span>
+<span class="normal"><a href="#__codelineno-10-141">141</a></span>
+<span class="normal"><a href="#__codelineno-10-142">142</a></span>
+<span class="normal"><a href="#__codelineno-10-143">143</a></span>
+<span class="normal"><a href="#__codelineno-10-144">144</a></span>
+<span class="normal"><a href="#__codelineno-10-145">145</a></span>
+<span class="normal"><a href="#__codelineno-10-146">146</a></span>
+<span class="normal"><a href="#__codelineno-10-147">147</a></span>
+<span class="normal"><a href="#__codelineno-10-148">148</a></span>
+<span class="normal"><a href="#__codelineno-10-149">149</a></span>
+<span class="normal"><a href="#__codelineno-10-150">150</a></span>
+<span class="normal"><a href="#__codelineno-10-151">151</a></span>
+<span class="normal"><a href="#__codelineno-10-152">152</a></span>
+<span class="normal"><a href="#__codelineno-10-153">153</a></span>
+<span class="normal"><a href="#__codelineno-10-154">154</a></span>
+<span class="normal"><a href="#__codelineno-10-155">155</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">#define mainNUM_ALLOCATION_ENTRIES          512</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="cp">#define mainNUM_PER_TASK_ALLOCATION_ENTRIES 32</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="cm">/*-----------------------------------------------------------*/</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5"></a>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="cm">/*</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="cm"> * +-----------------+--------------+----------------+-------------------+</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="cm"> * | Allocating Task | Entry in use | Allocated Size | Allocated Pointer |</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="cm"> * +-----------------+--------------+----------------+-------------------+</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="cm"> * |                 |              |                |                   |</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="cm"> * +-----------------+--------------+----------------+-------------------+</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="cm"> * |                 |              |                |                   |</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="cm"> * +-----------------+--------------+----------------+-------------------+</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="cm"> */</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">AllocationEntry</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="p">{</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="w">    </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xInUse</span><span class="p">;</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="w">    </span><span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">xAllocatingTaskHandle</span><span class="p">;</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">uxAllocatedSize</span><span class="p">;</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pvAllocatedPointer</span><span class="p">;</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="p">}</span><span class="w"> </span><span class="n">AllocationEntry_t</span><span class="p">;</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22"></a>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="n">AllocationEntry_t</span><span class="w"> </span><span class="n">xAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">mainNUM_ALLOCATION_ENTRIES</span><span class="w"> </span><span class="p">];</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24"></a>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="cm">/*</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="cm"> * +------+-----------------------+----------------------+</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="cm"> * | Task | Memory Currently Held | Max Memory Ever Held |</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="cm"> * +------+-----------------------+----------------------+</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="cm"> * |      |                       |                      |</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="cm"> * +------+-----------------------+----------------------+</span>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="cm"> * |      |                       |                      |</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32"></a><span class="cm"> * +------+-----------------------+----------------------+</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33"></a><span class="cm"> */</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">PerTaskAllocationEntry</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35"></a><span class="p">{</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36"></a><span class="w">    </span><span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">xTask</span><span class="p">;</span>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">uxMemoryCurrentlyHeld</span><span class="p">;</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">uxMaxMemoryEverHeld</span><span class="p">;</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39"></a><span class="p">}</span><span class="w"> </span><span class="n">PerTaskAllocationEntry_t</span><span class="p">;</span>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40"></a>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41"></a><span class="n">PerTaskAllocationEntry_t</span><span class="w"> </span><span class="n">xPerTaskAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">mainNUM_PER_TASK_ALLOCATION_ENTRIES</span><span class="w"> </span><span class="p">];</span>
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42"></a>
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43"></a><span class="cm">/*-----------------------------------------------------------*/</span>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44"></a>
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45"></a><span class="kt">void</span><span class="w"> </span><span class="nf">TracepvPortMalloc</span><span class="p">(</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">uxAllocatedSize</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pv</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46"></a><span class="p">{</span>
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48"></a><span class="w">    </span><span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">xAllocatingTaskHandle</span><span class="p">;</span>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49"></a><span class="w">    </span><span class="n">AllocationEntry_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pxAllocationEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50"></a><span class="w">    </span><span class="n">PerTaskAllocationEntry_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pxPerTaskAllocationEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51"></a>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52"></a><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xTaskGetSchedulerState</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">taskSCHEDULER_NOT_STARTED</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-53"><a id="__codelineno-10-53" name="__codelineno-10-53"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-10-54"><a id="__codelineno-10-54" name="__codelineno-10-54"></a><span class="w">        </span><span class="n">xAllocatingTaskHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTaskGetCurrentTaskHandle</span><span class="p">();</span>
+</span><span id="__span-10-55"><a id="__codelineno-10-55" name="__codelineno-10-55"></a>
+</span><span id="__span-10-56"><a id="__codelineno-10-56" name="__codelineno-10-56"></a><span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mainNUM_ALLOCATION_ENTRIES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-57"><a id="__codelineno-10-57" name="__codelineno-10-57"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-10-58"><a id="__codelineno-10-58" name="__codelineno-10-58"></a><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">].</span><span class="n">xInUse</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdFALSE</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-59"><a id="__codelineno-10-59" name="__codelineno-10-59"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-10-60"><a id="__codelineno-10-60" name="__codelineno-10-60"></a><span class="w">                </span><span class="n">pxAllocationEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="w"> </span><span class="n">xAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-61"><a id="__codelineno-10-61" name="__codelineno-10-61"></a><span class="w">                </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-10-62"><a id="__codelineno-10-62" name="__codelineno-10-62"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-10-63"><a id="__codelineno-10-63" name="__codelineno-10-63"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-64"><a id="__codelineno-10-64" name="__codelineno-10-64"></a>
+</span><span id="__span-10-65"><a id="__codelineno-10-65" name="__codelineno-10-65"></a><span class="w">        </span><span class="cm">/* Do we already have an entry in the per task table? */</span>
+</span><span id="__span-10-66"><a id="__codelineno-10-66" name="__codelineno-10-66"></a><span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mainNUM_PER_TASK_ALLOCATION_ENTRIES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-67"><a id="__codelineno-10-67" name="__codelineno-10-67"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-10-68"><a id="__codelineno-10-68" name="__codelineno-10-68"></a><span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xPerTaskAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">].</span><span class="n">xTask</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">xAllocatingTaskHandle</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-69"><a id="__codelineno-10-69" name="__codelineno-10-69"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-10-70"><a id="__codelineno-10-70" name="__codelineno-10-70"></a><span class="w">                </span><span class="n">pxPerTaskAllocationEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="w"> </span><span class="n">xPerTaskAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-71"><a id="__codelineno-10-71" name="__codelineno-10-71"></a><span class="w">                </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-10-72"><a id="__codelineno-10-72" name="__codelineno-10-72"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-10-73"><a id="__codelineno-10-73" name="__codelineno-10-73"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-74"><a id="__codelineno-10-74" name="__codelineno-10-74"></a>
+</span><span id="__span-10-75"><a id="__codelineno-10-75" name="__codelineno-10-75"></a><span class="w">        </span><span class="cm">/* We do not have an entry in the per task table. Find an empty slot. */</span>
+</span><span id="__span-10-76"><a id="__codelineno-10-76" name="__codelineno-10-76"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">pxPerTaskAllocationEntry</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-77"><a id="__codelineno-10-77" name="__codelineno-10-77"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-10-78"><a id="__codelineno-10-78" name="__codelineno-10-78"></a><span class="w">            </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mainNUM_PER_TASK_ALLOCATION_ENTRIES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-79"><a id="__codelineno-10-79" name="__codelineno-10-79"></a><span class="w">            </span><span class="p">{</span>
+</span><span id="__span-10-80"><a id="__codelineno-10-80" name="__codelineno-10-80"></a><span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xPerTaskAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">].</span><span class="n">xTask</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-81"><a id="__codelineno-10-81" name="__codelineno-10-81"></a><span class="w">                </span><span class="p">{</span>
+</span><span id="__span-10-82"><a id="__codelineno-10-82" name="__codelineno-10-82"></a><span class="w">                    </span><span class="n">pxPerTaskAllocationEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="w"> </span><span class="n">xPerTaskAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-83"><a id="__codelineno-10-83" name="__codelineno-10-83"></a><span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-10-84"><a id="__codelineno-10-84" name="__codelineno-10-84"></a><span class="w">                </span><span class="p">}</span>
+</span><span id="__span-10-85"><a id="__codelineno-10-85" name="__codelineno-10-85"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-10-86"><a id="__codelineno-10-86" name="__codelineno-10-86"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-87"><a id="__codelineno-10-87" name="__codelineno-10-87"></a>
+</span><span id="__span-10-88"><a id="__codelineno-10-88" name="__codelineno-10-88"></a><span class="w">        </span><span class="cm">/* Ensure that we have space in both the tables. */</span>
+</span><span id="__span-10-89"><a id="__codelineno-10-89" name="__codelineno-10-89"></a><span class="w">        </span><span class="n">configASSERT</span><span class="p">(</span><span class="w"> </span><span class="n">pxAllocationEntry</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-90"><a id="__codelineno-10-90" name="__codelineno-10-90"></a><span class="w">        </span><span class="n">configASSERT</span><span class="p">(</span><span class="w"> </span><span class="n">pxPerTaskAllocationEntry</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-91"><a id="__codelineno-10-91" name="__codelineno-10-91"></a>
+</span><span id="__span-10-92"><a id="__codelineno-10-92" name="__codelineno-10-92"></a><span class="w">        </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">xAllocatingTaskHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xAllocatingTaskHandle</span><span class="p">;</span>
+</span><span id="__span-10-93"><a id="__codelineno-10-93" name="__codelineno-10-93"></a><span class="w">        </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">xInUse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">;</span>
+</span><span id="__span-10-94"><a id="__codelineno-10-94" name="__codelineno-10-94"></a><span class="w">        </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">uxAllocatedSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uxAllocatedSize</span><span class="p">;</span>
+</span><span id="__span-10-95"><a id="__codelineno-10-95" name="__codelineno-10-95"></a><span class="w">        </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">pvAllocatedPointer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pv</span><span class="p">;</span>
+</span><span id="__span-10-96"><a id="__codelineno-10-96" name="__codelineno-10-96"></a>
+</span><span id="__span-10-97"><a id="__codelineno-10-97" name="__codelineno-10-97"></a><span class="w">        </span><span class="n">pxPerTaskAllocationEntry</span><span class="o">-&gt;</span><span class="n">xTask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xAllocatingTaskHandle</span><span class="p">;</span>
+</span><span id="__span-10-98"><a id="__codelineno-10-98" name="__codelineno-10-98"></a><span class="w">        </span><span class="n">pxPerTaskAllocationEntry</span><span class="o">-&gt;</span><span class="n">uxMemoryCurrentlyHeld</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">uxAllocatedSize</span><span class="p">;</span>
+</span><span id="__span-10-99"><a id="__codelineno-10-99" name="__codelineno-10-99"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">pxPerTaskAllocationEntry</span><span class="o">-&gt;</span><span class="n">uxMaxMemoryEverHeld</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">pxPerTaskAllocationEntry</span><span class="o">-&gt;</span><span class="n">uxMemoryCurrentlyHeld</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-100"><a id="__codelineno-10-100" name="__codelineno-10-100"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-10-101"><a id="__codelineno-10-101" name="__codelineno-10-101"></a><span class="w">            </span><span class="n">pxPerTaskAllocationEntry</span><span class="o">-&gt;</span><span class="n">uxMaxMemoryEverHeld</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pxPerTaskAllocationEntry</span><span class="o">-&gt;</span><span class="n">uxMemoryCurrentlyHeld</span><span class="p">;</span>
+</span><span id="__span-10-102"><a id="__codelineno-10-102" name="__codelineno-10-102"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-103"><a id="__codelineno-10-103" name="__codelineno-10-103"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-104"><a id="__codelineno-10-104" name="__codelineno-10-104"></a><span class="p">}</span>
+</span><span id="__span-10-105"><a id="__codelineno-10-105" name="__codelineno-10-105"></a><span class="cm">/*-----------------------------------------------------------*/</span>
+</span><span id="__span-10-106"><a id="__codelineno-10-106" name="__codelineno-10-106"></a>
+</span><span id="__span-10-107"><a id="__codelineno-10-107" name="__codelineno-10-107"></a><span class="kt">void</span><span class="w"> </span><span class="nf">TracevPortFree</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pv</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-108"><a id="__codelineno-10-108" name="__codelineno-10-108"></a><span class="p">{</span>
+</span><span id="__span-10-109"><a id="__codelineno-10-109" name="__codelineno-10-109"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+</span><span id="__span-10-110"><a id="__codelineno-10-110" name="__codelineno-10-110"></a><span class="w">    </span><span class="n">AllocationEntry_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pxAllocationEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</span><span id="__span-10-111"><a id="__codelineno-10-111" name="__codelineno-10-111"></a><span class="w">    </span><span class="n">PerTaskAllocationEntry_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pxPerTaskAllocationEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</span><span id="__span-10-112"><a id="__codelineno-10-112" name="__codelineno-10-112"></a>
+</span><span id="__span-10-113"><a id="__codelineno-10-113" name="__codelineno-10-113"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mainNUM_ALLOCATION_ENTRIES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-114"><a id="__codelineno-10-114" name="__codelineno-10-114"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-10-115"><a id="__codelineno-10-115" name="__codelineno-10-115"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">xAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">].</span><span class="n">xInUse</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span>
+</span><span id="__span-10-116"><a id="__codelineno-10-116" name="__codelineno-10-116"></a><span class="w">            </span><span class="p">(</span><span class="w"> </span><span class="n">xAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">].</span><span class="n">pvAllocatedPointer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pv</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-117"><a id="__codelineno-10-117" name="__codelineno-10-117"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-10-118"><a id="__codelineno-10-118" name="__codelineno-10-118"></a><span class="w">            </span><span class="n">pxAllocationEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="w"> </span><span class="n">xAllocationEntries</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-119"><a id="__codelineno-10-119" name="__codelineno-10-119"></a><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-10-120"><a id="__codelineno-10-120" name="__codelineno-10-120"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-121"><a id="__codelineno-10-121" name="__codelineno-10-121"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-122"><a id="__codelineno-10-122" name="__codelineno-10-122"></a>
+</span><span id="__span-10-123"><a id="__codelineno-10-123" name="__codelineno-10-123"></a><span class="w">    </span><span class="cm">/* Attempt to free a block that was never allocated. */</span>
+</span><span id="__span-10-124"><a id="__codelineno-10-124" name="__codelineno-10-124"></a><span class="w">    </span><span class="n">configASSERT</span><span class="p">(</span><span class="w"> </span><span class="n">pxAllocationEntry</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-125"><a id="__codelineno-10-125" name="__codelineno-10-125"></a>
+</span><span id="__span-10-126"><a id="__codelineno-10-126" name="__codelineno-10-126"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mainNUM_PER_TASK_ALLOCATION_ENTRIES</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-127"><a id="__codelineno-10-127" name="__codelineno-10-127"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-10-128"><a id="__codelineno-10-128" name="__codelineno-10-128"></a><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xPerTaskAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">].</span><span class="n">xTask</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">xAllocatingTaskHandle</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-10-129"><a id="__codelineno-10-129" name="__codelineno-10-129"></a><span class="w">        </span><span class="p">{</span>
+</span><span id="__span-10-130"><a id="__codelineno-10-130" name="__codelineno-10-130"></a><span class="w">            </span><span class="n">pxPerTaskAllocationEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="w"> </span><span class="n">xPerTaskAllocationEntries</span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-131"><a id="__codelineno-10-131" name="__codelineno-10-131"></a><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-10-132"><a id="__codelineno-10-132" name="__codelineno-10-132"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-10-133"><a id="__codelineno-10-133" name="__codelineno-10-133"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-10-134"><a id="__codelineno-10-134" name="__codelineno-10-134"></a>
+</span><span id="__span-10-135"><a id="__codelineno-10-135" name="__codelineno-10-135"></a><span class="w">    </span><span class="cm">/* An entry must exist in the per task table. */</span>
+</span><span id="__span-10-136"><a id="__codelineno-10-136" name="__codelineno-10-136"></a><span class="w">    </span><span class="n">configASSERT</span><span class="p">(</span><span class="w"> </span><span class="n">pxPerTaskAllocationEntry</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-137"><a id="__codelineno-10-137" name="__codelineno-10-137"></a>
+</span><span id="__span-10-138"><a id="__codelineno-10-138" name="__codelineno-10-138"></a><span class="w">    </span><span class="n">pxPerTaskAllocationEntry</span><span class="o">-&gt;</span><span class="n">uxMemoryCurrentlyHeld</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">uxAllocatedSize</span><span class="p">;</span>
+</span><span id="__span-10-139"><a id="__codelineno-10-139" name="__codelineno-10-139"></a>
+</span><span id="__span-10-140"><a id="__codelineno-10-140" name="__codelineno-10-140"></a><span class="w">    </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">xInUse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdFALSE</span><span class="p">;</span>
+</span><span id="__span-10-141"><a id="__codelineno-10-141" name="__codelineno-10-141"></a><span class="w">    </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">xAllocatingTaskHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</span><span id="__span-10-142"><a id="__codelineno-10-142" name="__codelineno-10-142"></a><span class="w">    </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">uxAllocatedSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-10-143"><a id="__codelineno-10-143" name="__codelineno-10-143"></a><span class="w">    </span><span class="n">pxAllocationEntry</span><span class="o">-&gt;</span><span class="n">pvAllocatedPointer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</span><span id="__span-10-144"><a id="__codelineno-10-144" name="__codelineno-10-144"></a><span class="p">}</span>
+</span><span id="__span-10-145"><a id="__codelineno-10-145" name="__codelineno-10-145"></a><span class="cm">/*-----------------------------------------------------------*/</span>
+</span><span id="__span-10-146"><a id="__codelineno-10-146" name="__codelineno-10-146"></a>
+</span><span id="__span-10-147"><a id="__codelineno-10-147" name="__codelineno-10-147"></a><span class="cm">/* The following goes in FreeRTOSConfig.h: */</span>
+</span><span id="__span-10-148"><a id="__codelineno-10-148" name="__codelineno-10-148"></a><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">TracepvPortMalloc</span><span class="p">(</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">uxAllocatedSize</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pv</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-149"><a id="__codelineno-10-149" name="__codelineno-10-149"></a><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">TracevPortFree</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pv</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-150"><a id="__codelineno-10-150" name="__codelineno-10-150"></a>
+</span><span id="__span-10-151"><a id="__codelineno-10-151" name="__codelineno-10-151"></a><span class="cp">#define traceMALLOC( pvReturn, xAllocatedBlockSize ) \</span>
+</span><span id="__span-10-152"><a id="__codelineno-10-152" name="__codelineno-10-152"></a><span class="cp">TracepvPortMalloc( xAllocatedBlockSize, pvReturn )</span>
+</span><span id="__span-10-153"><a id="__codelineno-10-153" name="__codelineno-10-153"></a>
+</span><span id="__span-10-154"><a id="__codelineno-10-154" name="__codelineno-10-154"></a><span class="cp">#define traceFREE( pv, xAllocatedBlockSize ) \</span>
+</span><span id="__span-10-155"><a id="__codelineno-10-155" name="__codelineno-10-155"></a><span class="cp">TracevPortFree( pv )</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.11</em></strong> <em>收集每个任务堆使用统计信息</em></p>
+<h3 id="336-malloc">3.3.6 Malloc 失败的钩子函数<a class="headerlink" href="#336-malloc" title="Permanent link">&para;</a></h3>
+<p>与标准库 <code>malloc()</code> 函数一样，<code>pvPortMalloc()</code> 返回 NULL
+如果无法分配请求的 RAM 金额。 malloc 失败 hook
+(or callback) 是应用程序提供的函数，如果
+<code>pvPortMalloc()</code> 返回 NULL。您必须将 <code>configUSE_MALLOC_FAILED_HOOK</code> 设置为
+FreeRTOSConfig.h 中的 1 以便发生回调。如果 malloc 失败
+在使用动态内存的 FreeRTOS API 函数内调用钩子
+分配创建一个内核对象，该对象没有创建。</p>
+<p>如果 FreeRTOSConfig.h 中的 <code>configUSE_MALLOC_FAILED_HOOK</code> 设置为 1，则
+应用程序必须提供一个 malloc 失败的钩子函数，其名称为
+原型如清单 3.12 所示。该应用程序可以实现
+以适合应用程序的任何方式运行。许多
+提供的 FreeRTOS 演示应用程序将分配失败视为
+致命错误，但这不是生产系统的最佳实践，
+它应该从分配失败中正常恢复。</p>
+<p><a name="list3.12" title="Listing 3.12 The malloc failed hook function name and prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vApplicationMallocFailedHook</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.12</em></strong> <em>malloc 失败的钩子函数名称和原型</em></p>
+<h3 id="337">3.3.7 将任务堆栈放入快速内存中<a class="headerlink" href="#337" title="Permanent link">&para;</a></h3>
+<p>由于堆栈的写入和读取速率很高，因此它们应该
+放置在快速内存中，但这可能不是您想要堆的位置
+居住。 FreeRTOS 使用 <code>pvPortMallocStack()</code> 和 <code>vPortFreeStack()</code>
+用于选择启用在 FreeRTOS API 内分配的堆栈的宏
+代码有自己的内存分配器。如果你想让堆栈来
+从 <code>pvPortMalloc()</code> 管理的堆中然后离开 <code>pvPortMallocStack()</code>
+和 <code>vPortFreeStack()</code> 未定义，因为它们默认调用
+分别为 <code>pvPortMalloc()</code> 和 <code>vPortFree()</code>。否则，定义
+宏来调用应用程序提供的函数，如清单 3.13 所示。</p>
+<p><a name="list3.13" title="Listing 3.13 Mapping the pvPortMallocStack() and vPortFreeStack() macros to an application defined memory allocator"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cm">/* Functions provided by the application writer than allocate and free</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="cm">   memory from a fast area of RAM. */</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">pvMallocFastMemory</span><span class="p">(</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">xWantedSize</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vPortFreeFastMemory</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvBlockToFree</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="cm">/* Add the following to FreeRTOSConfig.h to map the pvPortMallocStack()</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="cm">   and vPortFreeStack() macros to the functions that use fast memory. */</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="cp">#define pvPortMallocStack( x ) pvMallocFastMemory( x )</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="cp">#define vPortFreeStack( x ) vPortFreeFastMemory( x )</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.13</em></strong> <em>将 pvPortMallocStack() 和 vPortFreeStack() 宏映射到应用程序定义的内存分配器</em></p>
+<h2 id="34">3.4 使用静态内存分配<a class="headerlink" href="#34" title="Permanent link">&para;</a></h2>
+<p>3.1.4 节列出了动态内存分配带来的一些缺点。为了避免这些问题，静态
+内存分配允许开发人员显式创建应用程序所需的每个内存块。这有
+以下优点：</p>
+<ul>
+<li>所有需要的内存在编译时都是已知的。</li>
+<li>所有记忆都是确定性的。</li>
+</ul>
+<p>还有其他优点，但这些优点也带来了一些并发症。主要的并发症是增加了一个
+很少有额外的用户函数来管理一些内核内存，第二个复杂之处是需要确保所有静态
+内存被声明在合适的范围内。</p>
+<h3 id="341">3.4.1 启用静态内存分配<a class="headerlink" href="#341" title="Permanent link">&para;</a></h3>
+<p>通过将 FreeRTOSConfig.h 中的 <code>configSUPPORT_STATIC_ALLOCATION</code> 设置为 1 来启用静态内存分配。  当这个
+配置启用后，内核启用所有<code>static</code>版本的内核功能。这些都是：</p>
+<ul>
+<li><code>xTaskCreateStatic</code></li>
+<li><code>xEventGroupCreateStatic</code></li>
+<li><code>xEventGroupGetStaticBuffer</code></li>
+<li><code>xQueueGenericCreateStatic</code></li>
+<li><code>xQueueGenericGetStaticBuffers</code></li>
+<li><code>xQueueCreateMutexStatic</code></li>
+<li><em>如果 <code>configUSE_MUTEXES</code> 为 1</em></li>
+<li><code>xQueueCreateCountingSemaphoreStatic</code></li>
+<li><em>如果 <code>configUSE_COUNTING_SEMAPHORES</code> 为 1</em></li>
+<li><code>xStreamBufferGenericCreateStatic</code></li>
+<li><code>xStreamBufferGetStaticBuffers</code></li>
+<li><code>xTimerCreateStatic</code></li>
+<li><em>如果 <code>configUSE_TIMERS</code> 为 1</em></li>
+<li><code>xTimerGetStaticBuffer</code></li>
+<li><em>如果 <code>configUSE_TIMERS</code> 为 1</em></li>
+</ul>
+<p>这些功能将在本书的相应章节中进行解释。</p>
+<h3 id="342">3.4.2 静态内部内核内存<a class="headerlink" href="#342" title="Permanent link">&para;</a></h3>
+<p>当启用静态内存分配器时，空闲任务和定时器 task (if enabled) 将使用提供的静态内存
+通过用户功能。这些用户功能是：</p>
+<ul>
+<li><code>vApplicationGetTimerTaskMemory</code></li>
+<li><em>如果 <code>configUSE_TIMERS</code> 为 1</em></li>
+<li><code>vApplicationGetIdleTaskMemory</code></li>
+</ul>
+<h4 id="3421-vapplicationgettimertaskmemory">3.4.2.1 vApplicationGetTimerTaskMemory<a class="headerlink" href="#3421-vapplicationgettimertaskmemory" title="Permanent link">&para;</a></h4>
+<p>如果 <code>configSUPPORT_STATIC_ALLOCATION</code> 和 <code>configUSE_TIMERS</code> 都启用，内核将调用 <code>vApplicationGetTimerTaskMemory()</code>
+允许应用程序为定时器任务 TCB 和定时器任务堆栈创建并返回内存缓冲区。该函数将
+还返回定时器任务堆栈的大小。定时器任务内存函数的建议实现如清单 3.14 所示。</p>
+<p><a name="list3.14" title="Listing 3.14 Typical implementation of vApplicationGetTimerTaskMemory"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-13-10">10</a></span>
+<span class="normal"><a href="#__codelineno-13-11">11</a></span>
+<span class="normal"><a href="#__codelineno-13-12">12</a></span>
+<span class="normal"><a href="#__codelineno-13-13">13</a></span>
+<span class="normal"><a href="#__codelineno-13-14">14</a></span>
+<span class="normal"><a href="#__codelineno-13-15">15</a></span>
+<span class="normal"><a href="#__codelineno-13-16">16</a></span>
+<span class="normal"><a href="#__codelineno-13-17">17</a></span>
+<span class="normal"><a href="#__codelineno-13-18">18</a></span>
+<span class="normal"><a href="#__codelineno-13-19">19</a></span>
+<span class="normal"><a href="#__codelineno-13-20">20</a></span>
+<span class="normal"><a href="#__codelineno-13-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vApplicationGetTimerTaskMemory</span><span class="p">(</span><span class="w"> </span><span class="n">StaticTask_t</span><span class="w"> </span><span class="o">**</span><span class="n">ppxTimerTaskTCBBuffer</span><span class="p">,</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">                                     </span><span class="n">StackType_t</span><span class="w"> </span><span class="o">**</span><span class="n">ppxTimerTaskStackBuffer</span><span class="p">,</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">                                     </span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">pulTimerTaskStackSize</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="p">{</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="w">  </span><span class="cm">/* If the buffers to be provided to the Timer task are declared inside this</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="cm">  function then they must be declared static - otherwise they will be allocated on</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="cm">  the stack and hence would not exists after this function exits. */</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">StaticTask_t</span><span class="w"> </span><span class="n">xTimerTaskTCB</span><span class="p">;</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">StackType_t</span><span class="w"> </span><span class="n">uxTimerTaskStack</span><span class="p">[</span><span class="w"> </span><span class="n">configMINIMAL_STACK_SIZE</span><span class="w"> </span><span class="p">];</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10"></a>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">  </span><span class="cm">/* Pass out a pointer to the StaticTask_t structure in which the Timer task&#39;s</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="cm">  state will be stored. */</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">  </span><span class="o">*</span><span class="n">ppxTimerTaskTCBBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">xTimerTaskTCB</span><span class="p">;</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14"></a>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">  </span><span class="cm">/* Pass out the array that will be used as the Timer task&#39;s stack. */</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">  </span><span class="o">*</span><span class="n">ppxTimerTaskStackBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uxTimerTaskStack</span><span class="p">;</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17"></a>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">  </span><span class="cm">/* Pass out the stack size of the array pointed to by *ppxTimerTaskStackBuffer.</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="cm">  Note the stack size is a count of StackType_t */</span>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="w">  </span><span class="o">*</span><span class="n">pulTimerTaskStackSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">uxTimerTaskStack</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">uxTimerTaskStack</span><span class="p">);</span>
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.14</em></strong> <em>vApplicationGetTimerTaskMemory 的典型实现</em></p>
+<p>由于包括 SMP 在内的任何系统中都只有一个定时器任务，因此是定时器任务内存问题的有效解决方案
+就是在<code>vApplicationGetTimeTaskMemory()</code>函数中分配静态缓冲区并将缓冲区指针返回给内核。</p>
+<h4 id="3422-vapplicationgetidletaskmemory">3.4.2.2 vApplicationGetIdleTaskMemory<a class="headerlink" href="#3422-vapplicationgetidletaskmemory" title="Permanent link">&para;</a></h4>
+<p>当核心用完计划的工作时，将运行空闲任务。空闲任务执行一些内务处理，也可以触发
+用户的 <code>vTaskIdleHook()</code>（如果已启用）。  在对称多处理 system (SMP) 中，还有非内务处理
+其余每个核心的空闲任务，但这些任务在内部静态分配给 <code>configMINIMAL_STACK_SIZE</code> 字节。</p>
+<p>调用 <code>vApplicationGetIdleTaskMemory</code> 函数以允许应用程序为“主”创建所需的缓冲区
+闲置任务。清单 3.15 显示了使用静态本地的 <code>vApplicationIdleTaskMemory()</code> 函数的典型实现
+变量来创建所需的缓冲区。</p>
+<p><a name="list3.15" title="Listing 3.15 Typical implementation of vApplicationGetIdleTaskMemory"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vApplicationGetIdleTaskMemory</span><span class="p">(</span><span class="w"> </span><span class="n">StaticTask_t</span><span class="w"> </span><span class="o">**</span><span class="n">ppxIdleTaskTCBBuffer</span><span class="p">,</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">                                    </span><span class="n">StackType_t</span><span class="w"> </span><span class="o">**</span><span class="n">ppxIdleTaskStackBuffer</span><span class="p">,</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">                                    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">pulIdleTaskStackSize</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="p">{</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">StaticTask_t</span><span class="w"> </span><span class="n">xIdleTaskTCB</span><span class="p">;</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">StackType_t</span><span class="w"> </span><span class="n">uxIdleTaskStack</span><span class="p">[</span><span class="w"> </span><span class="n">configMINIMAL_STACK_SIZE</span><span class="w"> </span><span class="p">];</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7"></a>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">  </span><span class="o">*</span><span class="n">ppxIdleTaskTCBBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">xIdleTaskTCB</span><span class="p">;</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="w">  </span><span class="o">*</span><span class="n">ppxIdleTaskStackBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uxIdleTaskStack</span><span class="p">;</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="w">  </span><span class="o">*</span><span class="n">pulIdleTaskStackSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">configMINIMAL_STACK_SIZE</span><span class="p">;</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 3.15</em></strong> <em>vApplicationGetIdleTaskMemory 的典型实现</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

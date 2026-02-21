@@ -1,0 +1,5096 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/roadmap/ch12_zh/">
+      
+      
+        <link rel="prev" href="../ch11_zh/">
+      
+      
+        <link rel="next" href="../ch13_zh/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://cloud.rocketpi.club/cloud/rocket.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>【freeRTOS_12_开发者支持】 - Rocket-Pi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#12" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rocket-Pi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              【freeRTOS_12_开发者支持】
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <div class="md-header__links">
+        
+          
+          
+          
+            
+          
+          <a href="../.." class="md-header__link">
+            🏠 首页
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../roadmap/" class="md-header__link">
+            🧭 学习路线
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../downloads/download/" class="md-header__link">
+            📁 资料下载
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../doc/rocketpi_src/" class="md-header__link">
+            🧪 示例程序
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../faq/faq/" class="md-header__link">
+            ❓ 常见问题
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../tools/tools/" class="md-header__link">
+            💼 工具
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/announcement/" class="md-header__link">
+            📣 公告
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/column/" class="md-header__link">
+            👥 社区专栏
+          </a>
+        
+      </div>
+    
+    
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    Rocket-Pi
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🏠 首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧭 学习路线
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🧭 学习路线
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    学习路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【硬件】硬件一览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】开发路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】CubeMX安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stm32F4xx_DFP安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5注册
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stlink安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】验证开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【前言】嵌入式常见术语
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【Cubemx通用配置】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mcu_and_keil/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【多家MCU示例分析总结】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_01_前言】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_02_内核发行版】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_03_堆内存管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_04_任务管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_05_队列管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_06_软件定时器管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_07_中断管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_08_资源管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_09_事件组】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_10_任务通知】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_11_低功耗支持】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_12_开发者支持】
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_12_开发者支持】
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 简介
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-configassert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 configASSERT()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.2 configASSERT()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1221-configassert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2.1 configASSERT() 定义示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-freertos-tracealyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 FreeRTOS 的 Tracealyzer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124-hook-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 调试相关Hook (Callback)函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.4 调试相关Hook (Callback)函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1241-malloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4.1 Malloc 失败挂钩
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4.2 堆栈溢出钩子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5 查看运行时和任务状态信息
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.5 查看运行时和任务状态信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1251" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.1 任务运行时统计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1252" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.2 运行时统计时钟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1253" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.3 配置应用程序以收集运行时统计信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1254-uxtaskgetsystemstate-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.4 uxTaskGetSystemState() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1255-vtasklisttasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.5 vTaskListTasks() 辅助函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1256-vtaskgetruntimestatistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.6 vTaskGetRunTimeStatistics() 辅助函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1257" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.7 生成和显示运行时统计数据，一个工作示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6 跟踪钩子宏
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.6 跟踪钩子宏">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1261" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6.1 可用的跟踪挂钩宏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1262" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6.2 定义跟踪挂钩宏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1263-freertos-aware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6.3 FreeRTOS Aware 调试器插件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_13_故障排除】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📁 资料下载
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            📁 资料下载
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../downloads/download/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    资料下载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧪 示例程序
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🧪 示例程序
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_src/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi所有示例程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/factory/factory/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    厂测程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_scan/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_scan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_irq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_irq
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_multi_button/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_multi_button
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_delay_us/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_delay_us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_printf/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_printf
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_echo/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_echo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led_cjson
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_ymodem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_shell_microrl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_easylogger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_radar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_aht30
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_at24cxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_passive_buzzer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_sg90
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_motor/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_motor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_hcsr04/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_hcsr04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_mcu_temperature
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_joystick/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_joystick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_irda/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_irda
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_ws2812b/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_ws2812b
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_speedtest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_bitmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_240x240_lvgl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card_fatfs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_audio_to_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_pic_to_lcd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_cdc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_cdc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_msc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_msc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_flash_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266_tcp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_standby_wkup/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_standby_wkup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_crc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_crc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_mbedtls/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_mbedtls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_extern_io_check/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_extern_io_check
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader_iap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader_iap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/01_rocketpi_serial_plane_game/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    飞行大乱斗
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/02_don%27t_approach_me_alarm/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    别靠近我报警器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/03_rocketpi_usb_audio_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    超炫桌面节奏大师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/04_rocketpi_hcsr04_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    雷达探测器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/05_rocketpi_smart_home/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    物联网智能家居
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/06_rocketpi_mqtt_ota/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    FOTA固件升级
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_freertos/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_freertos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_zephyr/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_zephyr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_rt-thread/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_rt-thread
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_threadx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_threadx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    ❓ 常见问题
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ❓ 常见问题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/faq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    常见问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    💼 工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            💼 工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/tools/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📣 公告
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            📣 公告
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/announcement/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    公告
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    👥 社区专栏
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            👥 社区专栏
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/column/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    社区专栏
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1 简介
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-configassert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2 configASSERT()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.2 configASSERT()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1221-configassert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2.1 configASSERT() 定义示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-freertos-tracealyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3 FreeRTOS 的 Tracealyzer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124-hook-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4 调试相关Hook (Callback)函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.4 调试相关Hook (Callback)函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1241-malloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4.1 Malloc 失败挂钩
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.4.2 堆栈溢出钩子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5 查看运行时和任务状态信息
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.5 查看运行时和任务状态信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1251" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.1 任务运行时统计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1252" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.2 运行时统计时钟
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1253" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.3 配置应用程序以收集运行时统计信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1254-uxtaskgetsystemstate-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.4 uxTaskGetSystemState() API 功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1255-vtasklisttasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.5 vTaskListTasks() 辅助函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1256-vtaskgetruntimestatistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.6 vTaskGetRunTimeStatistics() 辅助函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1257" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.5.7 生成和显示运行时统计数据，一个工作示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6 跟踪钩子宏
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.6 跟踪钩子宏">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1261" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6.1 可用的跟踪挂钩宏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1262" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6.2 定义跟踪挂钩宏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1263-freertos-aware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.6.3 FreeRTOS Aware 调试器插件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="12">12 开发者支持<a class="headerlink" href="#12" title="Permanent link">&para;</a></h1>
+<h2 id="121">12.1 简介<a class="headerlink" href="#121" title="Permanent link">&para;</a></h2>
+<p>本章重点介绍了一组功能，旨在最大限度地提高
+生产力：</p>
+<ul>
+<li>提供对应用程序行为方式的深入了解。</li>
+<li>突出优化机会。</li>
+<li>在错误发生时捕获错误。</li>
+</ul>
+<h2 id="122-configassert">12.2 configASSERT()<a class="headerlink" href="#122-configassert" title="Permanent link">&para;</a></h2>
+<p>在 C 语言中，宏 <code>assert()</code> 用于验证<em>断言</em>（
+假设）由程序做出。断言被写成C语言
+表达式，如果表达式的计算结果为 false (0)，则
+断言被视为失败。例如，清单 12.1 测试了
+断言指针 <code>pxMyPointer</code> 不是 NULL。</p>
+<p><a name="list12.1" title="Listing 12.1 Using the standard C assert() macro to check pxMyPointer is not NULL"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cm">/* Test the assertion that pxMyPointer is not NULL */</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">assert</span><span class="p">(</span><span class="w"> </span><span class="n">pxMyPointer</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.1</em></strong> <em>使用标准 C assert() 宏来检查 pxMyPointer 是不是 NULL</em></p>
+<p>应用程序编写者指定在断言出现时要采取的操作
+由于提供 <code>assert()</code> 宏的实现而失败。</p>
+<p>FreeRTOS源代码没有调用<code>assert()</code>，因为<code>assert()</code>不是
+适用于编译 FreeRTOS 的所有编译器。
+相反，FreeRTOS 源代码包含大量对宏的调用
+称为 <code>configASSERT()</code>，它可以由应用程序编写者定义
+<code>FreeRTOSConfig.h</code>，其行为与标准 C <code>assert()</code> 完全相同。</p>
+<p>失败的断言必须被视为致命错误。不要尝试
+执行断言失败的行。</p>
+<blockquote>
+<p><em>使用 <code>configASSERT()</code> 通过立即捕获和
+识别许多最常见的错误来源。它是强烈的
+建议在开发或调试时定义 <code>configASSERT()</code>
+FreeRTOS 应用程序。</em></p>
+</blockquote>
+<p>定义 <code>configASSERT()</code> 将极大地帮助运行时调试，但是
+还会增加应用程序代码大小，从而减慢速度
+它的执行。如果未提供 <code>configASSERT()</code> 的定义，则
+将使用默认的空定义，并且所有调用
+<code>configASSERT()</code> 将被 C 预处理器完全删除。</p>
+<h3 id="1221-configassert">12.2.1 configASSERT() 定义示例<a class="headerlink" href="#1221-configassert" title="Permanent link">&para;</a></h3>
+<p>清单 12.2 中所示的 <code>configASSERT()</code> 的定义在以下情况下很有用：
+应用程序正在调试器的控制下执行。它将
+在断言失败的任何行上停止执行，因此该行
+失败时，断言将是调试器显示的行
+调试会话已暂停。</p>
+<p><a name="list12.2" title="Listing 12.2 A simple configASSERT() definition useful when executing under the control of a debugger"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cm">/* Disable interrupts so the tick interrupt stops executing, then sit</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cm">   in a loop so execution does not move past the line that failed the</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="cm">   assertion. If the hardware supports a debug break instruction, then the</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="cm">   debug break instruction can be used in place of the for() loop. */</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="cp">#define configASSERT( x ) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for(;;); }</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.2</em></strong> <em>一个简单的 configASSERT() 定义在调试器控制下执行时很有用</em></p>
+<p>清单 12.3 中所示的 <code>configASSERT()</code> 的定义在以下情况下很有用：
+应用程序不在调试器的控制下执行。它
+打印出或以其他方式记录失败的源代码行
+断言。使用以下命令来识别断言失败的行
+标准C <code>__FILE__</code>宏来获取源文件的名称，以及
+标准C <code>__LINE__</code>宏获取行号
+源文件。</p>
+<p><a name="list12.3" title="Listing 12.3 A configASSERT() definition that records the source code line that failed an assertion"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cm">/* This function must be defined in a C source file, not the FreeRTOSConfig.h </span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="cm">   header file. */</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vAssertCalled</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pcFile</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ulLine</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="p">{</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="cm">/* Inside this function, pcFile holds the name of the source file that </span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="cm">       contains the line that detected the error, and ulLine holds the line </span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="cm">       number in the source file. The pcFile and ulLine values can be printed </span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="cm">       out, or otherwise recorded, before the following infinite loop is </span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="cm">       entered. */</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="n">RecordErrorInformationHere</span><span class="p">(</span><span class="w"> </span><span class="n">pcFile</span><span class="p">,</span><span class="w"> </span><span class="n">ulLine</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="cm">/* Disable interrupts so the tick interrupt stops executing, then sit in a </span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="cm">       loop so execution does not move past the line that failed the assertion. */</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="n">taskDISABLE_INTERRUPTS</span><span class="p">();</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="p">}</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="cm">/*-----------------------------------------------------------*/</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18"></a>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="cm">/* These following two lines must be placed in FreeRTOSConfig.h. */</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">vAssertCalled</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pcFile</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">ulLine</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="cp">#define configASSERT( x ) if( ( x ) == 0 ) vAssertCalled( __FILE__, __LINE__ )</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.3</em></strong> <em>记录断言失败的源代码行的 configASSERT() 定义</em></p>
+<h2 id="123-freertos-tracealyzer">12.3 FreeRTOS 的 Tracealyzer<a class="headerlink" href="#123-freertos-tracealyzer" title="Permanent link">&para;</a></h2>
+<p>Tracealyzer for FreeRTOS 是提供的运行时诊断和优化工具
+由我们的合作伙伴公司 Percepio 提供。</p>
+<p>Tracealyzer for FreeRTOS 捕获有价值的动态行为信息，然后
+在互连的图形视图中呈现捕获的信息。的
+工具还能够显示多个同步视图。</p>
+<p>捕获的信息在分析、故障排除、
+或者只是优化 FreeRTOS 应用程序。</p>
+<p>Tracealyzer for FreeRTOS 可以与传统调试器并行使用，并且
+通过更高级别、基于时间的方式补充调试器的视图
+观点。</p>
+<p><a name="fig12.1" title="Figure 12.1 FreeRTOS+Trace includes more than 20 interconnected views"></a>
+<a name="fig12.2" title="Figure 12.2 FreeRTOS+Trace main trace view - one of more than 20 interconnected trace views"></a>
+<a name="fig12.3" title="Figure 12.3 FreeRTOS+Trace CPU load view - one of more than 20 interconnected trace views"></a>
+<a name="fig12.4" title="Figure 12.4 FreeRTOS+Trace response time view - one of more than 20 interconnected trace views"></a>
+<a name="fig12.5" title="Figure 12.5 FreeRTOS+Trace user event plot view - one of more than 20 interconnected trace views"></a>
+<a name="fig12.6" title="Figure 12.6 FreeRTOS+Trace kernel object history view - one of more than 20 interconnected trace views"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image82.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image82.png" /></a> <br />
+<strong><em>图 12.1</em></strong> <em>FreeRTOS+Trace 包括 20 多个互连视图</em></p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image83.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image83.png" /></a> <br />
+<strong><em>图 12.2</em></strong> <em>FreeRTOS+Trace 主跟踪视图 - 20 多个互连跟踪视图之一</em></p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image84.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image84.png" /></a> <br />
+<strong><em>图 12.3</em></strong> <em>FreeRTOS+Trace CPU 负载视图 - 20 多个互连跟踪视图之一</em></p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image85.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image85.png" /></a> <br />
+<strong><em>图 12.4</em></strong> <em>FreeRTOS+Trace 响应时间视图 - 20 多个互连跟踪视图之一</em></p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image86.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image86.png" /></a> <br />
+<strong><em>图 12.5</em></strong> <em>FreeRTOS+Trace 用户事件图视图 - 20 多个互连跟踪视图之一</em></p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image87.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image87.png" /></a> <br />
+<strong><em>图 12.6</em></strong> <em>FreeRTOS+Trace 内核对象历史视图 - 20 多个互连跟踪视图之一</em></p>
+<hr />
+<h2 id="124-hook-callback">12.4 调试相关Hook (Callback)函数<a class="headerlink" href="#124-hook-callback" title="Permanent link">&para;</a></h2>
+<h3 id="1241-malloc">12.4.1 Malloc 失败挂钩<a class="headerlink" href="#1241-malloc" title="Permanent link">&para;</a></h3>
+<p>malloc 失败 hook (or callback) 在第 3 章“堆”中进行了描述
+内存管理。</p>
+<p>定义 malloc 失败挂钩可确保应用程序开发人员
+如果尝试创建任务、队列、信号量或
+事件组失败。</p>
+<h3 id="1242">12.4.2 堆栈溢出钩子<a class="headerlink" href="#1242" title="Permanent link">&para;</a></h3>
+<p>堆栈溢出挂钩的详细信息在第 13.3 节“堆栈”中提供
+溢出。</p>
+<p>定义堆栈溢出挂钩可确保应用程序开发人员
+如果任务使用的堆栈量超出堆栈空间，则通知
+分配给任务。</p>
+<h2 id="125">12.5 查看运行时和任务状态信息<a class="headerlink" href="#125" title="Permanent link">&para;</a></h2>
+<h3 id="1251">12.5.1 任务运行时统计<a class="headerlink" href="#1251" title="Permanent link">&para;</a></h3>
+<p>任务运行时统计信息提供有关处理量的信息
+每个任务收到的时间。任务的<em>运行时间</em>是该任务的总时间
+自应用程序启动以来，任务一直处于运行状态。</p>
+<p>运行时统计数据旨在用作分析和调试
+项目开发阶段的援助。他们的信息
+提供仅在计数器用作运行时统计信息之前有效
+时钟溢出。收集运行时统计数据会增加任务
+上下文切换时间。</p>
+<p>要获取二进制运行时统计信息，请调用
+<code>uxTaskGetSystemState()</code> API 功能。获取运行时统计信息
+信息作为人类可读的 ASCII 表，调用
+<code>vTaskGetRunTimeStatistics()</code> 辅助函数。</p>
+<h3 id="1252">12.5.2 运行时统计时钟<a class="headerlink" href="#1252" title="Permanent link">&para;</a></h3>
+<p>运行时统计需要测量滴答周期的分数。
+因此，RTOS 滴答计数不用作运行时统计信息
+时钟，而时钟则由应用程序代码提供。它是
+建议制作运行时统计时钟的频率
+比滴答频率快 10 到 100 倍
+中断。运行时统计时钟越快，越准确
+统计数据就会，而且时间值也会越快
+溢出。</p>
+<p>理想情况下，时间值将由自由运行的 32 位生成
+外围定时器/计数器，无需其他即可读取其值
+处理开销。如果可用的外设和时钟速度
+不使该技术成为可能，然后替代，但效率较低，
+技术包括：</p>
+<ul>
+<li>配置外设以生成周期性中断
+  期望运行时统计时钟频率，然后使用计数
+  作为运行时统计时钟生成的中断数量。</li>
+</ul>
+<p>如果周期性中断只是
+  用于提供运行时统计时钟。
+  但是，如果应用程序已经使用周期性中断
+  合适的频率，那么添加计数就简单高效
+  现有中断中生成的中断数量
+  服务常规。</p>
+<ul>
+<li>使用自由运行的当前值生成 32 位值
+  16 位外设定时器作为 32 位值的最低有效位
+  16位，定时器溢出的次数
+  32 位值的最高有效 16 位。</li>
+</ul>
+<p>通过适当且有些复杂的操作，可以
+通过组合 RTOS 滴答计数生成运行时统计时钟
+ARM Cortex-M SysTick 定时器的当前值。一些
+FreeRTOS 下载中的演示项目演示了如何实现这一点。</p>
+<h3 id="1253">12.5.3 配置应用程序以收集运行时统计信息<a class="headerlink" href="#1253" title="Permanent link">&para;</a></h3>
+<p>以下是收集任务运行时所需的宏的详细信息
+统计数据。最初，这些宏旨在包含在
+RTOS 端口层，这就是宏以“port”为前缀的原因，但它
+事实证明，在 <code>FreeRTOSConfig.h</code> 中定义它们更为实用。</p>
+<p><strong>用于收集运行时统计信息的宏</strong></p>
+<ul>
+<li><code>configGENERATE_RUN_TIME_STATS</code></li>
+</ul>
+<p>该宏必须在 FreeRTOSConfig.h 中设置为 1。当这个宏是
+  设置为 1 调度程序将调用本节中详细介绍的其他宏
+  在适当的时候。</p>
+<ul>
+<li><code>portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()</code></li>
+</ul>
+<p>必须提供该宏来初始化任何外设
+  用于提供运行时统计时钟。</p>
+<ul>
+<li><code>portGET_RUN_TIME_COUNTER_VALUE()</code> 或 <code>portALT_GET_RUN_TIME_COUNTER_VALUE(Time)</code></li>
+</ul>
+<p>必须提供这两个宏之一来返回当前
+  运行时统计时钟值。这是应用程序的总时间
+  自运行时统计时钟单位以来一直在运行
+  应用程序首先启动。</p>
+<p>如果使用第一个宏，则必须将其定义为计算结果
+  当前时钟值。如果使用第二个宏，则必须将其定义为
+  将其“时间”参数设置为当前时钟值。</p>
+<h3 id="1254-uxtaskgetsystemstate-api">12.5.4 uxTaskGetSystemState() API 功能<a class="headerlink" href="#1254-uxtaskgetsystemstate-api" title="Permanent link">&para;</a></h3>
+<p><code>uxTaskGetSystemState()</code> 提供状态信息快照
+每个任务都在 FreeRTOS 调度程序的控制下。信息
+以 <code>TaskStatus_t</code> 结构数组的形式提供，其中有一个索引
+每个任务的数组。清单 12.5 描述了 <code>TaskStatus_t</code> 和
+下面。</p>
+<p><a name="list12.4" title="Listing 12.4 The uxTaskGetSystemState() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">UBaseType_t</span><span class="w"> </span><span class="nf">uxTaskGetSystemState</span><span class="p">(</span><span class="w"> </span><span class="n">TaskStatus_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pxTaskStatusArray</span><span class="p">,</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">                                  </span><span class="k">const</span><span class="w"> </span><span class="n">UBaseType_t</span><span class="w"> </span><span class="n">uxArraySize</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">                                  </span><span class="n">configRUN_TIME_COUNTER_TYPE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pulTotalRunTime</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.4</em></strong> <em>uxTaskGetSystemState() API 函数原型</em></p>
+<blockquote>
+<p>注意：为了向后兼容，<code>configRUN_TIME_COUNTER_TYPE</code> 默认为 <code>uint32_t</code>，但也可以 
+如果 <code>uint32_t</code> 限制过多，则在 FreeRTOSConfig.h 中覆盖。</p>
+</blockquote>
+<p><strong>uxTaskGetSystemState()参数及返回值</strong></p>
+<ul>
+<li><code>pxTaskStatusArray</code></li>
+</ul>
+<p>指向 <code>TaskStatus_t</code> 结构数组的指针。</p>
+<p>对于每个数组，该数组必须至少包含一个 <code>TaskStatus_t</code> 结构
+  任务。任务的数量可以使用以下方式确定
+  <code>uxTaskGetNumberOfTasks()</code> API 功能。</p>
+<p><code>TaskStatus_t</code> 结构如清单 12.5 所示，
+  TaskStatus_t 结构成员在下一个列表中描述。</p>
+<ul>
+<li><code>uxArraySize</code></li>
+</ul>
+<p><code>pxTaskStatusArray</code> 参数指向的数组的大小。
+  大小指定为数组中索引的数量（数量
+  数组中包含的 <code>TaskStatus_t</code> 结构的数量），而不是数量
+  数组中的字节。</p>
+<ul>
+<li><code>pulTotalRunTime</code></li>
+</ul>
+<p>如果 <code>FreeRTOSConfig.h</code> 中的 <code>configGENERATE_RUN_TIME_STATS</code> 设置为 1，
+  然后 <code>*pulTotalRunTime</code> 由 <code>uxTaskGetSystemState()</code> 设置为总运行
+  时间（由运行时统计时钟定义）
+  应用程序）自目标启动以来。</p>
+<p><code>pulTotalRunTime</code> 可选，如果总运行量可设置为 NULL
+  不需要时间。</p>
+<ul>
+<li>返回值</li>
+</ul>
+<p>填充的 <code>TaskStatus_t</code> 结构的数量
+  返回 <code>uxTaskGetSystemState()</code>。</p>
+<p>返回的值应该等于返回的数字
+  <code>uxTaskGetNumberOfTasks()</code> API 函数，但如果该值为零
+  传入的 <code>uxArraySize</code> 参数太小。</p>
+<p><a name="list12.5" title="Listing 12.5 The TaskStatus\_t structure"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">xTASK_STATUS</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">xHandle</span><span class="p">;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pcTaskName</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">    </span><span class="n">UBaseType_t</span><span class="w"> </span><span class="n">xTaskNumber</span><span class="p">;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">    </span><span class="n">eTaskState</span><span class="w"> </span><span class="n">eCurrentState</span><span class="p">;</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="n">UBaseType_t</span><span class="w"> </span><span class="n">uxCurrentPriority</span><span class="p">;</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="n">UBaseType_t</span><span class="w"> </span><span class="n">uxBasePriority</span><span class="p">;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="n">configRUN_TIME_COUNTER_TYPE</span><span class="w"> </span><span class="n">ulRunTimeCounter</span><span class="p">;</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="n">StackType_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pxStackBase</span><span class="p">;</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">    </span><span class="cp">#if ( ( portSTACK_GROWTH &gt; 0 ) || ( configRECORD_STACK_HIGH_ADDRESS == 1 ) )</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">        </span><span class="n">StackType_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pxTopOfStack</span><span class="p">;</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">        </span><span class="n">StackType_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pxEndOfStack</span><span class="p">;</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">    </span><span class="cp">#endif</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">usStackHighWaterMark</span><span class="p">;</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">    </span><span class="cp">#if ( ( configUSE_CORE_AFFINITY == 1 ) &amp;&amp; ( configNUMBER_OF_CORES &gt; 1 ) )</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">        </span><span class="n">UBaseType_t</span><span class="w"> </span><span class="n">uxCoreAffinityMask</span><span class="p">;</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">    </span><span class="cp">#endif</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="p">}</span><span class="w"> </span><span class="n">TaskStatus_t</span><span class="p">;</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.5</em></strong> <em>TaskStatus_t 结构</em></p>
+<p><strong>TaskStatus_t 结构成员</strong></p>
+<ul>
+<li><code>xHandle</code></li>
+</ul>
+<p>结构中的信息所涉及的任务的句柄。</p>
+<ul>
+<li><code>pcTaskName</code></li>
+</ul>
+<p>任务的人类可读文本名称。</p>
+<ul>
+<li><code>xTaskNumber</code></li>
+</ul>
+<p>每个任务都有一个唯一的 <code>xTaskNumber</code> 值。</p>
+<p>如果应用程序在运行时创建和删除任务，那么它是
+  任务可能与之前的任务具有相同的句柄
+  之前删除的。提供<code>xTaskNumber</code>以允许应用程序代码，
+  和内核感知调试器，以区分仍在运行的任务
+  有效，以及与有效任务具有相同句柄的已删除任务
+  任务。</p>
+<ul>
+<li><code>eCurrentState</code></li>
+</ul>
+<p>保存任务状态的枚举类型。
+  <code>eCurrentState</code> 可以是以下值之一：</p>
+<ul>
+<li><code>eRunning</code></li>
+<li><code>eReady</code></li>
+<li><code>eBlocked</code></li>
+<li><code>eSuspended</code></li>
+<li><code>eDeleted</code></li>
+</ul>
+<p>仅将任务报告为处于 <code>eDeleted</code> 状态
+  通过调用删除任务的时间间隔很短
+  <code>vTaskDelete()</code>，以及空闲任务释放内存的时间
+  分配给已删除任务的内部数据结构和堆栈。
+  在那之后，该任务将不再以任何方式存在，并且
+  尝试使用其句柄无效。</p>
+<ul>
+<li><code>uxCurrentPriority</code></li>
+</ul>
+<p>当时运行任务的优先级
+  <code>uxTaskGetSystemState()</code> 被称为。 <code>uxCurrentPriority</code>只会更高
+  比应用程序编写者分配给任务的优先级，如果
+  任务已暂时被分配了更高的优先级
+  章节中描述的优先级继承机制
+  <a href="../ch08_zh/#83-mutexes-and-binary-semaphores">8.3 Mutexes (and Binary Semaphores)</a>。</p>
+<ul>
+<li><code>uxBasePriority</code></li>
+</ul>
+<p>应用程序编写者分配给任务的优先级。
+  仅当 <code>configUSE_MUTEXES</code> 设置为 1 时，<code>uxBasePriority</code> 才有效
+  FreeRTOSConfig.h。</p>
+<ul>
+<li><code>ulRunTimeCounter</code></li>
+</ul>
+<p>自创建任务以来任务使用的总运行时间。的
+  总运行时间以使用时钟的绝对时间形式提供
+  由应用程序编写者提供，用于运行时的集合
+  统计数据。 <code>ulRunTimeCounter</code> 仅在以下情况下有效
+  <code>configGENERATE_RUN_TIME_STATS</code> 在 FreeRTOSConfig.h 中设置为 1。</p>
+<ul>
+<li><code>pxStackBase</code></li>
+</ul>
+<p>指向分配给该任务的堆栈区域的基地址。</p>
+<ul>
+<li><code>pxTopOfStack</code></li>
+</ul>
+<p>指向分配给该任务的堆栈区域的当前顶部地址。
+   仅当堆栈向上增长时，字段 <code>pxTopOfStack</code> 才有效（即
+   <code>portSTACK_GROWTH</code> 大于零）或 <code>configRECORD_STACK_HIGH_ADDRESS</code>
+   在 FreeRTOSConfig.h 中设置为 1。</p>
+<ul>
+<li><code>pxEndOfStack</code></li>
+</ul>
+<p>指向分配给该任务的堆栈区域的结束地址。
+   仅当堆栈向上增长时，字段 <code>pxEndOfStack</code> 才有效（即
+   <code>portSTACK_GROWTH</code> 大于零）或 <code>configRECORD_STACK_HIGH_ADDRESS</code>
+   在 FreeRTOSConfig.h 中设置为 1。</p>
+<ul>
+<li><code>usStackHighWaterMark</code></li>
+</ul>
+<p>任务的堆栈高水位线。这是最低金额
+  自创建任务以来为该任务保留的堆栈空间。
+  它表明任务已经接近溢出的程度
+  堆栈；该值越接近零，任务就越接近
+  溢出其堆栈。 <code>usStackHighWaterMark</code> 以字节为单位指定。</p>
+<ul>
+<li><code>uxCoreAffinityMask</code></li>
+</ul>
+<p>一个按位值，指示可以运行任务的核心。 
+   内核编号从 0 到 <code>configNUMBER_OF_CORES</code> - 1。例如，
+   可以在核心 0 和核心 1 上运行的任务将具有其 <code>uxCoreAffinityMask</code>
+   设置为 0x03。仅当同时满足以下条件时，字段 <code>uxCoreAffinityMask</code> 才可用
+   <code>configUSE_CORE_AFFINITY</code> 设置为 1，<code>configNUMBER_OF_CORES</code> 设置为 1
+   在 FreeRTOSConfig.h 中设置为大于 1。</p>
+<h3 id="1255-vtasklisttasks">12.5.5 vTaskListTasks() 辅助函数<a class="headerlink" href="#1255-vtasklisttasks" title="Permanent link">&para;</a></h3>
+<p><code>vTaskListTasks()</code> 提供与以下类似的任务状态信息
+<code>uxTaskGetSystemState()</code>，但它以人类的方式呈现信息
+可读的 ASCII 表，而不是二进制值数组。</p>
+<p><code>vTaskListTasks()</code> 是一个处理器密集型函数，并且保留了
+调度程序长时间暂停。因此，建议
+仅将该函数用于调试目的，而不是用于生产
+实时系统。</p>
+<p>如果 <code>configUSE_TRACE_FACILITY</code> 设置为 1 并且
+<code>configUSE_STATS_FORMATTING_FUNCTIONS</code> 设置为大于 0
+FreeRTOSConfig.h。</p>
+<p><a name="list12.6" title="Listing 12.6 The vTaskListTasks() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vTaskListTasks</span><span class="p">(</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pcWriteBuffer</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">uxBufferLength</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.6</em></strong> <em>vTaskListTasks() API 函数原型</em></p>
+<p><strong>vTaskListTasks() 参数</strong></p>
+<ul>
+<li><code>pcWriteBuffer</code></li>
+</ul>
+<p>指向写入格式化且人类可读表的字符缓冲区的指针。 
+  假设该缓冲区足够大以包含生成的报告。<br />
+  每个任务大约 40 个字节就足够了。</p>
+<ul>
+<li><code>uxBufferLength</code></li>
+</ul>
+<p><code>pcWriteBuffer</code> 的长度。</p>
+<p><code>vTaskListTasks()</code> 生成的输出示例如图 12.7 所示。
+在输出中：</p>
+<ul>
+<li>
+<p>每行提供有关单个任务的信息。</p>
+</li>
+<li>
+<p>第一列是任务名称。</p>
+</li>
+<li>
+<p>第二列是任务的状态，其中“X”表示正在运行，“R”表示“就绪”，“B”表示
+  表示已阻止，“S”表示已暂停，“D”表示任务已被
+  已删除。任务只会被报告为处于已删除状态
+  通过调用删除任务之间的短暂时间
+  <code>vTaskDelete()</code>，以及空闲任务释放内存的时间
+  被分配给已删除任务的内部数据结构并且
+  堆栈。在那之后，任务将不再存在，
+  并且尝试使用其句柄是无效的。</p>
+</li>
+<li>
+<p>第三列是任务的优先级。</p>
+</li>
+<li>
+<p>第四列是任务的堆栈高水位线。请参阅
+  <code>usStackHighWaterMark</code> 的描述。</p>
+</li>
+<li>
+<p>第五列是分配给任务的唯一编号。请参阅
+  <code>xTaskNumber</code> 的描述。</p>
+</li>
+</ul>
+<p><a name="fig12.7" title="Figure 12.7 Example output generated by vTaskListTasks()"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image88.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image88.png" /></a> <br />
+<strong><em>图 12.7</em></strong> <em>vTaskListTasks() 生成的示例输出</em></p>
+<hr />
+<blockquote>
+<p>注意： <br />
+<code>vTaskListTasks</code> 的旧版本是 <code>vTaskList</code>。 <code>vTaskList</code> 假设 
+<code>pcWriteBuffer</code> 的长度为 <code>configSTATS_BUFFER_MAX_LENGTH</code>。该功能仅适用于 
+向后兼容性。新应用建议使用 <code>vTaskListTasks</code> 和 
+明确提供 <code>pcWriteBuffer</code> 的长度。</p>
+</blockquote>
+<p><a name="list12.7" title="Listing 12.7 The vTaskList() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vTaskList</span><span class="p">(</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pcWriteBuffer</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.7</em></strong> <em>vTaskList() API 函数原型</em></p>
+<p><strong>vTaskList() 参数</strong></p>
+<ul>
+<li><code>pcWriteBuffer</code></li>
+</ul>
+<p>指向写入格式化且人类可读表的字符缓冲区的指针。 
+    缓冲区必须足够大以容纳整个表，因为不执行边界检查。</p>
+<h3 id="1256-vtaskgetruntimestatistics">12.5.6 vTaskGetRunTimeStatistics() 辅助函数<a class="headerlink" href="#1256-vtaskgetruntimestatistics" title="Permanent link">&para;</a></h3>
+<p><code>vTaskGetRunTimeStatistics()</code> 将收集的运行时统计数据格式化为
+人类可读的 ASCII 表。</p>
+<p><code>vTaskGetRunTimeStatistics()</code> 是一个处理器密集型函数，并且离开
+调度程序暂停很长一段时间。因此，它是
+建议仅将该函数用于调试目的，而不是在
+生产实时系统。</p>
+<p>当 <code>configGENERATE_RUN_TIME_STATS</code> 设置为
+1、<code>configUSE_STATS_FORMATTING_FUNCTIONS</code>设置为大于0，并且 
+<code>configUSE_TRACE_FACILITY</code> 在 FreeRTOSConfig.h 中设置为 1。</p>
+<p><a name="list12.8" title="Listing 12.8 The vTaskGetRunTimeStatistics() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vTaskGetRunTimeStatistics</span><span class="p">(</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pcWriteBuffer</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">uxBufferLength</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.8</em></strong> <em>vTaskGetRunTimeStatistics() API 函数原型</em></p>
+<p><strong>vTaskGetRunTimeStatistics() 参数</strong></p>
+<ul>
+<li><code>pcWriteBuffer</code></li>
+</ul>
+<p>指向写入格式化且人类可读表的字符缓冲区的指针。
+  假设该缓冲区足够大以包含生成的报告。<br />
+  每个任务大约 40 个字节就足够了。</p>
+<ul>
+<li><code>uxBufferLength</code></li>
+</ul>
+<p><code>pcWriteBuffer</code> 的长度。</p>
+<p><code>vTaskGetRunTimeStatistics()</code> 生成的输出示例如下所示
+图 12.8。在输出中：</p>
+<ul>
+<li>
+<p>每行提供有关单个任务的信息。</p>
+</li>
+<li>
+<p>第一列是任务名称。</p>
+</li>
+<li>
+<p>第二列是任务在该任务中花费的时间
+  以绝对值表示的运行状态。参见描述
+  <code>ulRunTimeCounter</code>。</p>
+</li>
+<li>
+<p>第三列是任务在该任务中花费的时间
+  运行状态占目标完成后总时间的百分比
+  启动。显示百分比次数的总和通常为
+  低于预期的 100%，因为收集了统计数据并且
+  使用向下舍入到最接近的整数计算进行计算
+  整数值。</p>
+</li>
+</ul>
+<p><a name="fig12.8" title="Figure 12.8 Example output generated by vTaskGetRunTimeStatistics()"></a></p>
+<hr />
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image89.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image89.png" /></a> <br />
+<strong><em>图 12.8</em></strong> <em>vTaskGetRunTimeStatistics() 生成的示例输出</em></p>
+<hr />
+<blockquote>
+<p>注意： <br />
+<code>vTaskGetRunTimeStatistics</code> 的旧版本是 <code>vTaskGetRunTimeStats</code>。 
+<code>vTaskGetRunTimeStats</code> 假定 pcWriteBuffer 的长度
+<code>configSTATS_BUFFER_MAX_LENGTH</code>。该函数只是为了向后兼容。 
+新应用推荐使用<code>vTaskGetRunTimeStatistics</code>并提供长度 
+明确 pcWriteBuffer。</p>
+</blockquote>
+<p><a name="list12.9" title="Listing 12.9 The vTaskGetRunTimeStats() API function prototype"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vTaskGetRunTimeStats</span><span class="p">(</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pcWriteBuffer</span><span class="w"> </span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.9</em></strong> <em>vTaskGetRunTimeStats() API 功能原型</em></p>
+<p><strong>vTaskGetRunTimeStats() 参数</strong></p>
+<ul>
+<li><code>pcWriteBuffer</code></li>
+</ul>
+<p>指向写入格式化且人类可读表的字符缓冲区的指针。的 
+    缓冲区必须足够大以容纳整个表，因为不执行边界检查。</p>
+<h3 id="1257">12.5.7 生成和显示运行时统计数据，一个工作示例<a class="headerlink" href="#1257" title="Permanent link">&para;</a></h3>
+<p>此示例使用假设的 16 位定时器来生成 32 位定时器
+运行时统计时钟。计数器被配置为生成
+每次 16 位值达到最大值时中断
+值—有效地创建溢出中断。中断服务
+例程计算溢出发生的次数。</p>
+<p>32 位值是通过使用溢出发生次数创建的
+作为 32 位值的两个最高有效字节，以及当前
+16 位计数器值作为 32 位的两个最低有效字节
+值。中断服务程序的伪代码如清单所示
+12.10。</p>
+<p><a name="list12.10" title="Listing 12.10 16-bit timer overflow interrupt handler used to count timer overflows"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span>
+<span class="normal"><a href="#__codelineno-9-7">7</a></span>
+<span class="normal"><a href="#__codelineno-9-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">TimerOverflowInterruptHandler</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="p">{</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="cm">/* Just count the number of interrupts. */</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="n">ulOverflowCount</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="cm">/* Clear the interrupt. */</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="n">ClearTimerInterrupt</span><span class="p">();</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.10</em></strong> <em>16 位定时器溢出中断处理程序用于对定时器溢出进行计数</em></p>
+<p>清单 12.11 显示了添加到 FreeRTOSConfig.h 以启用
+运行时统计数据的收集。</p>
+<p><a name="list12.11" title="Listing 12.11 Macros added to FreeRTOSConfig.h to enable the collection of run-time statistics"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span>
+<span class="normal"><a href="#__codelineno-10-21">21</a></span>
+<span class="normal"><a href="#__codelineno-10-22">22</a></span>
+<span class="normal"><a href="#__codelineno-10-23">23</a></span>
+<span class="normal"><a href="#__codelineno-10-24">24</a></span>
+<span class="normal"><a href="#__codelineno-10-25">25</a></span>
+<span class="normal"><a href="#__codelineno-10-26">26</a></span>
+<span class="normal"><a href="#__codelineno-10-27">27</a></span>
+<span class="normal"><a href="#__codelineno-10-28">28</a></span>
+<span class="normal"><a href="#__codelineno-10-29">29</a></span>
+<span class="normal"><a href="#__codelineno-10-30">30</a></span>
+<span class="normal"><a href="#__codelineno-10-31">31</a></span>
+<span class="normal"><a href="#__codelineno-10-32">32</a></span>
+<span class="normal"><a href="#__codelineno-10-33">33</a></span>
+<span class="normal"><a href="#__codelineno-10-34">34</a></span>
+<span class="normal"><a href="#__codelineno-10-35">35</a></span>
+<span class="normal"><a href="#__codelineno-10-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cm">/* Set configGENERATE_RUN_TIME_STATS to 1 to enable collection of run-time </span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="cm">   statistics. When this is done, both portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="cm">   and portGET_RUN_TIME_COUNTER_VALUE() or </span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="cm">   portALT_GET_RUN_TIME_COUNTER_VALUE(x) must also be defined. */</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="cp">#define configGENERATE_RUN_TIME_STATS 1</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="cm">/* portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() is defined to call the function </span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="cm">   that sets up the hypothetical 16-bit timer (the function&#39;s implementation </span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="cm">   is not shown). */</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="kt">void</span><span class="w"> </span><span class="nf">vSetupTimerForRunTimeStats</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="cp">#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()  vSetupTimerForRunTimeStats()</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="cm">/* portALT_GET_RUN_TIME_COUNTER_VALUE() is defined to set its parameter to the</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="cm">   current run-time counter/time value. The returned time value is 32-bits </span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="cm">   long, and is formed by shifting the count of 16-bit timer overflows into </span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="cm">   the top two bytes of a 32-bit number, then bitwise ORing the result with </span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="cm">   the current 16-bit counter value. */</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="cp">#define portALT_GET_RUN_TIME_COUNTER_VALUE( ulCountValue )                  \</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="cp">{                                                                           \</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="cp">    extern volatile unsigned long ulOverflowCount;                          \</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="cp">                                                                            \</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="cp">    </span><span class="cm">/* Disconnect the clock from the counter so it does not change          \</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="cm">       while its value is being used. */</span><span class="cp">                                    \</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="cp">    PauseTimer();                                                           \</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="cp">                                                                            \</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="cp">    </span><span class="cm">/* The number of overflows is shifted into the most significant         \</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="cm">       two bytes of the returned 32-bit value. */</span><span class="cp">                           \</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="cp">    ulCountValue = ( ulOverflowCount &lt;&lt; 16UL );                             \</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="cp">                                                                            \</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="cp">    </span><span class="cm">/* The current counter value is used as the two least significant       \</span>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="cm">       bytes of the returned 32-bit value. */</span><span class="cp">                               \</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32"></a><span class="cp">    ulCountValue |= ( unsigned long ) ReadTimerCount();                     \</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33"></a><span class="cp">                                                                            \</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34"></a><span class="cp">    </span><span class="cm">/* Reconnect the clock to the counter. */</span><span class="cp">                               \</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35"></a><span class="cp">    ResumeTimer();                                                          \</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36"></a><span class="cp">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.11</em></strong> <em>添加到 FreeRTOSConfig.h 的宏以启用运行时统计信息的收集</em></p>
+<p>清单 12.12 中所示的任务每 5 秒打印出收集的运行时统计信息。</p>
+<p><a name="list12.12" title="Listing 12.12 The task that prints out the collected run-time statistics"></a></p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span>
+<span class="normal"><a href="#__codelineno-11-13">13</a></span>
+<span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span>
+<span class="normal"><a href="#__codelineno-11-16">16</a></span>
+<span class="normal"><a href="#__codelineno-11-17">17</a></span>
+<span class="normal"><a href="#__codelineno-11-18">18</a></span>
+<span class="normal"><a href="#__codelineno-11-19">19</a></span>
+<span class="normal"><a href="#__codelineno-11-20">20</a></span>
+<span class="normal"><a href="#__codelineno-11-21">21</a></span>
+<span class="normal"><a href="#__codelineno-11-22">22</a></span>
+<span class="normal"><a href="#__codelineno-11-23">23</a></span>
+<span class="normal"><a href="#__codelineno-11-24">24</a></span>
+<span class="normal"><a href="#__codelineno-11-25">25</a></span>
+<span class="normal"><a href="#__codelineno-11-26">26</a></span>
+<span class="normal"><a href="#__codelineno-11-27">27</a></span>
+<span class="normal"><a href="#__codelineno-11-28">28</a></span>
+<span class="normal"><a href="#__codelineno-11-29">29</a></span>
+<span class="normal"><a href="#__codelineno-11-30">30</a></span>
+<span class="normal"><a href="#__codelineno-11-31">31</a></span>
+<span class="normal"><a href="#__codelineno-11-32">32</a></span>
+<span class="normal"><a href="#__codelineno-11-33">33</a></span>
+<span class="normal"><a href="#__codelineno-11-34">34</a></span>
+<span class="normal"><a href="#__codelineno-11-35">35</a></span>
+<span class="normal"><a href="#__codelineno-11-36">36</a></span>
+<span class="normal"><a href="#__codelineno-11-37">37</a></span>
+<span class="normal"><a href="#__codelineno-11-38">38</a></span>
+<span class="normal"><a href="#__codelineno-11-39">39</a></span>
+<span class="normal"><a href="#__codelineno-11-40">40</a></span>
+<span class="normal"><a href="#__codelineno-11-41">41</a></span>
+<span class="normal"><a href="#__codelineno-11-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="cp">#define RUN_TIME_STATS_STRING_BUFFER_LENGTH       512</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="cm">/* For clarity, calls to fflush() have been omitted from this code listing. */</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">prvStatsTask</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="p">{</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xLastExecutionTime</span><span class="p">;</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7"></a>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">    </span><span class="cm">/* The buffer used to hold the formatted run-time statistics text needs to</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="cm">       be quite large. It is therefore declared static to ensure it is not</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="cm">       allocated on the task stack. This makes this function non re-entrant. */</span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">cStringBuffer</span><span class="p">[</span><span class="w"> </span><span class="n">RUN_TIME_STATS_STRING_BUFFER_LENGTH</span><span class="w"> </span><span class="p">];</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12"></a>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">    </span><span class="cm">/* The task will run every 5 seconds. */</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xBlockPeriod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="w"> </span><span class="mi">5000</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15"></a>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="cm">/* Initialize xLastExecutionTime to the current time. This is the only</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="cm">       time this variable needs to be written to explicitly. Afterwards it is </span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="cm">       updated internally within the vTaskDelayUntil() API function. */</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19"></a><span class="w">    </span><span class="n">xLastExecutionTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTaskGetTickCount</span><span class="p">();</span>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20"></a>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="w">    </span><span class="cm">/* As per most tasks, this task is implemented in an infinite loop. */</span>
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22"></a><span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="p">)</span>
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24"></a><span class="w">        </span><span class="cm">/* Wait until it is time to run this task again. */</span>
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25"></a><span class="w">        </span><span class="n">xTaskDelayUntil</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">xLastExecutionTime</span><span class="p">,</span><span class="w"> </span><span class="n">xBlockPeriod</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26"></a>
+</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="w">        </span><span class="cm">/* Generate a text table from the run-time stats. This must fit into</span>
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28"></a><span class="cm">           the cStringBuffer array. */</span>
+</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29"></a><span class="w">        </span><span class="n">vTaskGetRunTimeStatistics</span><span class="p">(</span><span class="w"> </span><span class="n">cStringBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">RUN_TIME_STATS_STRING_BUFFER_LENGTH</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30"></a>
+</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31"></a><span class="w">        </span><span class="cm">/* Print out column headings for the run-time stats table. */</span>
+</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Task</span><span class="se">\t\t</span><span class="s">Abs</span><span class="se">\t\t\t</span><span class="s">%%</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;-------------------------------------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34"></a>
+</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35"></a><span class="w">        </span><span class="cm">/* Print out the run-time stats themselves. The table of data contains</span>
+</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36"></a><span class="cm">           multiple lines, so the vPrintMultipleLines() function is called </span>
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37"></a><span class="cm">           instead of calling printf() directly. vPrintMultipleLines() simply </span>
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38"></a><span class="cm">           calls printf() on each line individually, to ensure the line </span>
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39"></a><span class="cm">           buffering works as expected. */</span><span class="w"> </span>
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40"></a><span class="w">        </span><span class="n">vPrintMultipleLines</span><span class="p">(</span><span class="w"> </span><span class="n">cStringBuffer</span><span class="w"> </span><span class="p">);</span>
+</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<strong><em>清单 12.12</em></strong> <em>打印收集的运行时统计数据的任务</em></p>
+<h2 id="126">12.6 跟踪钩子宏<a class="headerlink" href="#126" title="Permanent link">&para;</a></h2>
+<p>跟踪宏是放置在程序内关键点的宏。
+FreeRTOS 源代码。默认情况下，宏是空的，所以不
+生成任何代码，并且没有运行时开销。通过重写
+默认空实现，应用程序编写者可以：</p>
+<ul>
+<li>
+<p>将代码插入 FreeRTOS，无需修改 FreeRTOS 源代码
+  文件。</p>
+</li>
+<li>
+<p>通过任意方式输出详细的执行顺序信息
+  在目标硬件上可用。跟踪宏出现在足够多的地方
+  FreeRTOS 源代码中的位置允许它们用于
+  创建完整且详细的调度程序活动跟踪和分析
+  日志。</p>
+</li>
+</ul>
+<h3 id="1261">12.6.1 可用的跟踪挂钩宏<a class="headerlink" href="#1261" title="Permanent link">&para;</a></h3>
+<p>在这里详细说明每个宏会占用太多空间。下面的列表
+详细说明了被认为对应用程序最有用的宏子集
+作家。</p>
+<p>下面列表中的许多描述都引用了一个名为
+<code>pxCurrentTCB</code>。 <code>pxCurrentTCB</code> 是一个 FreeRTOS 私有变量，保存
+运行状态下任务的句柄，可用于任何宏
+从 FreeRTOS/Source/tasks.c 源文件调用。</p>
+<p><strong>最常用的跟踪挂钩宏的选择</strong></p>
+<ul>
+<li><code>traceTASK_INCREMENT_TICK(xTickCount)</code></li>
+</ul>
+<p>在滴答中断期间、滴答计数递增之前调用。 <code>xTickCount</code>参数 
+  将新的刻度计数值传递到宏中。</p>
+<ul>
+<li><code>traceTASK_SWITCHED_OUT()</code></li>
+</ul>
+<p>在选择运行新任务之前调用。此时，<code>pxCurrentTCB</code>包含了句柄 
+  即将离开运行状态的任务。</p>
+<ul>
+<li><code>traceTASK_SWITCHED_IN()</code></li>
+</ul>
+<p>选择要运行的任务后调用。此时，<code>pxCurrentTCB</code>包含了 
+  任务即将进入运行状态。</p>
+<ul>
+<li><code>traceBLOCKING_ON_QUEUE_RECEIVE(pxQueue)</code></li>
+</ul>
+<p>在当前正在执行的任务在尝试后进入阻塞状态之前立即调用 
+  从空队列中读取，或尝试“获取”空信号量或互斥体。 <code>pxQueue</code>参数 
+  将目标队列或信号量的句柄传递到宏中。</p>
+<ul>
+<li><code>traceBLOCKING_ON_QUEUE_SEND(pxQueue)</code></li>
+</ul>
+<p>在当前正在执行的任务在尝试后进入阻塞状态之前立即调用 
+  写入已满的队列。 <code>pxQueue</code>参数将目标队列的句柄传递到 
+  宏。</p>
+<ul>
+<li><code>traceQUEUE_SEND(pxQueue)</code></li>
+</ul>
+<p>从 <code>xQueueSend()</code>、<code>xQueueSendToFront()</code>、<code>xQueueSendToBack()</code> 或任何信号量内部调用 
+  当队列发送或信号量“give”成功时，“give”函数。 <code>pxQueue</code> 参数传递 
+  将目标队列或信号量的句柄放入宏中。</p>
+<ul>
+<li><code>traceQUEUE_SEND_FAILED(pxQueue)</code></li>
+</ul>
+<p>从 <code>xQueueSend()</code>、<code>xQueueSendToFront()</code>、<code>xQueueSendToBack()</code> 或任何信号量内部调用 
+  当队列发送或信号量“give”操作失败时，“give”函数。队列发送或信号量 
+  如果队列已满并且在指定的任何块时间内保持满状态，则“give”将失败。 
+  <code>pxQueue</code> 参数将目标队列或信号量的句柄传递到宏中。</p>
+<ul>
+<li><code>traceQUEUE_RECEIVE(pxQueue)</code></li>
+</ul>
+<p>当队列接收或 
+  信号量“take”成功。 <code>pxQueue</code>参数传递目标队列或信号量的句柄 
+  进入宏。</p>
+<ul>
+<li><code>traceQUEUE_RECEIVE_FAILED(pxQueue)</code></li>
+</ul>
+<p>当队列或信号量时，从 <code>xQueueReceive()</code> 或任何信号量“获取”函数中调用 
+  接收操作失败。队列接收或信号量“获取”操作将失败，如果队列或信号量 
+  为空，并且在任何指定的区块时间内保持为空。 <code>pxQueue</code> 参数传递 
+  将目标队列或信号量的句柄放入宏中。</p>
+<ul>
+<li><code>traceQUEUE_SEND_FROM_ISR(pxQueue)</code></li>
+</ul>
+<p>发送操作成功时从 <code>xQueueSendFromISR()</code> 内部调用。 <code>pxQueue</code>参数 
+  将目标队列的句柄传递到宏中。</p>
+<ul>
+<li><code>traceQUEUE_SEND_FROM_ISR_FAILED(pxQueue)</code></li>
+</ul>
+<p>当发送操作失败时从 <code>xQueueSendFromISR()</code> 内部调用。发送操作将失败 
+  如果队列已经满了。 <code>pxQueue</code>参数将目标队列的句柄传递到 
+  宏。</p>
+<ul>
+<li><code>traceQUEUE_RECEIVE_FROM_ISR(pxQueue)</code></li>
+</ul>
+<p>接收操作成功时从 <code>xQueueReceiveFromISR()</code> 内部调用。 <code>pxQueue</code> 
+  参数将目标队列的句柄传递到宏中。</p>
+<ul>
+<li><code>traceQUEUE_RECEIVE_FROM_ISR_FAILED(pxQueue)</code></li>
+</ul>
+<p>当接收操作因队列已失败而从 <code>xQueueReceiveFromISR()</code> 内部调用 
+  是空的。 <code>pxQueue</code> 参数将目标队列的句柄传递到宏中。</p>
+<ul>
+<li><code>traceTASK_DELAY_UNTIL( xTimeToWake )</code></li>
+</ul>
+<p>在调用任务进入阻塞状态之前立即从 <code>xTaskDelayUntil()</code> 中调用。</p>
+<ul>
+<li><code>traceTASK_DELAY()</code></li>
+</ul>
+<p>在调用任务进入阻塞状态之前立即从 <code>vTaskDelay()</code> 中调用。</p>
+<h3 id="1262">12.6.2 定义跟踪挂钩宏<a class="headerlink" href="#1262" title="Permanent link">&para;</a></h3>
+<p>每个跟踪宏都有一个默认的空定义。默认定义
+可以通过在中提供新的宏定义来覆盖
+FreeRTOSConfig.h。如果跟踪宏定义变得很长或很复杂，
+然后它们可以在一个新的头文件中实现，该头文件就是它本身
+包含在 FreeRTOSConfig.h 中。</p>
+<p>按照软件工程最佳实践，FreeRTOS
+维持严格的数据隐藏政策。跟踪宏允许用户代码
+添加到 FreeRTOS 源文件中，以便数据类型对
+跟踪宏与应用程序代码可见的宏不同：</p>
+<ul>
+<li>
+<p>在 FreeRTOS/Source/tasks.c 源文件中，任务句柄是
+  指向描述任务的数据结构的指针（任务的
+  <em>任务控制块</em>，或<em>TCB</em>）。之外的
+  FreeRTOS/Source/tasks.c 源文件任务句柄是一个指向
+  无效。</p>
+</li>
+<li>
+<p>在 FreeRTOS/Source/queue.c 源文件中，队列句柄是
+  指向描述队列的数据结构的指针。之外的
+  FreeRTOS/Source/queue.c 源文件中队列句柄是一个指向
+  无效。</p>
+</li>
+</ul>
+<blockquote>
+<p><em>如果通常是私有的 FreeRTOS 数据，则需要格外小心
+结构由跟踪宏直接访问，作为私有数据
+FreeRTOS 版本之间的结构可能会发生变化。</em></p>
+</blockquote>
+<h3 id="1263-freertos-aware">12.6.3 FreeRTOS Aware 调试器插件<a class="headerlink" href="#1263-freertos-aware" title="Permanent link">&para;</a></h3>
+<p>提供一些 FreeRTOS 感知的插件可用于
+以下 IDE。此列表可能并不详尽：</p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/image90.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cloud.rocketpi.club/cloud/image90.png" /></a></p>
+<ul>
+<li>
+<p>Eclipse (StateViewer)</p>
+</li>
+<li>
+<p>Eclipse (ThreadSpy)</p>
+</li>
+<li>
+<p>IAR</p>
+</li>
+<li>
+<p>ARM DS-5</p>
+</li>
+<li>
+<p>Atollic TrueStudio</p>
+</li>
+<li>
+<p>Microchip MPLAB</p>
+</li>
+<li>
+<p>iSYSTEM WinIDEA</p>
+</li>
+<li>
+<p>STM32CubeIDE</p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

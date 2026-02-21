@@ -1,0 +1,4140 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/roadmap/ch01_zh/">
+      
+      
+        <link rel="prev" href="../mcu_and_keil/">
+      
+      
+        <link rel="next" href="../ch02_zh/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://cloud.rocketpi.club/cloud/rocket.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+    
+    
+      
+        <title>【freeRTOS_01_前言】 - Rocket-Pi</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rocket-Pi
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              【freeRTOS_01_前言】
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <div class="md-header__links">
+        
+          
+          
+          
+            
+          
+          <a href="../.." class="md-header__link">
+            🏠 首页
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../roadmap/" class="md-header__link">
+            🧭 学习路线
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../downloads/download/" class="md-header__link">
+            📁 资料下载
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../doc/rocketpi_src/" class="md-header__link">
+            🧪 示例程序
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../faq/faq/" class="md-header__link">
+            ❓ 常见问题
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../tools/tools/" class="md-header__link">
+            💼 工具
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/announcement/" class="md-header__link">
+            📣 公告
+          </a>
+        
+          
+          
+          
+            
+          
+          <a href="../../community/column/" class="md-header__link">
+            👥 社区专栏
+          </a>
+        
+      </div>
+    
+    
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+      
+
+<img src="https://cloud.rocketpi.club/cloud/rocket.svg"
+     alt="Rocket-Pi"
+     class="md-logo__image"
+     loading="lazy"
+     height="32">
+    </a>
+    Rocket-Pi
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🏠 首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧭 学习路线
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🧭 学习路线
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    学习路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【硬件】硬件一览
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】开发路线
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】CubeMX安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stm32F4xx_DFP安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】keilv5注册
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】stlink安装
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【环境】验证开发环境
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【前言】嵌入式常见术语
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【Cubemx通用配置】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mcu_and_keil/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【多家MCU示例分析总结】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_01_前言】
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_01_前言】
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 小型嵌入式系统中的多任务处理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 小型嵌入式系统中的多任务处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-freertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.1 关于 FreeRTOS 内核
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.2 价值主张
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.3 关于术语的说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-rtos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.4 为什么使用 RTOS？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#115-freertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.5 FreeRTOS 内核特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#116-freertosopenrtos-safertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.6 许可以及 FreeRTOS、OpenRTOS 和 SafeRTOS 系列
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 包含的源文件和项目
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 包含的源文件和项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1 获取本书附带的示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_02_内核发行版】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_03_堆内存管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_04_任务管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_05_队列管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_06_软件定时器管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_07_中断管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_08_资源管理】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_09_事件组】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_10_任务通知】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_11_低功耗支持】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_12_开发者支持】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13_zh/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    【freeRTOS_13_故障排除】
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📁 资料下载
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            📁 资料下载
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../downloads/download/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    资料下载
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    🧪 示例程序
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🧪 示例程序
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_src/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi所有示例程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/factory/factory/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    厂测程序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_scan/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_scan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_irq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_irq
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_key_multi_button/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_key_multi_button
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_delay_us/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_delay_us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_printf/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_printf
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_echo/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_echo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_control_led_cjson
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_ymodem
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_shell_microrl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_easylogger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_uart_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_uart_radar
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_aht30
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2c_at24cxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_passive_buzzer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_sg90
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_pwm_motor/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_pwm_motor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_hcsr04/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_hcsr04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_mcu_temperature
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_adc_joystick/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_adc_joystick
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_irda/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_irda
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_ws2812b/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_ws2812b
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_speedtest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_bitmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_spi_lcd_240x240_lvgl
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sdio_card_fatfs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_audio_to_i2s
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_sd_pic_to_lcd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_cdc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_cdc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_usb_msc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_usb_msc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_flash_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_w25qxx_littlefs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_esp8266_tcp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_standby_wkup/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_standby_wkup
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_crc/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_crc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_mbedtls/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_mbedtls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/base_samples/rocketpi_extern_io_check/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_extern_io_check
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/boot/bootloader_iap/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_bootloader_iap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/01_rocketpi_serial_plane_game/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    飞行大乱斗
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/02_don%27t_approach_me_alarm/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    别靠近我报警器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/03_rocketpi_usb_audio_i2s/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    超炫桌面节奏大师
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/04_rocketpi_hcsr04_radar/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    雷达探测器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/05_rocketpi_smart_home/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    物联网智能家居
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rocketpi_demo/06_rocketpi_mqtt_ota/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    FOTA固件升级
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_freertos/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_freertos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_zephyr/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_zephyr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_rt-thread/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_rt-thread
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doc/rtos/rocketpi_threadx/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    rocketpi_threadx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    ❓ 常见问题
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ❓ 常见问题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/faq/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    常见问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    💼 工具
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            💼 工具
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/tools/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    工具
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    📣 公告
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            📣 公告
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/announcement/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    公告
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    👥 社区专栏
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            👥 社区专栏
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../community/column/" class="md-nav__link">
+        
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    社区专栏
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 小型嵌入式系统中的多任务处理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 小型嵌入式系统中的多任务处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-freertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.1 关于 FreeRTOS 内核
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.2 价值主张
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.3 关于术语的说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-rtos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.4 为什么使用 RTOS？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#115-freertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.5 FreeRTOS 内核特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#116-freertosopenrtos-safertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.6 许可以及 FreeRTOS、OpenRTOS 和 SafeRTOS 系列
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 包含的源文件和项目
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 包含的源文件和项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1 获取本书附带的示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1">1 前言<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<h2 id="11">1.1 小型嵌入式系统中的多任务处理<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<h3 id="111-freertos">1.1.1 关于 FreeRTOS 内核<a class="headerlink" href="#111-freertos" title="Permanent link">&para;</a></h3>
+<p>FreeRTOS 是包含实时内核的 C 库的集合
+以及一组实现互补的模块化库
+功能。</p>
+<p>Richard Barry 最初于 2003 年左右开发了 FreeRTOS。 实时
+Richard 的公司 Engineers Ltd 继续开发 FreeRTOS
+与全球领先芯片公司紧密合作直至亚马逊
+Web Services (AWS) 接管了 FreeRTOS 2016 的管理工作。理查德现在
+作为高级首席工程师继续从事 FreeRTOS 的工作
+AWS 物联网团队。  FreeRTOS 是 MIT 授权的开源代码，可用于
+任何目的。  您不必成为 AWS 客户即可从 AWS 中受益
+管理权！</p>
+<p>FreeRTOS 内核非常适合深度嵌入式实时
+在微控制器或小型微处理器上运行的应用程序。这个
+应用类型通常包括硬性和软性的混合
+实时性要求。</p>
+<p>软实时要求规定了时间期限，但违反了
+截止日期不会使系统变得毫无用处。例如，响应
+击键速度太慢可能会使系统显得反应迟钝，令人恼火
+而实际上并没有使其无法使用。</p>
+<p>硬实时要求规定了时间期限，并且违反了
+截止日期将导致系统绝对失败。例如，一个
+驾驶员安全气囊如果不这样做的话，弊大于利
+对碰撞传感器输入的响应太慢。</p>
+<p>FreeRTOS 内核是一个实时 kernel (or real-time scheduler)，
+使基于 FreeRTOS 的应用程序能够满足其硬实时要求
+要求。它使应用程序能够被组织为一个集合
+独立的执行线程。例如，在具有
+只有一个核心，只有一个执行线程可以在任意时刻执行
+一次。内核通过检查来决定执行哪个线程
+由应用程序设计者分配给每个线程的优先级。在
+最简单的情况，应用程序设计者可以分配更高的优先级
+到实现硬实时要求和较低的线程
+实现软实时要求的线程的优先级。
+以这种方式分配优先级将确保硬实时线程
+始终先于软实时线程执行，但优先级分配
+决策并不总是那么简单。</p>
+<p>如果您不完全理解本文中的概念，请不要担心
+上一段还没有。以下章节提供了详细的
+带有许多示例的解释，帮助您了解如何使用
+实时内核，尤其是 FreeRTOS。</p>
+<h3 id="112">1.1.2 价值主张<a class="headerlink" href="#112" title="Permanent link">&para;</a></h3>
+<p>FreeRTOS 内核在全球范围内取得的空前成功源于其
+令人信服的价值主张； FreeRTOS是专业开发的，
+严格质量控制、坚固、受支持、不含任何
+知识产权归属不明确，真正可以自由使用
+商业应用程序无需公开您的
+专有源代码。此外，AWS 的管理权还提供了全球
+存在、专家安全事件响应程序、大量且多样化的
+开发团队，形式化验证、笔测试、内存方面的专业知识
+安全证明和长期
+支持 – 同时维护 FreeRTOS 作为硬件、开发
+工具和云服务中立的开源项目。自由实时操作系统
+GitHub 中的开发是透明且由社区驱动的，并且不
+需要任何特殊的工具或开发实践。</p>
+<p>您可以使用 FreeRTOS 将产品推向市场，甚至无需告诉我们，
+更不用说支付任何费用了，成千上万的公司就是这么做的。如果
+在任何时候您想要接收额外的备份，或者如果您
+法律团队要求额外的书面保证或赔偿，
+然后我们的战略合作伙伴提供简单的低成本商业许可
+选项。您可以选择学习的知识让您内心平静
+商业路线任您选择。</p>
+<h3 id="113">1.1.3 关于术语的说明<a class="headerlink" href="#113" title="Permanent link">&para;</a></h3>
+<p>在 FreeRTOS 中，每个执行线程称为“任务”。没有
+嵌入式社区内术语达成共识，但我更喜欢
+“任务”到“线程”，因为线程在某些情况下可以有更具体的含义
+应用领域。</p>
+<h3 id="114-rtos">1.1.4 为什么使用 RTOS？<a class="headerlink" href="#114-rtos" title="Permanent link">&para;</a></h3>
+<p>有许多成熟的技术可以用来编写优秀的嵌入式程序
+不使用多线程内核的软件。如果系统下
+开发很简单，那么这些技术可能会提供最多的
+适当的解决方案。在更多情况下使用内核可能会更好
+复杂的情况，但交叉点发生的地方总是
+主观的。</p>
+<p>如前所述，任务优先级可以帮助确保应用程序
+满足其处理期限，但内核可以带来其他更少的
+明显的好处。下面简要列出了其中一些。</p>
+<ul>
+<li>抽象出计时信息</li>
+</ul>
+<p>RTOS 负责执行计时，并提供与时间相关的
+  API 到应用程序。这使得应用程序的结构
+  代码更简单，整体代码大小更小。</p>
+<ul>
+<li>可维护性/可扩展性</li>
+</ul>
+<p>抽象出时序细节会减少相互依赖性
+  模块之间并允许软件在受控和
+  可预测的方式。另外，内核负责计时，所以
+  应用程序性能不太容易受到底层变化的影响
+  硬件。</p>
+<ul>
+<li>模块化</li>
+</ul>
+<p>任务是独立的模块，每个模块都应该有明确的定义
+  目的。</p>
+<ul>
+<li>团队发展</li>
+</ul>
+<p>任务还应该有明确定义的接口，以便更容易
+  团队发展。</p>
+<ul>
+<li>更容易测试</li>
+</ul>
+<p>任务是具有清晰接口的明确定义的独立模块
+  更容易单独测试。</p>
+<ul>
+<li>代码重用</li>
+</ul>
+<p>具有更高模块化性和更少相互依赖性的代码设计
+  更容易重复使用。</p>
+<ul>
+<li>提高效率</li>
+</ul>
+<p>使用 RTOS 的应用程序代码可以完全由事件驱动。否
+  轮询事件需要浪费处理时间
+  没有发生。</p>
+<p>与事件驱动所获得的效率相反的是需要处理 RTOS 滴答
+  中断并将执行从一项任务切换到另一项任务。然而，
+  不使用 RTOS 的应用程序通常包含某种形式的勾选
+  无论如何打断。</p>
+<ul>
+<li>空闲时间</li>
+</ul>
+<p>自动创建的Idle任务在没有任务时执行
+  需要处理的应用程序任务。空闲任务可以测量
+  备用处理能力，执行背景调查，或放置
+  处理器进入低功耗模式。</p>
+<ul>
+<li>电源管理</li>
+</ul>
+<p>使用 RTOS 带来的效率提升使处理器能够
+  在低功耗模式下花费更多时间。</p>
+<p>通过放置可以显着降低功耗
+  每次空闲任务运行时，处理器都会进入低功耗状态。自由实时操作系统
+  还有一个特殊的无滴答模式。使用无滴答模式允许
+  处理器进入比其他方式更低的功耗模式
+  并保持在低功耗模式更长时间。</p>
+<ul>
+<li>灵活的中断处理</li>
+</ul>
+<p>通过将处理延迟到
+  由应用程序编写者创建的任务或自动创建的任务
+  创建了 RTOS 守护进程 task (also known as the timer task)。</p>
+<ul>
+<li>混合加工要求</li>
+</ul>
+<p>简单的设计模式可以实现周期性、连续性和周期性的混合
+  应用程序内的事件驱动处理。此外，硬和
+  通过选择合适的任务和满足软实时要求
+  中断优先级。</p>
+<h3 id="115-freertos">1.1.5 FreeRTOS 内核特性<a class="headerlink" href="#115-freertos" title="Permanent link">&para;</a></h3>
+<p>FreeRTOS 内核具有以下标准功能：</p>
+<ul>
+<li>先发制人或合作行动</li>
+<li>可选的时间切片</li>
+<li>非常灵活的任务优先级分配</li>
+<li>灵活、快速、轻量级的任务通知机制</li>
+<li>队列</li>
+<li>二进制信号量</li>
+<li>计数信号量</li>
+<li>互斥体</li>
+<li>递归互斥体</li>
+<li>软件定时器</li>
+<li>活动组</li>
+<li>流缓冲区</li>
+<li>消息缓冲区</li>
+<li>Co-routines (deprecated)</li>
+<li>勾选钩子函数</li>
+<li>空闲挂钩功能</li>
+<li>堆栈溢出检查</li>
+<li>跟踪宏</li>
+<li>任务运行时统计信息收集</li>
+<li>可选的商业许可和支持</li>
+<li>完全中断嵌套 model (for some architectures)</li>
+<li>极低功耗的无滴答功能 applications (for some architectures)</li>
+<li>内存保护单元支持隔离任务和增加应用程序 safety (for some architectures)</li>
+<li>appropriate (this can help save RAM) 时软件管理中断堆栈</li>
+<li>能够使用静态或静态方式创建 RTOS 对象
+  动态分配内存</li>
+</ul>
+<h3 id="116-freertosopenrtos-safertos">1.1.6 许可以及 FreeRTOS、OpenRTOS 和 SafeRTOS 系列<a class="headerlink" href="#116-freertosopenrtos-safertos" title="Permanent link">&para;</a></h3>
+<p><strong>FreeRTOS</strong> MIT 开源许可证旨在确保：</p>
+<ul>
+<li>
+<p>FreeRTOS可用于商业应用。</p>
+</li>
+<li>
+<p>FreeRTOS 本身仍然可供所有人免费使用。</p>
+</li>
+<li>
+<p>FreeRTOS 用户保留其知识产权的所有权。</p>
+</li>
+</ul>
+<p>请参阅 <a href="https://www.FreeRTOS.org/license">https://www.FreeRTOS.org/license</a> 了解最新的开源代码
+许可证信息。</p>
+<p><strong>OpenRTOS</strong> 是 FreeRTOS 提供的商业许可版本
+经第三方 Amazon Web Services 许可。</p>
+<p><strong>SafeRTOS</strong> 与 FreeRTOS 具有相同的使用模型，但已
+根据实践、程序和流程开发
+有必要声称遵守各种国际公认的
+安全相关标准。</p>
+<h2 id="12">1.2 包含的源文件和项目<a class="headerlink" href="#12" title="Permanent link">&para;</a></h2>
+<h3 id="121">1.2.1 获取本书附带的示例<a class="headerlink" href="#121" title="Permanent link">&para;</a></h3>
+<p>zip 文件可从 <a href="https://www.FreeRTOS.org/Documentation/code">https://www.FreeRTOS.org/Documentation/code</a> 下载
+包含所有源代码、预配置的项目文件，以及
+构建和执行中提供的示例所需的说明
+这本书。请注意，zip 文件不一定包含最多的内容
+FreeRTOS 的最新版本。</p>
+<p>本书中包含的屏幕截图显示了在
+Microsoft Windows 环境，使用 FreeRTOS Windows 端口。的
+使用 FreeRTOS Windows 端口的项目已预先配置为构建
+使用 Visual Studio 的免费社区版，可从以下位置获取
+<a href="https://www.visualstudio.com/">https://www.visualstudio.com/</a>. 请注意，虽然 FreeRTOS Windows
+port提供了便捷的评估、测试、开发平台，
+它<em>不</em>提供真正的实时行为。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
