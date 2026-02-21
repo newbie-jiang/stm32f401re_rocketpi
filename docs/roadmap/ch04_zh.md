@@ -160,9 +160,8 @@ FreeRTOS任务创建API函数相当复杂。本节中的大多数例子
 清单 4.3 显示了 `xTaskCreate()` API 函数原型。
 `xTaskCreateStatic()` 有两个附加参数指向
 预先分配的内存用于保存任务的数据结构和堆栈，
-分别。 [Section 2.5: Data Types and Coding Style Guide](ch02.md#25-data-types-and-coding-style-guide)
+分别。 [Section 2.5: Data Types and Coding Style Guide](ch02_zh.md#25-data-types-and-coding-style-guide)
 描述所使用的数据类型和命名约定。
-
 
 <a name="list4.3" title="Listing 4.3 The xTaskCreate() API function prototype"></a>
 
@@ -214,7 +213,7 @@ BaseType_t xTaskCreate( TaskFunction_t pvTaskCode,
   如果堆栈深度成倍增加，则为 `FreeRTOSConfig.h` 中的 `unsigned long` 或 `size_t`
   堆栈宽度大于 65535（最大可能的 16 位数字）。
 
-[Section 13.3 Stack Overflow](ch13.md#133-stack-overflow)，描述了
+[Section 13.3 Stack Overflow](ch13_zh.md#133-stack-overflow)，描述了
   选择最佳堆栈大小的实用方法。
 
 - `pvParameters`
@@ -252,7 +251,7 @@ BaseType_t xTaskCreate( TaskFunction_t pvTaskCode,
 - `pdFAIL`
 
 这表明没有足够的堆内存可用于创建
-    任务。 [Chapter 3](ch03.md#3-heap-memory-management) 提供更多
+    任务。 [Chapter 3](ch03_zh.md#3-heap-memory-management) 提供更多
     有关堆内存管理的信息。
 
 
