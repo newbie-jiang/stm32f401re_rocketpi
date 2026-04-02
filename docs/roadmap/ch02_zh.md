@@ -491,7 +491,7 @@ FreeRTOS 配置一个称为节拍中断的周期性中断。
 
    <a name="tbl2" title="Table 2 TickType_t data type and the configTICK_TYPE_WIDTH_IN_BITS configuration"></a>
 
-   * * *
+* * *
 | configTICK\_TYPE\_WIDTH\_IN\_BITS | 8 位架构 | 16 位架构 | 32 位架构 | 64 位架构 |
    | --- | --- | --- | --- | --- |
 | TICK\_类型\_宽度\_16_BITS | uint16\_t | uint16\_t | uint16\_t |不适用 |
@@ -499,7 +499,7 @@ FreeRTOS 配置一个称为节拍中断的周期性中断。
    | TICK\_类型\_宽度\_64_BITS |不适用 |不适用 | uint64\_t | uint64\_t |
 
 ***表 2*** *TickType_t 数据类型和 configTICK_TYPE_WIDTH_IN_BITS 配置*
-   * * *
+* * *
 
 - `BaseType_t`
 

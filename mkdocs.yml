@@ -130,8 +130,8 @@ nav:
       - 工具: tools/tools.md
   - "📣 公告":
       - 公告: community/announcement.md
-  - "👥 社区专栏":
-      - 社区专栏: community/column.md
+  - "👥 Zephyr":
+      - Zephyr: zephyr/zephyr.md
 
 markdown_extensions:
   - md_in_html
@@ -167,8 +167,8 @@ extra:
       url: tools/tools/
     - name: "📣 公告"
       url: community/announcement/
-    - name: "👥 社区专栏"
-      url: community/column/
+    - name: "👥 Zephyr"
+      url: zephyr/zephyr/
   # 已去掉 RSS 的 social 链接，如需其他社交链接可在此处添加
   blog_category_icons:
     Bootloader: material/chip
