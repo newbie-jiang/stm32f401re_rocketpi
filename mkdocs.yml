@@ -131,7 +131,8 @@ nav:
   - "📣 公告":
       - 公告: community/announcement.md
   - "👥 Zephyr":
-      - Zephyr: zephyr/zephyr.md
+      - 前言: zephyr/zephyr.md
+      - 环境搭建: zephyr/image_use.md
 
 markdown_extensions:
   - md_in_html
