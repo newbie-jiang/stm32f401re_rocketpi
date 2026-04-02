@@ -8,8 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/doc/rocketpi_demo/rocketpi_demo/">
+        <link rel="canonical" href="https://newbie-jiang.github.io/blogs_mkdocs/zephyr/zephyr/">
       
+      
+        <link rel="prev" href="../../community/announcement/">
       
       
       
@@ -21,11 +23,11 @@
     
     
       
-        <title>Rocketpi demo - Rocket-Pi</title>
+        <title>Zephyr - Rocket-Pi</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
       
 
@@ -44,15 +46,15 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
-   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -61,7 +63,7 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     <body dir="ltr">
@@ -73,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#01_rocketpi_serial_plane_game" class="md-skip">
+        <a href="#zephyr-rtos" class="md-skip">
           跳转至
         </a>
       
@@ -90,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="../../.." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+    <a href="../.." title="Rocket-Pi" class="md-header__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
       
 
 <img src="https://cloud.rocketpi.club/cloud/rocket.svg"
@@ -113,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Rocketpi demo
+              Zephyr
             
           </span>
         </div>
@@ -127,7 +129,7 @@
           
             
           
-          <a href="../../.." class="md-header__link">
+          <a href="../.." class="md-header__link">
             🏠 首页
           </a>
         
@@ -136,7 +138,7 @@
           
             
           
-          <a href="../../../roadmap/roadmap/" class="md-header__link">
+          <a href="../../roadmap/roadmap/" class="md-header__link">
             🧭 学习路线
           </a>
         
@@ -145,7 +147,7 @@
           
             
           
-          <a href="../../../downloads/download/" class="md-header__link">
+          <a href="../../downloads/download/" class="md-header__link">
             📁 资料下载
           </a>
         
@@ -154,7 +156,7 @@
           
             
           
-          <a href="../../rocketpi_src/" class="md-header__link">
+          <a href="../../doc/rocketpi_src/" class="md-header__link">
             🧪 示例程序
           </a>
         
@@ -163,7 +165,7 @@
           
             
           
-          <a href="../../../faq/faq/" class="md-header__link">
+          <a href="../../faq/faq/" class="md-header__link">
             ❓ 常见问题
           </a>
         
@@ -172,7 +174,7 @@
           
             
           
-          <a href="../../../tools/tools/" class="md-header__link">
+          <a href="../../tools/tools/" class="md-header__link">
             💼 工具
           </a>
         
@@ -181,7 +183,7 @@
           
             
           
-          <a href="../../../community/announcement/" class="md-header__link">
+          <a href="../../community/announcement/" class="md-header__link">
             📣 公告
           </a>
         
@@ -190,7 +192,7 @@
           
             
           
-          <a href="../../../zephyr/zephyr/" class="md-header__link">
+          <a href="./" class="md-header__link md-header__link--active">
             👥 Zephyr
           </a>
         
@@ -269,7 +271,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
+    <a href="../.." title="Rocket-Pi" class="md-nav__button md-logo" aria-label="Rocket-Pi" data-md-component="logo">
       
 
 <img src="https://cloud.rocketpi.club/cloud/rocket.svg"
@@ -290,7 +292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -370,7 +372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/roadmap/" class="md-nav__link">
+      <a href="../../roadmap/roadmap/" class="md-nav__link">
         
   
   
@@ -403,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/hardware/" class="md-nav__link">
+      <a href="../../roadmap/hardware/" class="md-nav__link">
         
   
   
@@ -436,7 +438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
+      <a href="../../roadmap/0.%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E9%80%89%E6%8B%A9/" class="md-nav__link">
         
   
   
@@ -469,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
+      <a href="../../roadmap/1.CubeMX%E5%AE%89%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -502,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
+      <a href="../../roadmap/2.keilv5%E5%AE%89%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -535,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
+      <a href="../../roadmap/3.stm32F4xx_DFP%E5%AE%89%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -568,7 +570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
+      <a href="../../roadmap/4.keilv5%E6%B3%A8%E5%86%8C/" class="md-nav__link">
         
   
   
@@ -601,7 +603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
+      <a href="../../roadmap/5.stlink%E5%AE%89%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -634,7 +636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
+      <a href="../../roadmap/6.%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="md-nav__link">
         
   
   
@@ -667,7 +669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+      <a href="../../roadmap/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%B8%B8%E8%A7%81%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
         
   
   
@@ -700,7 +702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+      <a href="../../roadmap/0.1Cubemx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="md-nav__link">
         
   
   
@@ -733,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/mcu_and_keil/" class="md-nav__link">
+      <a href="../../roadmap/mcu_and_keil/" class="md-nav__link">
         
   
   
@@ -766,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch01_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch01_zh/" class="md-nav__link">
         
   
   
@@ -799,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch02_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch02_zh/" class="md-nav__link">
         
   
   
@@ -832,7 +834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch03_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch03_zh/" class="md-nav__link">
         
   
   
@@ -865,7 +867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch04_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch04_zh/" class="md-nav__link">
         
   
   
@@ -898,7 +900,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch05_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch05_zh/" class="md-nav__link">
         
   
   
@@ -931,7 +933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch06_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch06_zh/" class="md-nav__link">
         
   
   
@@ -964,7 +966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch07_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch07_zh/" class="md-nav__link">
         
   
   
@@ -997,7 +999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch08_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch08_zh/" class="md-nav__link">
         
   
   
@@ -1030,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch09_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch09_zh/" class="md-nav__link">
         
   
   
@@ -1063,7 +1065,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch10_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch10_zh/" class="md-nav__link">
         
   
   
@@ -1096,7 +1098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch11_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch11_zh/" class="md-nav__link">
         
   
   
@@ -1129,7 +1131,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch12_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch12_zh/" class="md-nav__link">
         
   
   
@@ -1162,7 +1164,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../roadmap/ch13_zh/" class="md-nav__link">
+      <a href="../../roadmap/ch13_zh/" class="md-nav__link">
         
   
   
@@ -1250,7 +1252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../downloads/download/" class="md-nav__link">
+      <a href="../../downloads/download/" class="md-nav__link">
         
   
   
@@ -1338,7 +1340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rocketpi_src/" class="md-nav__link">
+      <a href="../../doc/rocketpi_src/" class="md-nav__link">
         
   
   
@@ -1371,7 +1373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../factory/factory/" class="md-nav__link">
+      <a href="../../doc/factory/factory/" class="md-nav__link">
         
   
   
@@ -1404,7 +1406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_led/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_led/" class="md-nav__link">
         
   
   
@@ -1437,7 +1439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_key_scan/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_key_scan/" class="md-nav__link">
         
   
   
@@ -1470,7 +1472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_key_irq/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_key_irq/" class="md-nav__link">
         
   
   
@@ -1503,7 +1505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_key_multi_button/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_key_multi_button/" class="md-nav__link">
         
   
   
@@ -1536,7 +1538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_delay_us/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_delay_us/" class="md-nav__link">
         
   
   
@@ -1569,7 +1571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_uart_printf/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_printf/" class="md-nav__link">
         
   
   
@@ -1602,7 +1604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_uart_echo/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_echo/" class="md-nav__link">
         
   
   
@@ -1635,7 +1637,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_uart_control_led/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led/" class="md-nav__link">
         
   
   
@@ -1668,7 +1670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_control_led_cjson/" class="md-nav__link">
         
   
   
@@ -1701,7 +1703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_ymodem/" class="md-nav__link">
         
   
   
@@ -1734,7 +1736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_shell_microrl/" class="md-nav__link">
         
   
   
@@ -1767,7 +1769,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_easylogger/" class="md-nav__link">
         
   
   
@@ -1800,7 +1802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_uart_radar/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_uart_radar/" class="md-nav__link">
         
   
   
@@ -1833,7 +1835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_i2c_aht30/" class="md-nav__link">
         
   
   
@@ -1866,7 +1868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_i2c_at24cxx/" class="md-nav__link">
         
   
   
@@ -1899,7 +1901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_pwm_passive_buzzer/" class="md-nav__link">
         
   
   
@@ -1932,7 +1934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_pwm_sg90/" class="md-nav__link">
         
   
   
@@ -1965,7 +1967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_pwm_motor/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_pwm_motor/" class="md-nav__link">
         
   
   
@@ -1998,7 +2000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_hcsr04/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_hcsr04/" class="md-nav__link">
         
   
   
@@ -2031,7 +2033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_adc_mcu_temperature/" class="md-nav__link">
         
   
   
@@ -2064,7 +2066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_adc_joystick/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_adc_joystick/" class="md-nav__link">
         
   
   
@@ -2097,7 +2099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_irda/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_irda/" class="md-nav__link">
         
   
   
@@ -2130,7 +2132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_ws2812b/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_ws2812b/" class="md-nav__link">
         
   
   
@@ -2163,7 +2165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_speedtest/" class="md-nav__link">
         
   
   
@@ -2196,7 +2198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_bitmap/" class="md-nav__link">
         
   
   
@@ -2229,7 +2231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_spi_lcd_240x240_lvgl/" class="md-nav__link">
         
   
   
@@ -2262,7 +2264,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_i2s/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_i2s/" class="md-nav__link">
         
   
   
@@ -2295,7 +2297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_sdio_card/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_sdio_card/" class="md-nav__link">
         
   
   
@@ -2328,7 +2330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_sdio_card_fatfs/" class="md-nav__link">
         
   
   
@@ -2361,7 +2363,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_sd_audio_to_i2s/" class="md-nav__link">
         
   
   
@@ -2394,7 +2396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_sd_pic_to_lcd/" class="md-nav__link">
         
   
   
@@ -2427,7 +2429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_usb_cdc/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_usb_cdc/" class="md-nav__link">
         
   
   
@@ -2460,7 +2462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_usb_msc/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_usb_msc/" class="md-nav__link">
         
   
   
@@ -2493,7 +2495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_w25qxx/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_w25qxx/" class="md-nav__link">
         
   
   
@@ -2526,7 +2528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_flash_littlefs/" class="md-nav__link">
         
   
   
@@ -2559,7 +2561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_w25qxx_littlefs/" class="md-nav__link">
         
   
   
@@ -2592,7 +2594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_esp8266/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_esp8266/" class="md-nav__link">
         
   
   
@@ -2625,7 +2627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_esp8266_tcp/" class="md-nav__link">
         
   
   
@@ -2658,7 +2660,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_standby_wkup/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_standby_wkup/" class="md-nav__link">
         
   
   
@@ -2691,7 +2693,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_crc/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_crc/" class="md-nav__link">
         
   
   
@@ -2724,7 +2726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_mbedtls/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_mbedtls/" class="md-nav__link">
         
   
   
@@ -2757,7 +2759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../base_samples/rocketpi_extern_io_check/" class="md-nav__link">
+      <a href="../../doc/base_samples/rocketpi_extern_io_check/" class="md-nav__link">
         
   
   
@@ -2790,7 +2792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../boot/bootloader/" class="md-nav__link">
+      <a href="../../doc/boot/bootloader/" class="md-nav__link">
         
   
   
@@ -2823,7 +2825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../boot/bootloader_iap/" class="md-nav__link">
+      <a href="../../doc/boot/bootloader_iap/" class="md-nav__link">
         
   
   
@@ -2856,7 +2858,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01_rocketpi_serial_plane_game/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/01_rocketpi_serial_plane_game/" class="md-nav__link">
         
   
   
@@ -2889,7 +2891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02_don%27t_approach_me_alarm/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/02_don%27t_approach_me_alarm/" class="md-nav__link">
         
   
   
@@ -2922,7 +2924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_rocketpi_usb_audio_i2s/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/03_rocketpi_usb_audio_i2s/" class="md-nav__link">
         
   
   
@@ -2955,7 +2957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_rocketpi_hcsr04_radar/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/04_rocketpi_hcsr04_radar/" class="md-nav__link">
         
   
   
@@ -2988,7 +2990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_rocketpi_smart_home/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/05_rocketpi_smart_home/" class="md-nav__link">
         
   
   
@@ -3021,7 +3023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06_rocketpi_mqtt_ota/" class="md-nav__link">
+      <a href="../../doc/rocketpi_demo/06_rocketpi_mqtt_ota/" class="md-nav__link">
         
   
   
@@ -3054,7 +3056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rtos/rocketpi_freertos/" class="md-nav__link">
+      <a href="../../doc/rtos/rocketpi_freertos/" class="md-nav__link">
         
   
   
@@ -3087,7 +3089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rtos/rocketpi_zephyr/" class="md-nav__link">
+      <a href="../../doc/rtos/rocketpi_zephyr/" class="md-nav__link">
         
   
   
@@ -3120,7 +3122,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rtos/rocketpi_rt-thread/" class="md-nav__link">
+      <a href="../../doc/rtos/rocketpi_rt-thread/" class="md-nav__link">
         
   
   
@@ -3153,7 +3155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rtos/rocketpi_threadx/" class="md-nav__link">
+      <a href="../../doc/rtos/rocketpi_threadx/" class="md-nav__link">
         
   
   
@@ -3241,7 +3243,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../faq/faq/" class="md-nav__link">
+      <a href="../../faq/faq/" class="md-nav__link">
         
   
   
@@ -3329,7 +3331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tools/tools/" class="md-nav__link">
+      <a href="../../tools/tools/" class="md-nav__link">
         
   
   
@@ -3417,7 +3419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../community/announcement/" class="md-nav__link">
+      <a href="../../community/announcement/" class="md-nav__link">
         
   
   
@@ -3454,18 +3456,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
@@ -3491,7 +3495,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             👥 Zephyr
@@ -3502,10 +3506,42 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../zephyr/zephyr/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  
+    
+    
+      
+      
+      
+      
+    
+  
+
+  <span class="md-ellipsis">
+    Zephyr
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -3526,6 +3562,37 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rocket-pi50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目前已适配Rocket-Pi所有驱动，50+示例程序
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -3555,6 +3622,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -3563,65 +3632,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#01_rocketpi_serial_plane_game" class="md-nav__link">
+  <a href="#rocket-pi50" class="md-nav__link">
     <span class="md-ellipsis">
       
-        01_rocketpi_serial_plane_game
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#02_dont_approach_me_alarm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        02_don't_approach_me_alarm
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#03_rocketpi_usb_audio_i2s" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        03_rocketpi_usb_audio_i2s
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#04_rocketpi_hcsr04_radar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        04_rocketpi_hcsr04_radar
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#05_rocketpi_smart_home" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        05_rocketpi_smart_home
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#06_rocketpi_mqtt_ota" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        06_rocketpi_mqtt_ota
+        目前已适配Rocket-Pi所有驱动，50+示例程序
       
     </span>
   </a>
@@ -3645,23 +3659,15 @@
 
 
 
-  <h1>Rocketpi demo</h1>
-
-<h2 id="01_rocketpi_serial_plane_game">01_rocketpi_serial_plane_game<a class="headerlink" href="#01_rocketpi_serial_plane_game" title="Permanent link">&para;</a></h2>
-<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/5.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="5" src="https://cloud.rocketpi.club/cloud/5.png" /></a></p>
-<h2 id="02_dont_approach_me_alarm">02_don't_approach_me_alarm<a class="headerlink" href="#02_dont_approach_me_alarm" title="Permanent link">&para;</a></h2>
-<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/6.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="6" src="https://cloud.rocketpi.club/cloud/6.png" /></a></p>
-<h2 id="03_rocketpi_usb_audio_i2s">03_rocketpi_usb_audio_i2s<a class="headerlink" href="#03_rocketpi_usb_audio_i2s" title="Permanent link">&para;</a></h2>
-<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/7.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="7" src="https://cloud.rocketpi.club/cloud/7.png" /></a></p>
-<h2 id="04_rocketpi_hcsr04_radar">04_rocketpi_hcsr04_radar<a class="headerlink" href="#04_rocketpi_hcsr04_radar" title="Permanent link">&para;</a></h2>
-<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/8.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="8" src="https://cloud.rocketpi.club/cloud/8.png" /></a></p>
-<h2 id="05_rocketpi_smart_home">05_rocketpi_smart_home<a class="headerlink" href="#05_rocketpi_smart_home" title="Permanent link">&para;</a></h2>
-<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/9.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="9" src="https://cloud.rocketpi.club/cloud/9.png" /></a></p>
-<h2 id="06_rocketpi_mqtt_ota">06_rocketpi_mqtt_ota<a class="headerlink" href="#06_rocketpi_mqtt_ota" title="Permanent link">&para;</a></h2>
-<ul>
-<li>06_rocketpi_mqtt_app （测试固件 led闪烁）</li>
-</ul>
-<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/10.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="10" src="https://cloud.rocketpi.club/cloud/10.png" /></a></p>
+<h1 id="zephyr-rtos">Zephyr  RTOS<a class="headerlink" href="#zephyr-rtos" title="Permanent link">&para;</a></h1>
+<h2 id="rocket-pi50">目前已适配Rocket-Pi所有驱动，50+示例程序<a class="headerlink" href="#rocket-pi50" title="Permanent link">&para;</a></h2>
+<p>哔哩哔哩Zephyr视频专栏（UP工作时间不多，不必催更）：https://space.bilibili.com/308232011/lists/7297610?type=season</p>
+<p>全网最简单Zephyr开发环境搭建：https://www.bilibili.com/video/BV1TF6ABHETc/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=fa0653f564ca121b33d552a5a430612d</p>
+<p>环境搭建镜像以及工具：百度网盘：https://pan.baidu.com/s/1yG5-ToPbYYhepjOfhhB04g?pwd=6fuj</p>
+<p>开发套件：TB关键词 "火箭派开发板"</p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/rocketpi实物图.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="rocketpi实物图" src="https://cloud.rocketpi.club/cloud/rocketpi实物图.png" /></a></p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/c032067493127db8426cec8bdf6f266c.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="c032067493127db8426cec8bdf6f266c" src="https://cloud.rocketpi.club/cloud/c032067493127db8426cec8bdf6f266c.png" /></a></p>
+<p><a class="glightbox" href="https://cloud.rocketpi.club/cloud/49b62dbf-2f65-4a95-af54-0d14a202f9fb.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="49b62dbf-2f65-4a95-af54-0d14a202f9fb" src="https://cloud.rocketpi.club/cloud/49b62dbf-2f65-4a95-af54-0d14a202f9fb.png" /></a></p>
 
 
 
@@ -3711,10 +3717,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
