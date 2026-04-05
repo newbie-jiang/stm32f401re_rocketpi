@@ -21,7 +21,10 @@
 - 🐳keil map文件分析工具<a href="https://map.rocketpi.club/" target="_blank">keil map</a>  可快速对文件flash，ram占用排名
 - 🏘️物联网智能家居控制台 <a href="https://smarthome.rocketpi.club/" target="_blank">Rocket Pi smart home</a>     Rocketpi程序支持，  <a href="https://github.com/newbie-jiang/stm32f401re_rocketpi/tree/master/rocketpi_src/rocketpi_demo/05_rocketpi_smart_home" target="_blank">github</a>   <a href="https://gitee.com/he-dejiang/stm32f401re_rocketpi/tree/master/rocketpi_src/rocketpi_demo/05_rocketpi_smart_home" target="_blank">gitee</a>              
 - 🌏物联网FOTA升级控制台  <a href="https://fota.rocketpi.club/" target="_blank">Rocket Pi fota</a>     Rocketpi程序支持，  <a href="https://github.com/newbie-jiang/stm32f401re_rocketpi/tree/master/rocketpi_src/rocketpi_demo/06_rocketpi_mqtt_ota" target="_blank">github</a>   <a href="https://gitee.com/he-dejiang/stm32f401re_rocketpi/tree/master/rocketpi_src/rocketpi_demo/06_rocketpi_mqtt_ota" target="_blank">gitee</a>    
-- 🔊文本/音频   转PCM  <a href="https://audio.rocketpi.club/" target="_blank">Rocket Pi audio to pcm</a>     Rocketpi程序支持，  <a href="https://github.com/newbie-jiang/stm32f401re_rocketpi/tree/master/rocketpi_src/base_samples/rocketpi_i2s" target="_blank">github</a>   <a href="https://gitee.com/he-dejiang/stm32f401re_rocketpi/tree/master/rocketpi_src/base_samples/rocketpi_i2s" target="_blank">gitee</a>                          
+- 🔊文本/音频   转PCM  <a href="https://audio.rocketpi.club/" target="_blank">Rocket Pi audio to pcm</a>     Rocketpi程序支持，  <a href="https://github.com/newbie-jiang/stm32f401re_rocketpi/tree/master/rocketpi_src/base_samples/rocketpi_i2s" target="_blank">github</a>   <a href="https://gitee.com/he-dejiang/stm32f401re_rocketpi/tree/master/rocketpi_src/base_samples/rocketpi_i2s" target="_blank">gitee</a>     
+- 🪪Rocket-PI开发板正品验证 <a href="https://check.rocketpi.club/" target="_blank">Rocket Pi Check</a>  支持直接扫码验证
+
+​                    
 
 ## 推荐第三方工具
 

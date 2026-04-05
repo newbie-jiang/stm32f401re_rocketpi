@@ -3,7 +3,7 @@
 <title>Static Call Graph - [rocketpi_factory\rocketpi_factory.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image rocketpi_factory\rocketpi_factory.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Jan 01 17:24:38 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Apr 05 12:22:17 2026
 <BR><P>
 <H3>Maximum Stack Usage =       1224 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -612,10 +612,10 @@ Global Symbols
 <LI><a href="#[844]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ulGetRunTimeCounterValue
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_remote_interface_timestamp_read
 <LI><a href="#[57c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_ms_to_ticks
-<LI><a href="#[2b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
-<LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 <LI><a href="#[15f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ldivmod
 <LI><a href="#[33c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_test_apply
+<LI><a href="#[2b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+<LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 </UL>
 
 <P><STRONG><a name="[15f]"></a>__aeabi_ldivmod</STRONG> (Thumb, 98 bytes, Stack size 24 bytes, ldiv.o(.text))
@@ -786,18 +786,18 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[15e]"></a>__aeabi_llsl</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, llshl.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+<BR><BR>[Called By]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 <LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
-<LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 
 <P><STRONG><a name="[86a]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llshl.o(.text), UNUSED)
 
 <P><STRONG><a name="[15d]"></a>__aeabi_llsr</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, llushr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+<BR><BR>[Called By]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[16a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
-<LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 
 <P><STRONG><a name="[86b]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, llushr.o(.text), UNUSED)
@@ -3643,9 +3643,9 @@ Global Symbols
 <LI>Call Chain = elog_get_filter_tag_lvl &rArr;  elog_output (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_output
-<LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
 <LI><a href="#[44b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_output_unlock
 <LI><a href="#[44a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_output_lock
+<LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
 </UL>
 <BR>[Called By]<UL><LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_output
 </UL>
@@ -3666,8 +3666,6 @@ Global Symbols
 <LI>Call Chain = elog_output &rArr;  elog_output (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_output
-<LI><a href="#[458]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vsnprintf
-<LI><a href="#[2d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2snprintf
 <LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[450]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
 <LI><a href="#[161]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
@@ -3682,6 +3680,8 @@ Global Symbols
 <LI><a href="#[457]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fmt_used_and_enabled_u32
 <LI><a href="#[456]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fmt_used_and_enabled_ptr
 <LI><a href="#[452]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fmt_enabled
+<LI><a href="#[458]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vsnprintf
+<LI><a href="#[2d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2snprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvLogRunTimeSource
 <LI><a href="#[154]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;irda_Task
@@ -4009,8 +4009,8 @@ Global Symbols
 <P><STRONG><a name="[94]"></a>ir_remote_interface_debug_print</STRONG> (Thumb, 80 bytes, Stack size 160 bytes, driver_ir_remote_interface.o(i.ir_remote_interface_debug_print))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = ir_remote_interface_debug_print &rArr; putc &rArr; fputc &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[458]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vsnprintf
-<LI><a href="#[55c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putc
+<BR>[Calls]<UL><LI><a href="#[55c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putc
+<LI><a href="#[458]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vsnprintf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> unit_test_irda.o(i.irda_Task)
 </UL>
@@ -22212,9 +22212,9 @@ Local Symbols
 <P><STRONG><a name="[e1]"></a>shell_complete</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, unit_test_shell.o(i.shell_complete))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = shell_complete &rArr; strncmp
 </UL>
-<BR>[Calls]<UL><LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
-<LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<BR>[Calls]<UL><LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> unit_test_shell.o(i.shell_Task)
 </UL>
@@ -22463,10 +22463,10 @@ Local Symbols
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_close
 <LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;card_update_space_info
 <LI><a href="#[182]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_output
-<LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
 <LI><a href="#[18f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+<LI><a href="#[197]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncmp
 </UL>
 <BR>[Called By]<UL><LI><a href="#[155]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;card_Task
 </UL>
@@ -22860,9 +22860,9 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = at24cxx_interface_write_with_prefix &rArr; soft_i2c_master_transmit &rArr; soft_i2c_write_byte &rArr; soft_i2c_drive_scl
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;soft_i2c_master_transmit
+<LI><a href="#[186]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[306]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;malloc
 <LI><a href="#[307]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;free
-<LI><a href="#[186]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at24cxx_interface_iic_write_address16
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;at24cxx_interface_iic_write
@@ -23232,22 +23232,22 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[2b9]"></a>_fp_digits</STRONG> (Thumb, 366 bytes, Stack size 64 bytes, printfa.o(i._fp_digits), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<BR><BR>[Calls]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[16f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[168]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 <LI><a href="#[170]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
 <LI><a href="#[2ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
-<LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
 <P><STRONG><a name="[2b3]"></a>_printf_core</STRONG> (Thumb, 1704 bytes, Stack size 136 bytes, printfa.o(i._printf_core), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[2c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<BR><BR>[Calls]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[2c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 <LI><a href="#[2be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_pre_padding
 <LI><a href="#[2bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_post_padding
 <LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
-<LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0vsnprintf
 <LI><a href="#[2b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0snprintf
