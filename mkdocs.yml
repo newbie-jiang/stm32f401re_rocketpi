@@ -127,15 +127,14 @@ nav:
   - "🌱 生态支持":
       - Rocket-Pi 加入望获 zepLinux 生态: ecosystem/rocketpi-zeplinux.md
       - 社区共建：感谢 majorzpley 适配 PlatformIO: ecosystem/rocketpi-platformio.md
+      - Zephyr 前言: ecosystem/zephyr.md
+      - Zephyr 环境搭建: ecosystem/zephyr-environment.md
   - "❓ 常见问题":
       - 常见问题 : faq/faq.md
   - "💼 工具":
       - 工具: tools/tools.md
   - "📣 公告":
       - 公告: community/announcement.md
-  - "👥 Zephyr":
-      - 前言: zephyr/zephyr.md
-      - 环境搭建: zephyr/image_use.md
 
 markdown_extensions:
   - md_in_html
@@ -173,8 +172,6 @@ extra:
       url: tools/tools/
     - name: "📣 公告"
       url: community/announcement/
-    - name: "👥 Zephyr"
-      url: zephyr/zephyr/
   # 已去掉 RSS 的 social 链接，如需其他社交链接可在此处添加
   blog_category_icons:
     Bootloader: material/chip

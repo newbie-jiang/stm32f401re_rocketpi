@@ -44,7 +44,7 @@ description: Rocket-Pi 已成为望获 zepLinux 官方适配开发板，了解�
 | [官方 Gitee 仓库](https://gitee.com/ucasucas/OneWo-zepLinux) | 通过 Gitee 获取项目源码与说明 |
 | [Rocket-Pi 硬件一览](../roadmap/hardware.md) | 熟悉开发板硬件与接口 |
 | [Rocket-Pi 学习路线](../roadmap/roadmap.md) | 回顾开发环境与单片机基础知识 |
-| [Rocket-Pi Zephyr 专栏](../zephyr/zephyr.md) | 学习本站已有的 Zephyr 相关内容 |
+| [Rocket-Pi Zephyr 前言](zephyr.md) | 学习本站已有的 Zephyr 相关内容 |
 
 !!! note "适配范围以所用版本为准"
     官方支持开发板不等于所有板载外设、扩展模块和本站示例都已在 zepLinux 下验证。具体驱动支持、API 兼容范围及构建方式，请以 zepLinux 对应版本的文档和板级配置为准；本站 Zephyr 示例可作为学习参考，迁移时仍需逐项验证。
