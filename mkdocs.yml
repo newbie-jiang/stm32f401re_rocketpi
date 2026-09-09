@@ -126,6 +126,7 @@ nav:
      
   - "🌱 生态支持":
       - Rocket-Pi 加入望获 zepLinux 生态: ecosystem/rocketpi-zeplinux.md
+      - 社区共建：感谢 majorzpley 适配 PlatformIO: ecosystem/rocketpi-platformio.md
   - "❓ 常见问题":
       - 常见问题 : faq/faq.md
   - "💼 工具":

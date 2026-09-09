@@ -5,6 +5,10 @@ description: Rocket-Pi 已成为望获 zepLinux 官方适配开发板，了解�
 
 # 从单片机实践走向系统开发：Rocket-Pi 加入望获 zepLinux 生态
 
+![望获 OneWo-zepLinux 官方产品图](../assets/images/ecosystem/onewos-zeplinux.png){ width="800" style="display: block; width: 100%; max-width: 800px; height: auto; margin: 1.5rem auto; background: #fff;" }
+
+图片来源：[望获 OS 官网](https://www.onewos.com/)。
+
 **Rocket-Pi 已成为望获 zepLinux 官方适配开发板！**
 
 在望获 OS 官网的 zepLinux 产品页面中，**STM32F401RE、Rocket-Pi** 已列入支持开发板清单，并附有 Rocket-Pi 官网入口。这让 Rocket-Pi 的系统开发实践多了一条值得探索的路线。适配信息可在[望获 zepLinux 官方产品页面](https://www.onewos.com/product/zeplinux)查看。
@@ -44,6 +48,14 @@ description: Rocket-Pi 已成为望获 zepLinux 官方适配开发板，了解�
 
 !!! note "适配范围以所用版本为准"
     官方支持开发板不等于所有板载外设、扩展模块和本站示例都已在 zepLinux 下验证。具体驱动支持、API 兼容范围及构建方式，请以 zepLinux 对应版本的文档和板级配置为准；本站 Zephyr 示例可作为学习参考，迁移时仍需逐项验证。
+
+## 感谢望获 OS 团队，让系统实践多一个起点
+
+**感谢望获 OS 团队对 Rocket-Pi 的适配与支持，也感谢团队将 zepLinux 核心代码开放给开发者。** 从板级适配到系统与硬件之间的衔接，这些工作为社区提供了可以继续学习、验证和扩展的基础。
+
+对于正在学习嵌入式开发的朋友，一块熟悉的开发板能够进入新的操作系统生态，就多了一次把已有知识与新方法联系起来的机会。感谢望获 OS 团队为这条学习路径增加新的入口，让大家有机会围绕 Rocket-Pi 探索更多系统开发实践。
+
+如果 zepLinux 对你有帮助，欢迎前往[官方开源仓库](https://github.com/ucas-linux/OneWo-zepLinux)为项目点一个 Star，通过问题反馈、文档补充或代码贡献参与共建。分享实践成果时，也请保留项目来源与贡献者署名，让这些工作被更多人看见。
 
 ## 一块开发板，继续拓展实践空间
 
