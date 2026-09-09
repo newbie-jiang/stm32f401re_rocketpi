@@ -124,6 +124,8 @@ nav:
       - rocketpi_rt-thread: doc/rtos/rocketpi_rt-thread.md
       - rocketpi_threadx: doc/rtos/rocketpi_threadx.md
      
+  - "🌱 生态支持":
+      - Rocket-Pi 加入望获 zepLinux 生态: ecosystem/rocketpi-zeplinux.md
   - "❓ 常见问题":
       - 常见问题 : faq/faq.md
   - "💼 工具":
@@ -162,6 +164,8 @@ extra:
       url: downloads/download/
     - name: "🧪 示例程序"
       url: doc/rocketpi_src/
+    - name: "🌱 生态支持"
+      url: ecosystem/rocketpi-zeplinux/
     - name: "❓ 常见问题"
       url: faq/faq/
     - name: "💼 工具"
